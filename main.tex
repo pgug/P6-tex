@@ -1,0 +1,55 @@
+\input{Setup/Latex_includes/preamble}% package inclusion and set up of the document
+
+\begin{document}
+
+%%% Front matter %%%
+\pagestyle{empty} %disable headers and footers
+\pagenumbering{roman} %use roman page numbering in the frontmatter
+\input{Setup/Opsaetning/frontpage}
+\input{Setup/Opsaetning/colophon}
+\input{Setup/Opsaetning/titlepages}
+\input{Setup/Opsaetning/preface}
+
+\cleardoublepage
+\pdfbookmark[1]{Contents}{label:contents}
+\pagestyle{fancy} %enable headers and footers again
+%\setcounter{tocdepth}{1} USELESS
+\tableofcontents
+\cleardoublepage
+
+%%% Main matter %%%
+\pagenumbering{arabic} %use Arabic page numbering in the main-matter
+
+
+
+%%% Bibliography %%%
+\clearpage
+\fancyhf{}
+\setlength{\headheight}{15pt} 
+\rfoot{\thepage}
+\lfoot{D608F17}
+\lhead{* \enspace |\enspace \leftmark}
+
+\bibliography{Biblio/Bibliografi}
+%\label{bib:biblio}
+\listoffigures
+\listoftables
+\label{LastPage}
+
+%%% Appendix %%%
+\clearpage
+\pagenumbering{arabic}% resets `page` counter to 1
+\renewcommand*{\thepage}{\thechapter \arabic{page}}
+\fancyhf{}
+\setlength{\headheight}{15pt} 
+\rfoot{\thepage}
+\lfoot{D608F17}
+\lhead{\thechapter \enspace |\enspace \leftmark}
+\appendix
+\addtocontents{toc}{\protect\setcounter{tocdepth}{0}}
+%\pagenumbering{roman}
+
+\addtocontents{toc}{\protect\setcounter{tocdepth}{1}}
+
+\end{document}
+\grid

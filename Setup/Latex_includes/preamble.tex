@@ -1,0 +1,437 @@
+%Doc settings
+\documentclass[12pt,twoside,a4paper%,openright
+]{report}
+\usepackage[utf8]{inputenc}
+\usepackage[english]{babel}
+\usepackage{lmodern} %vector font Latin Modern
+\usepackage[T1]{fontenc} %font encoding
+
+%Tabels, color, figures and alike
+\usepackage{colortbl}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{float}
+\usepackage{graphicx}
+\usepackage{tabularx}
+\usepackage{rotating}
+\usepackage{caption}
+\usepackage[nottoc]{tocbibind}
+\captionsetup{%
+  font=footnotesize,% set font size to footnotesize
+  labelfont=bf % bold label (e.g., Figure 3.2) font
+}
+\usepackage{pdfpages}
+%\usepackage{wrapfig} %Wrapping graphics
+
+%fixme
+%\usepackage[final,inline,nomargin,index]{fixme} %draft
+
+%\fxsetup{theme=color} %+mode=multiuser
+%\FXRegisterAuthor{sv}{asv}{Me}
+%\FXRegisterAuthor{aa}{aaa}{Other}
+%See http://tex.stackexchange.com/questions/99904/is-there-a-way-to-assign-different-colors-to-different-authors-in-fixme
+
+%comments
+\newcommand\todo[1]{\textcolor{red}{?? #1}}
+%remove comments
+%\renewcommand\todo[1]{}
+
+%Math
+\usepackage{amsmath}
+\usepackage{amssymb}
+
+%Layout
+\usepackage[
+  inner=28mm,% left margin on an odd page
+  outer=28mm,% right margin on an odd page
+  ]{geometry}
+
+\usepackage{verbatim}
+
+
+% Clear empty pages between chapters
+\let\origdoublepage\cleardoublepage
+\newcommand{\clearemptydoublepage}{%
+  \clearpage
+  {\pagestyle{empty}\origdoublepage}%
+}
+\let\cleardoublepage\clearemptydoublepage
+
+% Change the headers and footers
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\fancypagestyle{plain}{ %
+  \fancyhf{} % remove everything
+  \renewcommand{\headrulewidth}{0pt} % remove lines as well
+  \renewcommand{\footrulewidth}{0pt}
+  \rfoot{\fancyplain{}{\thepage}}
+  \lfoot{\fancyplain{}{D504E16}}
+}
+\fancyhf{} %delete everything
+\renewcommand{\headrulewidth}{0pt} %remove the horizontal line in the header
+%\fancyfoot[C]{Page \thepage \ of \pageref{LastPage}} %page number on all pages
+\setlength{\headheight}{15pt} 
+\renewcommand{\chaptermark}[1]{ \markboth{#1}{} }
+\renewcommand{\sectionmark}[1]{ \markright{#1}{} }
+\rfoot{\thepage}
+\lfoot{D504E16}
+\lhead{\thechapter \enspace |\enspace \leftmark}
+
+%\fancypagestyle{plain}{\fancyhf{} \fancyfoot[C]{\thepage} \renewcommand{\headrulewidth}{0pt} \renewcommand{\footrulewidth}{0.0pt}}
+
+
+% Do not stretch the content of a page. Instead,
+% insert white space at the bottom of the page
+\raggedbottom
+% Enable arithmetics with length. Useful when
+% typesetting the layout.
+\usepackage{calc}
+
+
+%Chapter layout
+\newcommand{\hsp}{\hspace{20pt}}
+\definecolor{gray75}{gray}{0.75}
+
+\makeatletter
+\renewcommand{\@makechapterhead}[1]{%
+    \vspace*{50 pt}%
+    {\setlength{\parindent}{0pt} \raggedright \normalfont
+    \bfseries\Huge\thechapter\hsp{\color{gray75}|}\hsp #1
+    \par\nobreak\vspace{40 pt}}
+}
+\makeatother
+
+
+%\usepackage{titlesec}
+%\definecolor{gray75}{gray}{0.75}
+%\newcommand{\hsp}{\hspace{20pt}}
+%\titleformat{\chapter}[hang]{\Huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\Huge\bfseries}
+
+
+
+%¤¤ Afsnitsformatering ¤¤ %
+%\setlength{\parindent}{0mm}           	
+% Størrelse af indryk
+%\setlength{\parskip}{3mm}          			
+% Afstand mellem afsnit ved brug af double Enter
+%\linespread{1,1}												
+% Linie afstand
+
+
+
+% Bibliography
+\usepackage{natbib}
+\setcitestyle{numbers,square}
+\bibliographystyle{unsrtnat}
+
+
+% Misc
+%\usepackage[nottoc]{tocbibind}
+\usepackage{hyperref}
+\hypersetup{%
+	plainpages=false,%
+	bookmarksnumbered=true,%
+	colorlinks,%
+	citecolor=black,%
+	filecolor=black,%
+	linkcolor=black,%
+	urlcolor=black,%
+	pdfstartview=FitH%
+}
+
+%Code font - From http://tex.stackexchange.com/questions/124953/syntax-highlighting-in-listings-for-c-that-it-looks-like-in-visual-studio
+\usepackage{listings}
+
+\definecolor{grayC}{RGB}{250,250,250}
+\definecolor{Dgray}{RGB}{200,200,200}
+\definecolor{bluekeywords}{rgb}{0,0,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.64,0.08,0.08}
+\definecolor{xmlcomments}{rgb}{0.5,0.5,0.5}
+\definecolor{types}{rgb}{0.17,0.57,0.68}
+
+\usepackage{listings}
+\lstdefinestyle{C}{ %
+  %backgroundcolor=\color{grayC},
+  basicstyle=\ttfamily\small,        % the size of the fonts that are used for the code
+  breakatwhitespace=true,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{greencomments},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={(*@}{@*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 %% keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{bluekeywords},       % keyword style
+  language=[Sharp]C,              % the language of the code
+  morekeywords={partial, var, value, get, set},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{black},  % the style that is used for the line-numbers
+  rulecolor=\color{Dgray},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=1,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{redstrings},     % string literal style
+  tabsize=2,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+%colors for C#:
+\definecolor{MylightGray}{RGB}{210,210,210}
+\definecolor{bluekeywords}{rgb}{0.13,0.13,1}
+\definecolor{greencomments}{rgb}{0,0.5,0}
+\definecolor{redstrings}{rgb}{0.9,0,0}
+\definecolor{Cyan}{rgb}{0.0,0.6,0.6}
+\definecolor{LimeGreen}{RGB}{205,133,0}
+\definecolor{LineNumbers}{RGB}{0,0,0}
+
+%colors for XML:
+\definecolor{forestgreen}{RGB}{34,139,34}
+\definecolor{orangered}{RGB}{239,134,64}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.6}
+\definecolor{gray}{RGB}{210,210,210}
+\definecolor{purple}{RGB}{148,0,211}
+
+%colors for language definition
+\definecolor{editorLightGray}{cmyk}{0.05, 0.05, 0.05, 0.1}
+\definecolor{editorGray}{RGB}{210,210,210}
+\definecolor{editorPurple}{cmyk}{0.5, 1, 0, 0}
+\definecolor{editorWhite}{cmyk}{0, 0, 0, 0}
+\definecolor{editorBlack}{cmyk}{1, 1, 1, 1}
+\definecolor{editorOrange}{cmyk}{0, 0.8, 1, 0}
+\definecolor{editorBlue}{cmyk}{1, 0.6, 0, 0}
+\definecolor{editorPink}{cmyk}{0, 1, 0, 0}
+
+%colors JS colors
+\definecolor{lightgray}{RGB}{210,210,210}
+\definecolor{darkgray}{rgb}{.4,.4,.4}
+\definecolor{purple}{rgb}{0.65, 0.12, 0.82}
+
+%colors Table colors
+\definecolor{TblYellow}{RGB}{252,232,178}
+\definecolor{TblBlue}{RGB}{201,218,248}
+\definecolor{TblGreen}{RGB}{183,225,205}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%defining new languages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% CSS
+\lstdefinelanguage{CSS}{
+    keywords={color:,background-image:,margin:,margin-top:,margin-bottom:,margin-right:,margin-left:,padding,font,weight,display,position:,top:,left:,right:,bottom:,list:,style:,border:,border-radius:,size:,white:,space:,min:,width:, transition:, transform:, transition-property:, transition-duration:, transition-timing-function:}, 
+    sensitive=true,
+    morecomment=[l]{//},
+    morecomment=[s]{/*}{*/},
+    morestring=[b]',
+    morestring=[b]",
+    alsoletter={:,.},
+    alsodigit={-}
+}
+% Javascript
+\lstdefinelanguage{JavaScript}{
+  keywords={typeof, new, true, false, catch, function, return, null, catch, switch, var, if, in, while, do, else, case, break},
+  keywordstyle=\color{blue}\bfseries,
+  ndkeywords={class, export, boolean, throw, implements, import, this},
+  ndkeywordstyle=\color{blue}\bfseries,
+  identifierstyle=\color{black},
+  sensitive=false,
+  comment=[l]{//},
+  morecomment=[s]{/*}{*/},
+  commentstyle=\color{greencomments}\ttfamily,
+  stringstyle=\color{red}\ttfamily,
+  morestring=[b]',
+  morestring=[b]"
+}
+
+% eXtensible Markup Language
+\lstdefinelanguage{XML} {
+  morestring=[b]",
+ morestring=[s][\color{black}]{>}{<},
+  morecomment=[s]{<!--}{-->},
+  stringstyle=\color{black},
+  identifierstyle=\color{darkblue},
+  keywordstyle=\color{cyan},
+  morekeywords={xmlns,version,type}
+}
+
+%setup to C# in listings
+\lstdefinestyle{C[Sharp]}{
+    language=[Sharp]C,
+    %backgroundcolor=\color{MylightGray},
+    frame=single,
+    showspaces=false,
+    showtabs=false,
+    stepnumber = 1,
+    tabsize = 2,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+    showstringspaces=false,
+    breakatwhitespace=false,
+    escapeinside={(*@}{@*)},
+    commentstyle=\color{greencomments},
+    morecomment=[l]{//}, %use comment-line-style!
+    morecomment=[s]{/*}{*/}, %for multi-line comments
+    keywordstyle=\color{bluekeywords}\bfseries,
+    stringstyle=\color{redstrings},
+    basicstyle=\ttfamily\small,
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{LineNumbers},
+    literate=%
+    {æ}{{\ae}}1
+    {å}{{\aa}}1
+    {ø}{{\o}}1
+    {Æ}{{\AE}}1
+    {Å}{{\AA}}1
+    {Ø}{{\O}}1,
+    extendedchars = \true,
+    inputencoding=ansinew,
+    morekeywords={
+    abstract, event, new, struct,as, explicit, null, switch,base, extern, object, this,bool, false, operator, throw,break, finally, out, true,byte, fixed, override, try,case, float, params, typeof,catch, for, private, uint,char, foreach, protected, ulong,checked, goto, public, unchecked,class, if, readonly, unsafe,const, implicit, ref, ushort,continue, in, return, using,decimal, int, sbyte, virtual,default, interface, sealed, volatile,delegate, internal, short, void,do, is, sizeof, while,double, lock, stackalloc,else, long, static,enum, namespace, string, Convert, XmlAttribute, String,Program,
+    File,Regex,Exception,BackgroundWorker,Dictionary,MainWindow, FileRead,List,var,},
+    keywords=[2]{Label,Price, Location}, keywordstyle=[2]\color{blue},%tilføj ting der skal highlightes samme farve som klasser!
+    keywords=[3]{IinterfaceHere }, keywordstyle=[3]\color{LimeGreen},%tilføj interfaces
+}
+%defining style for HTML
+\lstdefinestyle{HTML}{%
+    language=html,
+    %backgroundcolor=\color{MylightGray},
+    frame=single,
+    showspaces=false,
+    showtabs=false,
+    stepnumber = 1,
+    tabsize = 2,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+    showstringspaces=false,
+    breakatwhitespace=false,
+    tagstyle=\color{black},
+    basicstyle=\small\ttfamily,
+    keywordstyle=\color{blue},
+    commentstyle=\color{greencomments},
+    stringstyle=\color{red},
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{LineNumbers},
+}
+
+% XML
+\lstdefinestyle{XML}{
+    language=XML,
+    %backgroundcolor = \color{MylightGray},
+    frame = single,
+    showspaces = false,
+    showtabs = false,
+    stepnumber = 1,
+    tabsize = 2,
+    breaklines = true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+    showstringspaces = false,
+    breakatwhitespace = false,
+    tagstyle = \color{black},
+    basicstyle = {\small\ttfamily},
+    keywordstyle = \color{blue},
+    commentstyle = \color{greencomments},
+    stringstyle = \color{red},
+    numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{LineNumbers},
+}
+
+%defining style for CSS
+\lstdefinestyle{Css}{%
+    language = CSS,
+    %backgroundcolor=\color{MylightGray},
+    frame=single,
+    showspaces=false,
+    showtabs=false,
+    stepnumber = 1,
+    tabsize = 2,
+    breaklines=true,
+    postbreak=\raisebox{0ex}[0ex][0ex]{\ensuremath{\color{red}\hookrightarrow\space}},
+    showstringspaces=false,
+    breakatwhitespace=false,
+    escapeinside={(*@}{@*)},
+    basicstyle=\ttfamily\small,
+    commentstyle=\color{greencomments},
+    keywordstyle=\color{blue},
+    numbers=left, 
+    numbersep=5pt,                   % how far the line-numbers are from the code
+    numberstyle=\tiny\color{LineNumbers},
+    literate=%
+    {æ}{{\ae}}1
+    {å}{{\aa}}1
+    {ø}{{\o}}1
+    {Æ}{{\AE}}1
+    {Å}{{\AA}}1
+    {Ø}{{\O}}1,
+    extendedchars = \true
+}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%JavaScript styling
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\lstdefinestyle{JS}{
+   language=JavaScript,
+   %backgroundcolor=\color{lightgray},
+   frame=single,
+   extendedchars=true,
+   basicstyle=\small\ttfamily,
+   showstringspaces=false,
+   showspaces=false,
+   numbers=left,
+   numberstyle=\footnotesize,
+   numbersep=9pt,
+   tabsize=2,
+   breaklines=true,
+   showtabs=false,
+   captionpos=b
+}
+\lstset{style = C[Sharp]}
+
+%Defines and custom settingsg
+\definecolor{aaublue}{RGB}{33,26,82}% dark blue
+\definecolor{LightBlue}{RGB}{0,235,235}% Light blue mucho
+
+%\setcounter{secnumdepth}{4}% Show down to subsubsection
+	
+%\setcounter{tocdepth}{2}
+%\usepackage{here}					% Gør det muligt at placere figurer hvor du vil. \begin{figure}[!h] % Will not be floating.
+%\usepackage{floatflt}				% Indsættelse af tabeller omsvøbt af tekst.
+\usepackage{epstopdf}
+
+%hypernation
+\hyphenation{ex-am-ple hy-phen-a-tion short}
+\hyphenation{long la-tex}
+
+
+\usepackage{pdfpages}
+
+
+%\usepackage{algpseudocode}
+
+
+\input{Setup/Latex_includes/buildtitlepage.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Mængdebyggernotation
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\suchthat}{\ensuremath{\,\middle|\,}}
+\newcommand{\set}[1]{\ensuremath{\left\{#1\right\}}}
+\newcommand{\buildset}[2]{\ensuremath{\set{#1\suchthat#2}}}
+
+\newcommand{\R}{{\mathbb{R}}}
+\newcommand{\Z}{{\mathbb{Z}}}
+\DeclareMathOperator*{\argmin}{\arg\!\min}
+\delimitershortfall-1sp
+\newcommand\abs[1]{\left\mid#1\right\mid}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% simpler backslash
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\bs}{\textbackslash}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% referencing commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\figref}[1]{[Figure \ref{#1}]}
