@@ -1,0 +1,48 @@
+\input{preample.tex}
+\input{rho-makroer.tex}
+\author{Group D608F16}
+\title{Rho-calculus Constructions}
+
+
+\begin{document}
+\maketitle
+
+\section{Workpaper week 10}
+The notation of the $\rho$-Calculus.\citep{Meredith2005}\\
+P,Q ::= \nil \ Nil\\
+|\inp{x}{y}P Input\\
+|\lift{x}{P} Lift\\
+|\drop{x} Drop\\
+|P\para Q Parallel\\
+x,y::= \quot{P} Quot\\
+
+
+\subsection{Numbers}
+This example could be a way of expressing numbers in $\rho$ - Calculus. Where the number takes place as $x$ or $y$ in the notation. By quoting the last number you get a higher number, and by droping a number you get a lower number, and at 0 you get the process P.\\
+$0:$ \quot{\nil}\\
+$1:$ \quot{\lift{\quot{\nil}}{\nil}}\\
+$2:$ \quot{\lift{\quot{\nil}}{\lift{\quot{\nil}}{\nil}}}\\
+$3:$ \quot{\lift{\quot{\nil}}{\lift{\quot{\nil}}{\lift{\quot{\nil}}{\nil}}}}\\
+$4:$ \quot{\lift{\quot{\nil}}{\lift{\quot{\nil}}{\lift{\quot{\nil}}{\lift{\quot{\nil}}{\nil}}}}}\\
+
+\subsection{Structure}
+We can express some of the programming terms in $\rho$-Calculus, but more has to be discovered.\\
+$if\ a == b\ then\ P$ Can be express in $\rho$-Calculus as: \lift{a}{\nil} \para \inp{b}{x}P
+\\ We send \nil \ on channel $a$ and if channel $a$ and channel $b$ is equal then channel $b$ will get a  \nil \ and execute $P$.
+%$[P,Q]:$ \lift{x}{\drop{P \para Q}} \para \inp{x}{y}\quot{y}
+\\\\
+$P+Q$ Can be express in $\rho$-Calculus as: \lift{a}{0} \para \inp{a}{x}P \para \inp{a}{x}Q
+\\We can make a determanistic choice between $P$ and $Q$ by sending \nil \ on channel $a$ and in parralel two channel $a$ tryies both to recive, but only one would succed and would run its procces $P$ or procces $Q$.
+
+\subsection{Yet to be solved}
+We need to express more programming structures, before we can use the $\rho$-Calculs to model a blockchain structure or even r-chain. These are a few exampels of what we need to express, and more should follow.
+\begin{itemize}
+\item if a$\neq$ b then P
+\item if a<b then P
+\item if a>b then P
+\item if a==b then P else Q
+\end{itemize}
+
+
+\bibliography{Bib}
+\end{document}
