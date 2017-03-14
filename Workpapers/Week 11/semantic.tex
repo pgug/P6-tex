@@ -1,0 +1,71 @@
+\subsection{Semantic for $\rho$-Calculus}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{Nil} & \infrule{}{\nil \ra}
+\end{tabular}
+\end{center}
+\caption{Reduction rule for Nil}
+\label{tab:nil}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{Input} & \infrule{}{\inp{x}{y}P\ra P}
+\end{tabular}
+\end{center}
+\caption{Reduction rule for Input}
+\label{tab:input}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{Lift} & \infrule{}{\lift{x}{P}\ra \nil}
+\end{tabular}
+\end{center}
+\caption{Reduction rule for Lift}
+\label{tab:nil}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{Drop} & \infrule{}{\drop{x}\ra P}
+\end{tabular}
+\end{center}
+\caption{Reduction rule for Drop}
+\label{tab:nil}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{Parallel P} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
+\end{tabular}
+\end{center}
+\caption{Reduction rule for Parallel}
+\label{tab:nil}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{Parallel Q} & \infrule{Q\ra Q'}{P\para Q\ra P\para Q'}
+\end{tabular}
+\end{center}
+\caption{Reduction rule for Parallel}
+\label{tab:nil}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{Quote} & \infrule{}{\quot{P}\ra a}
+\end{tabular}
+\end{center}
+\caption{Reduction rule for Quote}
+\label{tab:nil}
+\end{table}

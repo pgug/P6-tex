@@ -11,13 +11,16 @@
 
 \begin{align*}
 P  ::= \; &  \nil & \text{nil} \\
-  & \mid \inp{x}{y}P_1 & \text{input} \\
-  & \mid \lift{x}{P_1} & \text{lift} \\
+  & \mid \inp{x}{y}P & \text{input} \\
+  & \mid \lift{x}{P} & \text{lift} \\
   & \mid \drop{x} & \text{drop} \\
   & \mid P \para Q & \text{parallel} \\[3mm]
 x,y ::= \; & \quot{P} & \text{quote}
 \end{align*}
 \citep{Meredith2005}
+
+\input{semantic.tex}
+
 \subsection{Sequens of numbers}
 !\inp{seq}{base}(!\quot{\quot{base[next]}[prev]}[base]\para \lift{seq}{base[next]})
 
@@ -45,6 +48,7 @@ Unwrapper: &\inp{x}{y}\\
 &\quad \drop{y}\\
 )
 \end{align*}
+
 
 
 
