@@ -1,43 +1,52 @@
-\subsection{Semantic for $\rho$-Calculus}
+\begin{align*}
+P\para 0 \equiv P \equiv 0\para P\\
+P\para Q \equiv Q\para P\\
+P\para (Q\para R)\equiv (P\para Q)\para R
+\end{align*}
 
 \begin{table}[h]
 \begin{center}
 \begin{tabular}[c]{ll}
-  \runa{Nil} & \infrule{}{\nil \ra}
+  \runa{Equivalence} & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
 \end{tabular}
 \end{center}
-\caption{Reduction rule for Nil}
-\label{tab:nil}
+\caption{}
+\label{tab:equi}
 \end{table}
 
+\subsection{Semantic for $\rho$-Calculus}
+
+%nil er fjernet
+
 \begin{table}[h]
 \begin{center}
 \begin{tabular}[c]{ll}
-  \runa{Input} & \infrule{}{\inp{x}{y}P\ra P}
+  \runa{Communication} & \infrule{x_1\equiv _N x_2 }{x_1[y]\para \inp{x_2}{z}P\ra P\{y/ z\}} 
 \end{tabular}
 \end{center}
-\caption{Reduction rule for Input}
+\caption{Reduction rule for Communication}
 \label{tab:input}
 \end{table}
 
+
 \begin{table}[h]
 \begin{center}
 \begin{tabular}[c]{ll}
-  \runa{Lift} & \infrule{}{\lift{x}{P}\ra \nil}
+  \runa{Drop and Quot} & \infrule{}{\quot{\drop{x}}\equiv _N x}
 \end{tabular}
 \end{center}
-\caption{Reduction rule for Lift}
-\label{tab:nil}
+\caption{Reduction rule for Drop and Quot}
+\label{tab:dropquot}
 \end{table}
 
 \begin{table}[h]
 \begin{center}
 \begin{tabular}[c]{ll}
-  \runa{Drop} & \infrule{}{\drop{x}\ra P}
+  \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
 \end{tabular}
 \end{center}
-\caption{Reduction rule for Drop}
-\label{tab:nil}
+\caption{Reduction rule for Structural equivalence}
+\label{tab:dropquot}
 \end{table}
 
 \begin{table}[h]
@@ -47,25 +56,12 @@
 \end{tabular}
 \end{center}
 \caption{Reduction rule for Parallel}
-\label{tab:nil}
+\label{tab:para}
 \end{table}
 
-\begin{table}[h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{Parallel Q} & \infrule{Q\ra Q'}{P\para Q\ra P\para Q'}
-\end{tabular}
-\end{center}
-\caption{Reduction rule for Parallel}
-\label{tab:nil}
-\end{table}
 
-\begin{table}[h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{Quote} & \infrule{}{\quot{P}\ra a}
-\end{tabular}
-\end{center}
-\caption{Reduction rule for Quote}
-\label{tab:nil}
-\end{table}
+
+
+
+
+  
