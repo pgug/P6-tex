@@ -1,0 +1,19 @@
+\subsection{Reduction Example}
+
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}[c]{cll}
+     & !P & \runa{Initial} \\
+    
+     $\equiv$ & \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y}) & \runa{Substitution} \\
+    
+     $\ra$ & \lift{x}{\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}}}\para\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}} & \runa{Communication} \\
+    
+     $\equiv$ & \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y})\para P & \runa{DropQuote} \\
+    
+     $\equiv$ & !P\para P & \runa{Substitution}
+\end{tabular}
+\end{center}
+\caption{Reduction example of replication}
+\label{tab:reductionexample}
+\end{table}
