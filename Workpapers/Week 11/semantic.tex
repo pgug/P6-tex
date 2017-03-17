@@ -1,24 +1,24 @@
+
+\subsection{Structural Congruence}
 \begin{align*}
 P\para 0 \equiv P \equiv 0\para P\\
 P\para Q \equiv Q\para P\\
 P\para (Q\para R)\equiv (P\para Q)\para R
 \end{align*}
 
-\begin{table}[h]
+\begin{table}[!h]
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Equivalence} & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
 \end{tabular}
 \end{center}
-\caption{}
+\caption{Structural Congruence for Equivalence}
 \label{tab:equi}
 \end{table}
 
-\subsection{Semantic for $\rho$-Calculus}
+\subsection{Semantic}
 
-%nil er fjernet
-
-\begin{table}[h]
+\begin{table}[]
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Communication} & \infrule{x_1\equiv _N x_2 }{x_1[y]\para \inp{x_2}{z}P\ra P\{y/ z\}} 
@@ -29,7 +29,7 @@ P\para (Q\para R)\equiv (P\para Q)\para R
 \end{table}
 
 
-\begin{table}[h]
+\begin{table}[]
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Drop and Quote} & \infrule{}{\quot{\drop{x}}\equiv _N x}
@@ -39,7 +39,7 @@ P\para (Q\para R)\equiv (P\para Q)\para R
 \label{tab:dropquot}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[]
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
@@ -49,19 +49,13 @@ P\para (Q\para R)\equiv (P\para Q)\para R
 \label{tab:strucequiv}
 \end{table}
 
-\begin{table}[h]
+\begin{table}[]
 \begin{center}
 \begin{tabular}[c]{ll}
-  \runa{Parallel P} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
+  \runa{Parallel} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
 \end{tabular}
 \end{center}
 \caption{Reduction rule for Parallel}
 \label{tab:para}
 \end{table}
-
-
-
-
-
-
-  
+\FloatBarrier
