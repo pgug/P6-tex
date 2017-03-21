@@ -1,0 +1,46 @@
+\subsection{Blockchain Code}
+
+\subsection{Block}
+\begin{align*}
+Block = (index, previusHash, timestamp, data, hash)
+\end{align*}
+
+\subsubsection{Generate New Block}
+
+\begin{align*}
+generateNewBlock(data, previusBlock)\Rightarrow \\
+index[inc(previusBlock.Index)]\para\\
+previusHash[previusBlock.hash] \para \\
+timestamp[time.now] \para \\
+hash[hash(data)] \para \\
+(index(y).\drop{y}, previusHash(x).\drop{x}, timestamp(a).\drop{a}, data, hash(b).\drop{b})
+\end{align*}
+
+\subsubsection{Hash Block}
+
+\begin{align*}
+hashBlock(block)\Rightarrow\\
+SHA256(block)\\
+\end{align*}
+
+\subsubsection{Add Block}
+
+\begin{align*}
+addBlock(newBlock, previusBlock) \Rightarrow\\
+isValidNewBlock(newBlock, previusBlock)[0]\para \\
+\inp{true}{y}blockchain.push(newBlock)
+\end{align*}
+
+\subsubsection{Is Valid New Block}
+
+\begin{align*}
+isValidNewBlock(newBlock, previusBlock) \Rightarrow\\
+inc(previusBlock.index)[0] \para \\
+\inp{newBlock.index}{y}trueIndex[0] \para \\
+previusBlock.hash[0] \para \\
+\inp{newBlock.previusHash}{y}trueHash[0] \para \\
+hashBlock(newBlock)[0] \para \\
+\inp{new.Block.hash}{y}trueBlock[0] \para \\
+\inp{trueIndex}{x}\inp{trueHash}{y}\inp{trueBlock}{z}totalTrue[true] \para \\
+\inp{totalTrue}{a}\drop{a}
+\end{align*}

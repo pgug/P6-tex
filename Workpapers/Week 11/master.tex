@@ -8,7 +8,7 @@
 \maketitle
 
 \section{Workpaper week 11}
-
+\subsection{Syntax}
 \begin{align*}
 P  ::= \; &  \nil & \text{nil} \\
   & \mid \inp{x}{y}P & \text{input} \\
@@ -17,39 +17,11 @@ P  ::= \; &  \nil & \text{nil} \\
   & \mid P \para Q & \text{parallel} \\[3mm]
 x,y ::= \; & \quot{P} & \text{quote}
 \end{align*}
-\citep{Meredith2005}
+The syntax of $\rho$-calculus, where $P$ and $Q$ are a process and $x$ and $y$ is a name.\citep{Meredith2005}
 
 \input{semantic.tex}
-
-\subsection{Sequence of numbers}
-!\inp{seq}{base}(!\quot{\quot{base[next]}[prev]}[base]\para \lift{seq}{base[next]})
-
-\subsection{Tupels}
-\begin{align*}
-P=\lift{a}{A}\para \lift{b}{B}
-\end{align*}
-
-
-
-\begin{align*}
-Wrapper:
-\\ & \lift{x}{P}\para
-\\ & \quot{\quot{P}[head]}[a]\para
-\\ & \quot{\quot{P}[tail]}[b]
-\end{align*}
-
-\begin{align*}
-Unwrapper: &\inp{x}{y}\\
-(\\
-&\quad \inp{\quot{y[head]}}{a'}\\
-&\quad \inp{\quot{y}[tail]}{b'}\\
-&\quad \inp{a'}{A'}\\
-&\quad \inp{b'}{B'}Q\para\\
-&\quad \drop{y}\\
-)
-\end{align*}
-
-
+\input{reductionexample.tex}
+%\input{programmingconstruction.tex}
 
 
 \bibliography{../../Bibliography/Bib}

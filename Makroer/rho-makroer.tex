@@ -20,3 +20,16 @@
 % Henvisninger
 
 \newcommand{\tabref}[1]{Table \ref{#1}}
+
+
+\newcommand{\redchain}[3]{
+\begin{table}[!h]
+\begin{center}
+\begin{tabular}{cll}
+$$#1$$
+\end{tabular}
+\end{center}
+\caption{#2}
+\label{#3}
+\end{table}
+}
