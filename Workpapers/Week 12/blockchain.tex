@@ -1,9 +1,14 @@
 \subsection{Blockchain Code}
 
+\subsection{Block}
+\begin{align*}
+Block = (index, previusHash, timestamp, data, hash)
+\end{align*}
+
 \subsubsection{Generate New Block}
 
 \begin{align*}
-generateNewBlock(data)\Rightarrow \\
+generateNewBlock(data, previusBlock)\Rightarrow \\
 index[previusBlock.Index + 1]\para\\
 previusHash[previusBlock.hash] \para \\
 timestamp[time.now] \para \\
@@ -14,6 +19,14 @@ hash[hash(data)] \para \\
 \subsubsection{Hash Block}
 
 \begin{align*}
-HashBlock(block)\Rightarrow\\
+hashBlock(block)\Rightarrow\\
 SHA256(block)\\
+\end{align*}
+
+\subsubsection{Add Block}
+
+\begin{align*}
+addBlock(newBlock, previusBlock) \Rightarrow\\
+isBlockValidNewBlock(newBlock, previusBlock)[0]\para \\
+\inp{true}{y}blockchain.push(newBlock)
 \end{align*}
