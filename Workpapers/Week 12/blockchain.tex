@@ -9,7 +9,7 @@ Block = (index, previusHash, timestamp, data, hash)
 
 \begin{align*}
 generateNewBlock(data, previusBlock)\Rightarrow \\
-index[previusBlock.Index + 1]\para\\
+index[inc(previusBlock.Index)]\para\\
 previusHash[previusBlock.hash] \para \\
 timestamp[time.now] \para \\
 hash[hash(data)] \para \\
@@ -27,6 +27,20 @@ SHA256(block)\\
 
 \begin{align*}
 addBlock(newBlock, previusBlock) \Rightarrow\\
-isBlockValidNewBlock(newBlock, previusBlock)[0]\para \\
+isValidNewBlock(newBlock, previusBlock)[0]\para \\
 \inp{true}{y}blockchain.push(newBlock)
+\end{align*}
+
+\subsubsection{Is Valid New Block}
+
+\begin{align*}
+isValidNewBlock(newBlock, previusBlock) \Rightarrow\\
+inc(previusBlock.index)[0] \para \\
+\inp{newBlock.index}{y}trueIndex[0] \para \\
+previusBlock.hash[0] \para \\
+\inp{newBlock.previusHash}{y}trueHash[0] \para \\
+hashBlock(newBlock)[0] \para \\
+\inp{new.Block.hash}{y}trueBlock[0] \para \\
+\inp{trueIndex}{x}\inp{trueHash}{y}\inp{trueBlock}{z}totalTrue[true] \para \\
+\inp{totalTrue}{a}\drop{a}
 \end{align*}
