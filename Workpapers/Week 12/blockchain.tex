@@ -3,9 +3,17 @@
 \subsubsection{Generate New Block}
 
 \begin{align*}
-generateNewBlock(data)\Rightarrow \\ index[previusBlock.Index + 1]\para\\
+generateNewBlock(data)\Rightarrow \\
+index[previusBlock.Index + 1]\para\\
 previusHash[previusBlock.hash] \para \\
 timestamp[time.now] \para \\
 hash[hash(data)] \para \\
 (index(y).\drop{y}, previusHash(x).\drop{x}, timestamp(a).\drop{a}, data, hash(b).\drop{b})
+\end{align*}
+
+\subsubsection{Hash Block}
+
+\begin{align*}
+HashBlock(block)\Rightarrow\\
+SHA256(block)\\
 \end{align*}
