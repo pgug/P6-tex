@@ -15,60 +15,54 @@ Reduction rules for our additionally syntax.
 
 \subsubsection{Operation rule}
 \begin{align*}
-\dfrac{}{fM \ra x} 
+    \dfrac{}{fM \ra x} 
 \end{align*}
-Where $f$ is a operation that takes $M$ and returns $x$.
+Where \textit{f} is a operation that takes \textit{M} and returns \textit{x}.
 
 \subsubsection{Terms and Names}
-
-
-
 \begin{table}[h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{TN} & $T \ra N$
-\end{tabular}
-\end{center}
-\caption{TN makes it possible to go from $Terms$ to $Names$.}
-\label{tab:TN}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            \runa{TN} & \textit{T} \ra \textit{N}
+        \end{tabular}
+    \end{center}
+    \caption{TN makes it possible to go from \textit{Terms} to \textit{Names}.}
+    \label{tab:TN}
 \end{table}
 
 \begin{table}[h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{NT} &  $N \ra T$
-\end{tabular}
-\end{center}
-\caption{NT makes it possible to go from $Names$ to $Terms$}
-\label{tab:NT}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            \runa{NT} & \textit{N} \ra \textit{T}
+        \end{tabular}
+    \end{center}
+    \caption{NT makes it possible to go from \textit{Names} to \textit{Terms}}
+    \label{tab:NT}
 \end{table}
 
 \begin{table}[h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  $\runa{mTOn}$ & $\infrule{TN \dsp{n} \ra m}{NT \dsp{m} \ra n}$
-\end{tabular}
-\end{center}
-\caption{}
-\label{tab:}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            $\runa{mTOn}$ & $\infrule{TN \dsp{n} \ra m}{NT \dsp{m} \ra n}$
+        \end{tabular}
+    \end{center}
+    \caption{}
+    \label{tab:}
 \end{table}
 
 \begin{table}[h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  $\runa{Numbers}$ 	& $TN\dsp{0} \ra \quot{0}$\\
-  					& $TN\dsp{n+1} \ra \quot{TN\dsp{n}[next]}$
-\end{tabular}
-\end{center}
-\caption{}
-\label{tab:}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            $\runa{Numbers}$ &  $TN\dsp{0} \ra \quot{0}$\\
+            & $TN\dsp{n+1} \ra \quot{TN\dsp{n}[next]}$
+        \end{tabular}
+    \end{center}
+    \caption{}
+    \label{tab:}
 \end{table}
-
-
 \FloatBarrier
 
 \input{blockchain.tex}
-
 
 \bibliography{../../Bibliography/Bib}
 \end{document}\grid

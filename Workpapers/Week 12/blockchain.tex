@@ -2,55 +2,55 @@
 
 \subsubsection{Block}
 \begin{align*}
-Block = (index, previusHash, timestamp, data, hash)
+    Block = (index, previusHash, timestamp, data, hash)
 \end{align*}
 
 \subsubsection{Generate New Block}
 
 \begin{align*}
-generateNewBlock(data, previusBlock)\Rightarrow \\
-index[inc(previusBlock.Index)]\para\\
-previusHash[previusBlock.hash] \para \\
-timestamp[time.now] \para \\
-hash[hash(data)] \para \\
-(index(y).\drop{<y>}, previusHash(x).\drop{<x>},\\ timestamp(a).\drop{<a>}, data, hash(b).\drop{<b>})
+    generateNewBlock(data, previusBlock)\Rightarrow \\
+    index[inc(previusBlock.Index)]\para\\
+    previusHash[previusBlock.hash] \para \\
+    timestamp[time.now] \para \\
+    hash[hash(data)] \para \\
+    (index(y).\drop{<y>}, previusHash(x).\drop{<x>},\\ timestamp(a).\drop{<a>}, data, hash(b).\drop{<b>})
 \end{align*}
 
 \subsubsection{Hash Block}
 
 \begin{align*}
-hashBlock(block)\Rightarrow\\
-SHA256(block)\\
+    hashBlock(block)\Rightarrow\\
+    SHA256(block)\\
 \end{align*}
 
 \subsubsection{Add Block}
 
 \begin{align*}
-addBlock(newBlock, previusBlock) \Rightarrow\\
-<isValidNewBlock(newBlock, previusBlock)>[\nil]\para \\
-\inp{true}{y}blockchain.push(newBlock)
+    addBlock(newBlock, previusBlock) \Rightarrow\\
+    <isValidNewBlock(newBlock, previusBlock)>[\nil]\para \\
+    \inp{true}{y}blockchain.push(newBlock)
 \end{align*}
 
 \subsubsection{Is Valid New Block}
 
 \begin{align*}
-isValidNewBlock(newBlock, previusBlock) \Rightarrow\\
-inc(previusBlock.index)[\nil] \para \\
-\inp{newBlock.index}{y}trueIndex[\nil] \para \\
-previusBlock.hash[\nil] \para \\
-\inp{newBlock.previusHash}{y}trueHash[\nil] \para \\
-hashBlock(newBlock)[\nil] \para \\
-\inp{new.Block.hash}{y}trueBlock[\nil] \para \\
-\inp{trueIndex}{x}\inp{trueHash}{y}\inp{trueBlock}{z}totalTrue[true] \para \\
-\inp{totalTrue}{a}\drop{a}
+    isValidNewBlock(newBlock, previusBlock) \Rightarrow\\
+    inc(previusBlock.index)[\nil] \para \\
+    \inp{newBlock.index}{y}trueIndex[\nil] \para \\
+    previusBlock.hash[\nil] \para \\
+    \inp{newBlock.previusHash}{y}trueHash[\nil] \para \\
+    hashBlock(newBlock)[\nil] \para \\
+    \inp{new.Block.hash}{y}trueBlock[\nil] \para \\
+    \inp{trueIndex}{x}\inp{trueHash}{y}\inp{trueBlock}{z}totalTrue[true] \para \\
+    \inp{totalTrue}{a}\drop{a}
 \end{align*}
 
 \subsubsection{Is Chain Valid}
 
 \begin{align*}
-isChainVlaid(blockchainToValidate) \Rightarrow\\
-blockchainToValidate[0][\nil] \para \\
-\inp{genesisBlock}{y}
+    isChainVlaid(blockchainToValidate) \Rightarrow\\
+    blockchainToValidate[0][\nil] \para \\
+    \inp{genesisBlock}{y}
 \end{align*}
 
 
