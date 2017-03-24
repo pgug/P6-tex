@@ -9,18 +9,63 @@
 
 \section{Workpaper week 12}
 \input{syntax.tex}
-\begin{align*}
-Block = (index, previusHash, timestamp, data, hash)
-\end{align*}
-\citep{Meredith2005}
+\subsection{Semantic}
+Reduction rules for our additionally syntax.
+\input{commrule.tex}
 
-We need to provide a semantic of the M and \lift{x}{M}
-
+\subsubsection{Operation rule}
 \begin{align*}
 \dfrac{}{fM \ra x} 
 \end{align*}
-Where $f$ is a function that takes $M$ an returns $x$.
+Where $f$ is a operation that takes $M$ and returns $x$.
 
+\subsubsection{Terms and Names}
+
+
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{TN} & $T \ra N$
+\end{tabular}
+\end{center}
+\caption{TN makes it possible to go from $Terms$ to $Names$.}
+\label{tab:TN}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  \runa{NT} &  $N \ra T$
+\end{tabular}
+\end{center}
+\caption{NT makes it possible to go from $Names$ to $Terms$}
+\label{tab:NT}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  $\runa{mTOn}$ & $\infrule{TN \dsp{n} \ra m}{NT \dsp{m} \ra n}$
+\end{tabular}
+\end{center}
+\caption{}
+\label{tab:}
+\end{table}
+
+\begin{table}[h]
+\begin{center}
+\begin{tabular}[c]{ll}
+  $\runa{Numbers}$ 	& $TN\dsp{0} \ra \quot{0}$\\
+  					& $TN\dsp{n+1} \ra \quot{TN\dsp{n}[next]}$
+\end{tabular}
+\end{center}
+\caption{}
+\label{tab:}
+\end{table}
+
+
+\FloatBarrier
 
 \input{blockchain.tex}
 
