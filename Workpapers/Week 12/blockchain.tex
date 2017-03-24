@@ -1,12 +1,13 @@
 \subsection{Blockchain Code}
 
 \subsubsection{Block}
+A block in the block chain can be made of a tuple of $Terms$, like this.
 \begin{align*}
     Block = (index, previusHash, timestamp, data, hash)
 \end{align*}
 
 \subsubsection{Generate New Block}
-
+When a new block is made, the information for the new block is generated and saved like this. We have used a syntax of getting information out of tuples with a dot, but we have not yet formed the semantic rules for that. We have not made a syntax structure or semantic for the return statement, so right now the last process in chain of parallel process, should act as a return statement.
 \begin{align*}
     generateNewBlock(data, previusBlock)\Rightarrow \\
     index[inc(previusBlock.Index)]\para\\
@@ -16,15 +17,16 @@
     (index(y).\drop{<y>}, previusHash(x).\drop{<x>},\\ timestamp(a).\drop{<a>}, data, hash(b).\drop{<b>})
 \end{align*}
 
-\subsubsection{Hash Block}
 
+\subsubsection{Hash Block}
+If we assume that we have a standard library, with the most standard operation and cryptographic operation,to our disposal we may assume that the SHA256 operation should be one of them.
 \begin{align*}
     hashBlock(block)\Rightarrow\\
     SHA256(block)\\
 \end{align*}
 
 \subsubsection{Add Block}
-
+The addblock checks if the new block is valid, and if it is, then it is pushing it to the chain.
 \begin{align*}
     addBlock(newBlock, previusBlock) \Rightarrow\\
     <isValidNewBlock(newBlock, previusBlock)>[\nil]\para \\
@@ -32,7 +34,7 @@
 \end{align*}
 
 \subsubsection{Is Valid New Block}
-
+is validnewblock is checking if the new block is valid, and returns true, but if it is not valid it gets stuck, and we need a way to check if things is not true.
 \begin{align*}
     isValidNewBlock(newBlock, previusBlock) \Rightarrow\\
     inc(previusBlock.index)[\nil] \para \\
@@ -45,12 +47,12 @@
     \inp{totalTrue}{a}\drop{a}
 \end{align*}
 
-\subsubsection{Is Chain Valid}
+%\subsubsection{Is Chain Valid}
 
-\begin{align*}
-    isChainVlaid(blockchainToValidate) \Rightarrow\\
-    blockchainToValidate[0][\nil] \para \\
-    \inp{genesisBlock}{y}
-\end{align*}
+%\begin{align*}
+%isChainVlaid(blockchainToValidate) \Rightarrow\\
+%blockchainToValidate[0][\nil] \para \\
+%\inp{genesisBlock}{y}
+%\end{align*}
 
 
