@@ -1,0 +1,68 @@
+\subsection{Encoding of terms}
+
+In the communication rule shown last week, a term is directly substituting a name. This works fine if we define how this substitution is done.
+However, before that meeting we came up with a way to avoid this which also builds a foundation for the added abstraction of terms.
+This did not make it into our last workpaper, but we still wanted to share the idea.
+\\\\
+We add a new syntax rule seen in figure \ref{decode}
+\begin{figure}[h]
+	\begin{align*}
+	M::=\; & \decode{x} & \text{decode}
+	\end{align*}
+	\caption{The decode syntax rule}
+	\label{decode}
+\end{figure}
+
+where $M \in Terms$, $x \in Names$.\\\\
+This syntax allows a term to be a decoded name and in reverse also allows a name to be an encoded term.
+\\\\
+In order to bring the new decode term in context with the other terms, we introduce term equivalence.
+\begin{figure}[h]
+	\begin{align*}
+	M \equiv_T N
+	\end{align*}
+	\caption{Term equivalence example}
+	\label{tequiv}
+\end{figure}
+
+In figure \ref{tequiv}, $M$ and $N$ are equivalent with each other and are therefore able to substitute each other at any given moment. We are not sure whether this property is implied by equivalence or if we need a formalization of it.
+\\\\
+With this idea the communication rule appears as figure \ref{enccomm}.
+\begin{figure}[h]
+	\begin{center}
+		\begin{tabular}[c]{ll}
+			\runa{Comm} & \infrule{x_0 \equiv_N x_1 \quad M \equiv_T \decode{z}}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{z/y\}}
+		\end{tabular}
+	\end{center}
+	\caption{Communication rule with term encoding}
+	\label{enccomm}
+\end{figure}
+
+In this rule, we substitute a name with another name, instead of a term. It comes with the cost of defining how the term is encoded into a name with term equivalence. However, this can be done for all terms.
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tabular}[c]{ll}
+			\runa{NumBase} & \infrule{}{0 \equiv_T \decode{numbase}}
+		\end{tabular}
+	\end{center}
+	\caption{Base case for term equivalence with numbers}
+	\label{numbase}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{center}
+		\begin{tabular}[c]{ll}
+			\runa{NumInc} & \infrule{n \equiv_T \decode{x}}{n+1 \equiv_T \decode{\quot{\lift{x}{0}}}}
+		\end{tabular}
+	\end{center}
+	\caption{Incremental case for term equivalence with numbers}
+	\label{numinc}
+\end{figure}
+
+where $n \in Num$, $x \in Names$.\\\\
+In figure \ref{numbase} and figure \ref{numinc} we define the term equivalence for numbers using induction. Here $numbase$ is a specific name chosen in order to avoid name clashing between encodings. $n + 1$ represents the number that succeeds $n$.
+
+We will stick with the assumption that a similar definition is possible for strings, tuples, functions, and encodings that can be added later if needed.
+
+\FloatBarrier
