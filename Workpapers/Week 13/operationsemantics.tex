@@ -1,0 +1,14 @@
+\subsection{Operation Semantics}
+
+\begin{figure}
+\begin{center}
+\begin{align*}
+&first(M_1,M_2)=M_1\\
+&second(M_1,M_2)=M_2\\
+third(M_1,M_2,M_3)=&second(M_1,second(M_2,M_3))=M_3
+\end{align*}
+\end{center}
+\caption{A tuple operation, where we can get a value from a tuple, by only using the two functions \textit{first} and \textit{second}, and recursively using \textit{second} to make all other tuple variants.}
+\end{figure}
+
+\FloatBarrier
