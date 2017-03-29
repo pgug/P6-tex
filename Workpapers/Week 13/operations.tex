@@ -1,0 +1,23 @@
+%\begin{itemize}
+%    \item encrypt --- enc
+%    \item decrypt --- dec
+%    \item equal   --- eq
+%    \item !equal  --- !eq
+%    \item greater --- >
+%    \item greatereq --- >=
+%    \item lesser  --- <
+%    \item lessereq --- <=
+%    \item hashing --- hash
+%\end{itemize}
+
+\begin{align}
+    &enc(M_1, M_2) = M_2 \tag{Encrypt}\\
+    &dec(enc(M_1, M_2),M_2) = M_1 \tag{Decrypt}\\
+    &hash(M_1) = M_2 \tag{Hashing}\\
+    &[x_1 = x_2]P \ra P \tag{Equal}\\
+    &[x_1 \neq x_2]P \ra P \tag{Not Equal}\\
+    &[x_1 > x_2]P \ra P \tag{Greater}\\
+    &[x_1 >= x_2]P \ra P \tag{Greater than}\\
+    &[x_1 < x_2]P \ra P \tag{Lesser}\\
+    &[x_1 <= x_2]P \ra P \tag{Lesser than}
+\end{align}
