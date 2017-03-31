@@ -1,14 +1,24 @@
 \subsection{Operation Semantics}
 
-\begin{figure}
+\begin{figure}[h]
 \begin{center}
 \begin{align*}
-&first(M_1,M_2)=M_1\\
-&second(M_1,M_2)=M_2\\
-third(M_1,M_2,M_3)=&second(M_1,second(M_2,M_3))=M_3
+	&first(M_1,M_2)=M_1\\
+	&second(M_1,M_2)=M_2\\
+	third(M_1,M_2,M_3)=&second(M_1,second(M_2,M_3))=M_3
 \end{align*}
 \end{center}
 \caption{A tuple operation, where we can get a value from a tuple, by only using the two functions \textit{first} and \textit{second}, and recursively using \textit{second} to make all other tuple variants.}
+\end{figure}
+
+\begin{figure}[h]
+\begin{center}
+\begin{align*}
+	f(1) =& first(M_1, M_2)\\
+	f(n+1) =& second(M_1, f(n))
+\end{align*}
+\end{center}
+\caption{The recursive function for getting values out of tuples. Where the number of values in the tuples is equal or greater than 2}
 \end{figure}
 
 \FloatBarrier
