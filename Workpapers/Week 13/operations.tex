@@ -11,13 +11,26 @@
 %\end{itemize}
 
 \begin{align}
-    &enc(M_1, M_2) = M_2 \tag{Encrypt}\\
+    &enc(M_1, M_2) = M_1' \tag{Encrypt}\\
     &dec(enc(M_1, M_2),M_2) = M_1 \tag{Decrypt}\\
-    &hash(M_1) = M_2 \tag{Hashing}\\
-    &[x_1 = x_2]P \ra P \tag{Equal}\\
-    &[x_1 \neq x_2]P \ra P \tag{Not Equal}\\
-    &[x_1 > x_2]P \ra P \tag{Greater}\\
-    &[x_1 >= x_2]P \ra P \tag{Greater than}\\
-    &[x_1 < x_2]P \ra P \tag{Lesser}\\
-    &[x_1 <= x_2]P \ra P \tag{Lesser than}
 \end{align}
+Operations for encrypting and decrypting a message $M_1\ \mathrm{with\ key}\ M_2$.
+
+
+\begin{align}
+    &hash(M_1) = M_1' \tag{Hashing}
+\end{align}
+Operations for hashing a message $M_1$.
+
+
+\begin{align}
+    &[x_1 = x_2]P \ra P \tag{Equal}\\
+    &[x_1 \neq x_2]P \ra P \tag{NotEqual}\\
+    &[x_1 > x_2]P \ra P \tag{Greater}\\
+    &[x_1 >= x_2]P \ra P \tag{GreaterEqual}\\
+    &[x_1 < x_2]P \ra P \tag{Lesser}\\
+    &[x_1 <= x_2]P \ra P \tag{LesserEqual}
+\end{align}
+Listed is the evaluation operations. All evaluation operations evaluates $x_1\ \mathrm{against}\ x_2$ on some process \textit{P}, resulting in \textit{P} if the evaluation holds true.
+
+
