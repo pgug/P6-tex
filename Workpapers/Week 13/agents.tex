@@ -1,0 +1,9 @@
+\begin{align*}
+    &User \eqdef \overline{mineBlock}.User + block.User + \overline{addpeer}.User \\\\
+    &Client \eqdef MineBlock.Client + QueryLatest.Client + QueryAll.Client + Bupdate.Client \\%+ Addpeer.Client \\
+    &MineBlock \eqdef mineBlock.\overline{bup}.Client\\
+    &QueryLatest \eqdef qlatest.\overline{bup}.Client\\
+    &QueryAll \eqdef qall.\overline{bup}.Client\\
+    &Bupdate \eqdef bup.(\overline{bup}.Client + \overline{qall}.Client)\\
+    %&Addpeer \eqdef addpeer.\overline{qlatest}.?
+\end{align*}
