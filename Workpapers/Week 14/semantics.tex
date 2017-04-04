@@ -1,74 +1,76 @@
 
 \subsection{Structural Congruence}
+\begin{figure}[h]
 \begin{align*}
 P\para 0 \equiv &P \equiv 0\para P\\
 P\para Q &\equiv Q\para P\\
 P\para (Q\para R)&\equiv (P\para Q)\para R
 \end{align*}
-The structural congruence for parallel process.
+\caption{The structural congruence for parallel process.}
+\end{figure}
 
-\begin{table}[h]
+\begin{figure}[h]
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Equivalence} & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
 \end{tabular}
 \end{center}
 \caption{Structural Congruence for Equivalence}
-\label{tab:equi}
-\end{table}
+\label{fig:equi}
+\end{figure}
 \noindent
-The structural equivalence for $P$ and $Q$, as seen in \tabref{tab:equi}
+The structural equivalence for $P$ and $Q$, as seen in \tabref{fig:equi}
 \FloatBarrier
 
 
 \subsection{Reduction Rules}
 
-\begin{table}[!h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{Communication} & \infrule{x_1\equiv _N x_2 }{x_1[y]\para \inp{x_2}{z}P\ra P\{y/ z\}} 
-\end{tabular}
-\end{center}
-\caption{Reduction rule for Communication}
-\label{tab:com}
-\end{table}
+\begin{figure}[h]
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            \runa{Comm} & \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}
+        \end{tabular}
+    \end{center}
+    \caption{Communication rule for when a \textit{Term} is lifted instead of a \textit{Process}.}
+    \label{tab:commrule}
+\end{figure}
 \noindent
-The communication rule for input and output is seen in \tabref{tab:com}.
+The communication rule for input and output is seen in \figref{tab:com}.
 
 
-\begin{table}[!h]
+\begin{figure}
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Drop and Quote} & \infrule{}{\quot{\drop{x}}\equiv _N x}
 \end{tabular}
 \end{center}
 \caption{Reduction rule for Drop and Quote}
-\label{tab:dropquot}
-\end{table}
+\label{fig:dropquot}
+\end{figure}
 \noindent
-The drop and quote rules are applied to $x$ in \tabref{tab:dropquot}. Where if $x$ if first dropped, and then quoted then it should be name equivalent with $x$.
+The drop and quote rules are applied to $x$ in \figref{fig:dropquot}. Where if $x$ if first dropped, and then quoted then it should be name equivalent with $x$.
 
-\begin{table}[!h]
+\begin{figure}[!h]
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
 \end{tabular}
 \end{center}
 \caption{Reduction rule for Structural equivalence}
-\label{tab:strucequiv}
-\end{table}
+\label{fig:strucequiv}
+\end{figure}
 \noindent
-The structural equivalence of $P$ and $Q$, where if $P$ and $Q$ are congruent with each other, the quoted version of $P$ and $Q$ are name equivalent with each other, see \tabref{tab:strucequiv}.
+The structural equivalence of $P$ and $Q$, where if $P$ and $Q$ are congruent with each other, the quoted version of $P$ and $Q$ are name equivalent with each other, see \figref{fig:strucequiv}.
 
-\begin{table}[!h]
+\begin{figure}[!h]
 \begin{center}
 \begin{tabular}[c]{ll}
   \runa{Parallel} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
 \end{tabular}
 \end{center}
 \caption{Reduction rule for Parallel}
-\label{tab:para}
-\end{table}
+\label{fig:para}
+\end{figure}
 \noindent
-The reduction rule for $P$ parallel with $Q$ as seen in \tabref{tab:para}.
+The reduction rule for $P$ parallel with $Q$ as seen in \figref{fig:para}.
 \FloatBarrier
