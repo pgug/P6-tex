@@ -1,0 +1,35 @@
+\subsection{Description}
+Our description of the syntax of the rho-calculus.
+
+\subsubsection{Proces}
+\textbf{Nil}
+Nil is a process that does not do anything, and terminates the process.
+\\
+\textbf{Input}
+The input process receives \textit{y} on channel \textit{x} and runs afterwards the process \textit{P}.
+\\
+\textbf{Lift}
+The lift process sends \textit{M} on channel \textit{x}, and terminates afterwards.
+\\
+\textbf{Drop}
+The drop process drops \textit{x} so \textit{x} becomes a process.
+\\
+\textbf{Parallel}
+The parallel process runs process \textit{P} and process \textit{Q} in parallel.
+
+\subsubsection{Names}
+\textbf{Quote}
+The quote takes a process \textit{P} and it becomes a name.
+
+\subsubsection{Terms}
+\textbf{Numbers} 
+Numbers is a term for numbers.
+\\
+\textbf{Strings}
+Strings is a term for text.
+\\
+\textbf{Tuples}
+Tuples takes a number of terms bigger than or equal to two, and combines it into one term.
+\\
+\textbf{Operations}
+Operations takes a term and returns a term. Both the input and output term can be a tuple and that way the operation can takes multiple input and output.
