@@ -1,18 +1,18 @@
 \subsubsection{Tuple operation}
 
 \begin{figure}[h]
-\begin{center}
-\begin{align*}
-first&(M_1, M_2) = M_1\\
-second&(M_1, M_2) = M_2\\
-\\
-f(1) \eqdef & first(M_1, M_2)\\
-f(n) \eqdef & second(M_1, f(n-1))\\
-\\
-index(M, n) \eqdef &[n = 1]first(M)\para \\
-			&[n > 1]index(second(M), n-1)
-\end{align*}
-\end{center}
-\caption{The operation for indexing a tuple. Where \textit{M} is a tuple, and \textit{n} is a number bigger than 0}
+    \begin{center}
+        \begin{align*}
+            first&(M_1, M_2) = M_1\\
+            second&(M_1, M_2) = M_2\\
+            \\
+            f(1) \eqdef & first(M_1, M_2)\\
+            f(n) \eqdef & second(M_1, f(n-1))\\
+            \\
+            index(M, n) \eqdef &[n = 1]first(M)\para \\
+            &[n > 1]index(second(M), n-1)
+        \end{align*}
+    \end{center}
+    \caption{The operation for indexing a tuple. Where \textit{M} is a tuple, and \textit{n} is a number bigger than 0}
 \end{figure}
 \FloatBarrier

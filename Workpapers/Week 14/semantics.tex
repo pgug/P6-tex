@@ -1,27 +1,25 @@
-
 \subsection{Structural Congruence}
 \begin{figure}[h]
-\begin{align*}
-P\para 0 \equiv &P \equiv 0\para P\\
-P\para Q &\equiv Q\para P\\
-P\para (Q\para R)&\equiv (P\para Q)\para R
-\end{align*}
-\caption{The structural congruence for parallel process.}
+    \begin{align*}
+        P\para 0 \equiv &P \equiv 0\para P\\
+        P\para Q &\equiv Q\para P\\
+        P\para (Q\para R)&\equiv (P\para Q)\para R
+    \end{align*}
+    \caption{The structural congruence for parallel process.}
 \end{figure}
 
 \begin{figure}[h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{Equivalence} & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
-\end{tabular}
-\end{center}
-\caption{Structural Congruence for Equivalence}
-\label{fig:equi}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            \runa{Equivalence} & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
+        \end{tabular}
+    \end{center}
+    \caption{Structural Congruence for Equivalence}
+    \label{fig:equi}
 \end{figure}
 \noindent
 The structural equivalence for $P$ and $Q$, as seen in \tabref{fig:equi}
 \FloatBarrier
-
 
 \subsection{Reduction Rules}
 
@@ -37,39 +35,38 @@ The structural equivalence for $P$ and $Q$, as seen in \tabref{fig:equi}
 \noindent
 The communication rule for input and output is seen in \figref{tab:com}.
 
-
 \begin{figure}
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{Drop and Quote} & \infrule{}{\quot{\drop{x}}\equiv _N x}
-\end{tabular}
-\end{center}
-\caption{Reduction rule for Drop and Quote}
-\label{fig:dropquot}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            \runa{Drop and Quote} & \infrule{}{\quot{\drop{x}}\equiv _N x}
+        \end{tabular}
+    \end{center}
+    \caption{Reduction rule for Drop and Quote}
+    \label{fig:dropquot}
 \end{figure}
 \noindent
 The drop and quote rules are applied to $x$ in \figref{fig:dropquot}. Where if $x$ if first dropped, and then quoted then it should be name equivalent with $x$.
 
 \begin{figure}[!h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
-\end{tabular}
-\end{center}
-\caption{Reduction rule for Structural equivalence}
-\label{fig:strucequiv}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
+        \end{tabular}
+    \end{center}
+    \caption{Reduction rule for Structural equivalence}
+    \label{fig:strucequiv}
 \end{figure}
 \noindent
 The structural equivalence of $P$ and $Q$, where if $P$ and $Q$ are congruent with each other, the quoted version of $P$ and $Q$ are name equivalent with each other, see \figref{fig:strucequiv}.
 
 \begin{figure}[!h]
-\begin{center}
-\begin{tabular}[c]{ll}
-  \runa{Parallel} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
-\end{tabular}
-\end{center}
-\caption{Reduction rule for Parallel}
-\label{fig:para}
+    \begin{center}
+        \begin{tabular}[c]{ll}
+            \runa{Parallel} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
+        \end{tabular}
+    \end{center}
+    \caption{Reduction rule for Parallel}
+    \label{fig:para}
 \end{figure}
 \noindent
 The reduction rule for $P$ parallel with $Q$ as seen in \figref{fig:para}.
