@@ -1,0 +1,55 @@
+\subsection{Implementation of blockchain}
+
+\begin{align*}
+    User &= !mineBlock \lift{}{data} |!addPeer\lift{}{address}\\
+    MineBlock &= !mineBlock(data).blockchain(chain).(blockchain\\
+        &\lift{}{addToChain(newBlock(data,getLatest(chain)),chain)}\\
+        &|\overline{blockUpdate})\lift{}{newBlock(data, getLatest(chain))})\\
+    QueryLatest &=!queryLatest(null).blockchain(chain).(blockchain\\
+        &\lift{}{chain}|\overline{blockUpdate}\lift{}{getLatest(chain)})\\
+        QueryAll &= !queryAll(null).blochchain(chain).blockchain\lift{}{chain}|\\
+        &\overline{blockUpdate}\lift{}{chain})\\
+    BlockUpdate &= !blockUpdate(chain).blockchain(localchain).[indexOf(\\
+        &getLatest(chain))>indexOf(getLatest(localchain)),[hashOf(getLatest(\\
+        &localchain))=prevHashOf(getLatest(chain)),P_0,\\
+        &[lenghtOf(chain)=1,P_1,P_1]],P_3]\\
+    P_0 &= blockchain\lift{}{addToChain(getLatest(chain),localchain)}|\\
+        &\overline{blockUpdate}\lift{}{getLatest(chain)}\\
+    P_1 &= P_3|\overline{queryAll}\lift{}{0}\\
+    P_2 &= [isValid(chain) \land lenghtOf(chain) > lenghtOf(localchain),\\
+        &blockchain\lift{}{chain}|\overline{blockUpdate}\lift{}{getLatest\\
+        &(chain)},P_3]\\
+    P_3 &= blockchain\lift{}{blockchain}
+\end{align*}
+
+\subsection{Operations}
+
+\begin{align*}
+    newBlock(data,latest)\\
+    getLatest(chain)\\
+    addToChain(block,chain)\\
+    indexOf(block)\\
+    hashOf(block)\\
+    prevHashOf(block)\\
+    lenghtOf(chain)\\
+    isValid(chain)\\
+\end{align*}
+
+\subsection{Condition rule}
+
+\begin{align*}
+    if &= [cond,True,False] = [cond].True|[\neg cond].False
+\end{align*}
+
+\subsection{Peer network}
+
+\begin{align*}
+    &(blockUpdate, queryLatest, queryAll)\\
+    AddPeer &= !addPeer(peer).(peers(localpeers).peers\lift{}{(peer,localpeers)}\\
+        &|queryLatestOf(peer)\lift{}{0})\\
+    \overline{BlockUpdate} &= !\overline{blockUpdate}.(data).peers(localpeers).\\
+        &(peers\lift{}{localpeers}|blockUpdateLoop\lift{}{(localpeers,data)})|\\
+        &!blockUpdateLoop(x).(getBlockUpdate(head(getLocalPeers(x)))\\
+        &\lift{}{getData(x)}|[tail(getLocalPeers(x))\not= 0,\\
+        &blockUpdateLoop\lift{}{(tail(getLocalPeers(x)),getData(x))},\nil)
+\end{align*}
