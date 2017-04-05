@@ -50,9 +50,9 @@
         &|queryLatestOf(peer)\lift{}{0})\\
     \overline{BlockUpdate} &= !\overline{blockUpdate}.(data).peers(localpeers).\\
         &(peers\lift{}{localpeers}|blockUpdateLoop\lift{}{(localpeers,data)})|\\
-        &!blockUpdateLoop(x).(getBlockUpdate(head(getLocalPeers(x)))\\
-        &\lift{}{getData(x)}|[tail(getLocalPeers(x))\not= 0,\\
-        &blockUpdateLoop\lift{}{(tail(getLocalPeers(x)),getData(x))},\nil)
+        &!blockUpdateLoop(x).(BlockUpdateOf(head(LocalPeersOf(x)))\\
+        &\lift{}{DataOf(x)}|[tail(LocalPeersOf(x))\not= 0,\\
+        &blockUpdateLoop\lift{}{(tail(LocalPeersOf(x)),DataOf(x))},\nil)
 \end{align*}
 
 \subsection{Client}
