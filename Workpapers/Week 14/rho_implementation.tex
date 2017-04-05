@@ -12,11 +12,11 @@
     BlockUpdate &= !blockUpdate(chain).blockchain(localchain).[indexOf(\\
         &getLatest(chain))>indexOf(getLatest(localchain)),[hashOf(getLatest(\\
         &localchain))=prevHashOf(getLatest(chain)),P_0,\\
-        &[lenghtOf(chain)=1,P_1,P_1]],P_3]\\
+        &[getLenght(chain)=1,P_1,P_1]],P_3]\\
     P_0 &= blockchain\lift{}{addToChain(getLatest(chain),localchain)}|\\
         &\overline{blockUpdate}\lift{}{getLatest(chain)}\\
     P_1 &= P_3|\overline{queryAll}\lift{}{0}\\
-    P_2 &= [isValid(chain) \land lenghtOf(chain) > lenghtOf(localchain),\\
+    P_2 &= [isValid(chain) \land getLenght(chain) > getLenght(localchain),\\
         &blockchain\lift{}{chain}|\overline{blockUpdate}\lift{}{getLatest\\
         &(chain)},P_3]\\
     P_3 &= blockchain\lift{}{blockchain}
@@ -31,7 +31,7 @@
     indexOf(block)\\
     hashOf(block)\\
     prevHashOf(block)\\
-    lenghtOf(chain)\\
+    getLenght(chain)\\
     isValid(chain)\\
     xOf((M_0,M_1,...M_N))=M_x
 \end{align*}
