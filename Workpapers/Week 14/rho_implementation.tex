@@ -1,7 +1,38 @@
-\subsection{Implementation of blockchain}
+\section{Implementation of blockchain}
+
+\subsection{Prerequisites}
+
+\subsubsection{Operations}
 
 \begin{align*}
-    User &= !mineBlock \lift{}{data} |!addPeer\lift{}{address}\\
+	newBlock(data,latest)\\
+	getLatest(chain)\\
+	addToChain(block,chain)\\
+	indexOf(block)\\
+	hashOf(block)\\
+	prevHashOf(block)\\
+	getLenght(chain)\\
+	isValid(chain)\\
+	xOf((M_0,M_1,...M_N))=M_x
+\end{align*}
+
+\subsubsection{Condition syntax}
+
+\begin{align*}
+	if &= [cond,True,False] = [cond].True|[\neg cond].False
+\end{align*}
+
+\subsection{Overview}
+
+\begin{align*}
+	User &= !mineBlock \lift{}{data} |!addPeer\lift{}{address}\\
+	Client &= MineBlock|QueryLatest|QueryAll|BlockUpdate|\overline{BlockUpdate}\\
+	&|\overline{QueryLatest}|\overline{QueryAll}|peers\lift{}{0}|blockchain\lift{}{newBlockchain}
+\end{align*}
+
+\subsection{Client}
+
+\begin{align*}
     MineBlock &= !mineBlock(data).blockchain(chain).(blockchain\\
         &\lift{}{addToChain(newBlock(data,getLatest(chain)),chain)}\\
         &|\overline{blockUpdate})\lift{}{newBlock(data, getLatest(chain))})\\
@@ -22,26 +53,6 @@
     P_3 &= blockchain\lift{}{blockchain}
 \end{align*}
 
-\subsection{Operations}
-
-\begin{align*}
-    newBlock(data,latest)\\
-    getLatest(chain)\\
-    addToChain(block,chain)\\
-    indexOf(block)\\
-    hashOf(block)\\
-    prevHashOf(block)\\
-    getLenght(chain)\\
-    isValid(chain)\\
-    xOf((M_0,M_1,...M_N))=M_x
-\end{align*}
-
-\subsection{Condition rule}
-
-\begin{align*}
-    if &= [cond,True,False] = [cond].True|[\neg cond].False
-\end{align*}
-
 \subsection{Peer network}
 
 \begin{align*}
@@ -53,11 +64,4 @@
         &!blockUpdateLoop(x).(BlockUpdateOf(head(LocalPeersOf(x)))\\
         &\lift{}{DataOf(x)}|[tail(LocalPeersOf(x))\not= 0,\\
         &blockUpdateLoop\lift{}{(tail(LocalPeersOf(x)),DataOf(x))},\nil)
-\end{align*}
-
-\subsection{Client}
-
-\begin{align*}
-    Client &= MineBlock|QueryLatest|QueryAll|BlockUpdate|\overline{BlockUpdate}\\
-    &|\overline{QueryLatest}|\overline{QueryAll}|peers\lift{}{0}|blockchain\lift{}{newBlockchain}
 \end{align*}
