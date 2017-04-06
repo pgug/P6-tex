@@ -5,29 +5,29 @@
 \subsubsection{Operations}
 
 \begin{align*}
-	newBlock(data,latest)\\
-	getLatest(chain)\\
-	addToChain(block,chain)\\
-	indexOf(block)\\
-	hashOf(block)\\
-	prevHashOf(block)\\
-	getLenght(chain)\\
-	isValid(chain)\\
-	xOf((M_0,M_1,...M_N))=M_x
+    newBlock(data,latest)\\
+    getLatest(chain)\\
+    addToChain(block,chain)\\
+    indexOf(block)\\
+    hashOf(block)\\
+    prevHashOf(block)\\
+    getLength(chain)\\
+    isValid(chain)\\
+    xOf((M_0,M_1,...M_N))=M_x
 \end{align*}
 
 \subsubsection{Condition syntax}
 
 \begin{align*}
-	if &= [cond,True,False] = [cond].True|[\neg cond].False
+    if &= [cond,True,False] = [cond].True|[\neg cond].False
 \end{align*}
 
 \subsection{Overview}
 
 \begin{align*}
-	User &= !mineBlock \lift{}{data} |!addPeer\lift{}{address}\\
-	Client &= MineBlock|QueryLatest|QueryAll|BlockUpdate|\overline{BlockUpdate}\\
-	&|\overline{QueryLatest}|\overline{QueryAll}|peers\lift{}{0}|blockchain\lift{}{newBlockchain}
+    User &= !mineBlock \lift{}{data} |!addPeer\lift{}{address}\\
+    Client &= MineBlock|QueryLatest|QueryAll|BlockUpdate|\overline{BlockUpdate}\\
+    &|\overline{QueryLatest}|\overline{QueryAll}|peers\lift{}{0}|blockchain\lift{}{newBlockchain}
 \end{align*}
 
 \subsection{Client}
@@ -43,11 +43,11 @@
     BlockUpdate &= !blockUpdate(chain).blockchain(localchain).[indexOf(\\
         &getLatest(chain))>indexOf(getLatest(localchain)),[hashOf(getLatest(\\
         &localchain))=prevHashOf(getLatest(chain)),P_0,\\
-        &[getLenght(chain)=1,P_1,P_1]],P_3]\\
+        &[getLength(chain)=1,P_1,P_1]],P_3]\\
     P_0 &= blockchain\lift{}{addToChain(getLatest(chain),localchain)}|\\
         &\overline{blockUpdate}\lift{}{getLatest(chain)}\\
     P_1 &= P_3|\overline{queryAll}\lift{}{0}\\
-    P_2 &= [isValid(chain) \land getLenght(chain) > getLenght(localchain),\\
+    P_2 &= [isValid(chain) \land getLength(chain) > getLength(localchain),\\
         &blockchain\lift{}{chain}|\overline{blockUpdate}\lift{}{getLatest\\
         &(chain)},P_3]\\
     P_3 &= blockchain\lift{}{blockchain}
