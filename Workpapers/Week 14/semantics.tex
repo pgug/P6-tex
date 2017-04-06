@@ -18,7 +18,7 @@
     \label{fig:equi}
 \end{figure}
 \noindent
-The structural equivalence for $P$ and $Q$, as seen in \tabref{fig:equi}
+The structural equivalence for $P$ and $Q$, as seen in \figref{fig:equi}
 \FloatBarrier
 
 \subsection{Reduction Rules}
@@ -30,12 +30,12 @@ The structural equivalence for $P$ and $Q$, as seen in \tabref{fig:equi}
         \end{tabular}
     \end{center}
     \caption{Communication rule for when a \textit{Term} is lifted instead of a \textit{Process}.}
-    \label{tab:commrule}
+    \label{fig:com}
 \end{figure}
 \noindent
-The communication rule for input and output is seen in \figref{tab:com}.
+The communication rule for input and output is seen in \figref{fig:com}.
 
-\begin{figure}
+\begin{figure}[h]
     \begin{center}
         \begin{tabular}[c]{ll}
             \runa{Drop and Quote} & \infrule{}{\quot{\drop{x}}\equiv _N x}
@@ -47,7 +47,7 @@ The communication rule for input and output is seen in \figref{tab:com}.
 \noindent
 The drop and quote rules are applied to $x$ in \figref{fig:dropquot}. Where if $x$ if first dropped, and then quoted then it should be name equivalent with $x$.
 
-\begin{figure}[!h]
+\begin{figure}[h]
     \begin{center}
         \begin{tabular}[c]{ll}
             \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
