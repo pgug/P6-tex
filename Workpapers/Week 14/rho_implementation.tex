@@ -101,7 +101,7 @@ $BlockUpdateSetup$ inputs messages on $\overline{blockUpdate}$ and lifts a $Broa
     &\quad (peers\lift{}{localpeers}\ |\ blockUpdateTasks\lift{}{(localpeers,data)})
 \end{align*}
 
-$BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data. If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is $BoradcastTask$ with the tail of the task peers and the message data.
+$BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data. If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is $BroadcastTask$ with the tail of the task peers and the message data.
 
 \begin{align*}
     BlockUpdateExecute &=\ !blockUpdateTasks(task).(blockUpdateOf(head(peersOf(task)))\\
