@@ -24,8 +24,8 @@ In this section, an implementation of a simple blockchain written in $\rho$-calc
 
 \begin{align*}
     User &=\ !mineBlock \lift{}{data}\ |\ !addPeer\lift{}{peer}\\
-    Client &= MineBlock\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\ \overline{BlockUpdate}\\
-    &\quad |\ \overline{QueryLatest}\ |\ \overline{QueryAll}\ |\ peers\lift{}{0}\ |\ blockchain\lift{}{newBlockchain}
+    Client &= MineBlock\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\ \overline{BlockUpdate}|\\
+    &\quad \overline{QueryLatest}\ |\ \overline{QueryAll}\ |\ peers\lift{}{0}\ |\ blockchain\lift{}{newBlockchain}
 \end{align*}
 
 \subsection{Client}
@@ -56,15 +56,15 @@ The subset of these clients the our client can communicate with is called its pe
 Each peer is represented as a tuple of channel names, that lets the client know where to lift messages.
 
 \begin{align*}
-	Peer &= (blockUpdate, queryLatest, queryAll)
+    Peer &= (blockUpdate, queryLatest, queryAll)
 \end{align*}
 
 The client stores its peers as a list lifted on the channel $peers$, similar to how the blockchain is stored.
 When the client receives a new peer from its user, the peer is added to its peers.
 
 \begin{align*}
-    AddPeer &= !addPeer(peer).(peers(localpeers).peers\lift{}{(peer,localpeers)}\\
-        &|queryLatestOf(peer)\lift{}{0})\\
+    AddPeer &=\ !addPeer(peer).(peers(localpeers).peers\lift{}{(peer,localpeers)}|\\
+        &\quad queryLatestOf(peer)\lift{}{0})\\
 \end{align*}
 
 This is done by inputting from peers into the name localpeers, and lifting localpeers on peers again, with the new peer added.
@@ -81,7 +81,7 @@ Note that although $\overline{BlockUpdate}$ only manages $\overline{blockUpdate}
 To explain how $\overline{BlockUpdate}$ works we first need to introduce broadcast tasks.
 
 \begin{align*}
-	BroadcastTask &= (peers, data)
+    BroadcastTask &= (peers, data)
 \end{align*}
 
 A broadcast task represents some data that should be lifted to a list of peers.
@@ -97,14 +97,14 @@ The idea is to have $BlockUpdateSetup$ setup the broadcast tasks and have $Block
 $BlockUpdateSetup$ inputs messages on $\overline{blockUpdate}$ and lifts a $BroadcastTask$ with the known peers and the message data to $blockUpdateTasks$
 
 \begin{align*}
-	BlockUpdateSetup &= !\overline{blockUpdate}.(data).peers(localpeers).\\
-	&(peers\lift{}{localpeers}|blockUpdateTasks\lift{}{(localpeers,data)})
+    BlockUpdateSetup &=\ !\overline{blockUpdate}.(data).peers(localpeers).\\
+    &\quad (peers\lift{}{localpeers}\ |\ blockUpdateTasks\lift{}{(localpeers,data)})
 \end{align*}
 
 $BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data. If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is $BoradcastTask$ with the tail of the task peers and the message data.
 
 \begin{align*}
-	BlockUpdateExecute &= !blockUpdateTasks(task).(blockUpdateOf(head(peersOf(task)))\\
-	&\lift{}{dataOf(task)}|[isEmpty(tail(peersOf(task))),\nil,\\
-	&blockUpdateTasks\lift{}{(tail(peersOf(task)),dataOf(task))})
+    BlockUpdateExecute &=\ !blockUpdateTasks(task).(blockUpdateOf(head(peersOf(task)))\\
+    &\quad \lift{}{dataOf(task)}\ |\ [isEmpty(tail(peersOf(task))),\nil,\\
+    &\quad blockUpdateTasks\lift{}{(tail(peersOf(task)),dataOf(task))})
 \end{align*}
