@@ -36,7 +36,7 @@ In this section, an implementation of a simple blockchain written in $\rho$-calc
         &\quad \overline{blockUpdate})\lift{}{newBlock(data, getLatest(chain))})\\
     QueryLatest &=\ !queryLatest(null).blockchain(chain).(blockchain\\
         &\quad \lift{}{chain}\ |\ \overline{blockUpdate}\lift{}{getLatest(chain)})\\
-        QueryAll &=\ !queryAll(null).blochchain(chain).blockchain\lift{}{chain}|\\
+        QueryAll &=\ !queryAll(null).blockchain(chain).(blockchain\lift{}{chain}|\\
         &\quad \overline{blockUpdate}\lift{}{chain})\\
     BlockUpdate &=\ !blockUpdate(chain).blockchain(localchain).[indexOf(\\
         &\quad getLatest(chain))>indexOf(getLatest(localchain)),[hashOf(getLatest(\\
