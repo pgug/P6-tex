@@ -24,8 +24,8 @@ In this section, an implementation of a simple blockchain written in $\rho$-calc
 
 \begin{align*}
     User &=\ !mineBlock \lift{}{data}\ |\ !addPeer\lift{}{peer}\\
-    Client &= MineBlock\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\ \overline{BlockUpdate}|\\
-    &\quad \overline{QueryLatest}\ |\ \overline{QueryAll}\ |\ peers\lift{}{0}\ |\ blockchain\lift{}{newBlockchain}
+    Client &= MineBlock\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\ BroadcastBlockUpdate\ |\\
+    &\quad \ BroadcastQueryLatest\ |\ \ BroadcastQueryAll \ |\ peers\lift{}{0}\ |\ blockchain\lift{}{newBlockchain}
 \end{align*}
 
 \subsection{Client}
@@ -33,20 +33,20 @@ In this section, an implementation of a simple blockchain written in $\rho$-calc
 \begin{align*}
     MineBlock &=\ !mineBlock(data).blockchain(chain).(blockchain\\
         &\quad \lift{}{addToChain(newBlock(data,getLatest(chain)),chain)}|\\
-        &\quad \overline{blockUpdate})\lift{}{newBlock(data, getLatest(chain))})\\
+        &\quad \ broadcastBlockUpdate)\lift{}{newBlock(data, getLatest(chain))})\\
     QueryLatest &=\ !queryLatest(null).blockchain(chain).(blockchain\\
-        &\quad \lift{}{chain}\ |\ \overline{blockUpdate}\lift{}{getLatest(chain)})\\
+        &\quad \lift{}{chain}\ |\ \ broadcastBlockUpdate\lift{}{getLatest(chain)})\\
         QueryAll &=\ !queryAll(null).blockchain(chain).(blockchain\lift{}{chain}|\\
-        &\quad \overline{blockUpdate}\lift{}{chain})\\
+        &\quad \ broadcastBlockUpdate\lift{}{chain})\\
     BlockUpdate &=\ !blockUpdate(chain).blockchain(localchain).[indexOf(\\
         &\quad getLatest(chain))>indexOf(getLatest(localchain)),[hashOf(getLatest(\\
         &\quad localchain))=prevHashOf(getLatest(chain)),P_0,\\
         &\quad [getLength(chain)=1,P_1,P_1]],P_3]\\
     P_0 &=\ blockchain\lift{}{addToChain(getLatest(chain),localchain)}|\\
-        &\quad \overline{blockUpdate}\lift{}{getLatest(chain)}\\
-    P_1 &= P_3\ |\ \overline{queryAll}\lift{}{0}\\
+        &\quad \ broadcastBlockUpdate\lift{}{getLatest(chain)}\\
+    P_1 &= P_3\ |\ broadcastQueryAll \lift{}{0}\\
     P_2 &= [isValid(chain) \land getLength(chain) > getLength(localchain),\\
-        &\quad blockchain\lift{}{chain}\ |\ \overline{blockUpdate}\lift{}{getLatest(chain)},P_3]\\
+        &\quad blockchain\lift{}{chain}\ |\ broadcastBlockUpdate \lift{}{getLatest(chain)},P_3]\\
     P_3 &= blockchain\lift{}{blockchain}
 \end{align*}
 
@@ -74,11 +74,11 @@ This is done by indexing the $queryLatest$ channel from the peer and lifting a m
 \subsection{Broadcasting}
 In order for our client to communicate with more than one peer, we use broadcasting.
 When a message is broadcast, it is lifted to all peers exactly once.
-In previous client descriptions, any message that should be broadcast, is lifted on an overline channel name like $\overline{blockUpdate}$.
-$\overline{BlockUpdate}$ is the process that inputs messages from $\overline{blockUpdate}$ and broadcasts them.
-Note that although $\overline{BlockUpdate}$ only manages $\overline{blockUpdate}$, it is general enough to be repurposed for any other channel.
+In previous client descriptions, any message that should be broadcast, is lifted on a channel with a broadcast prefix like $broadcastBlockUpdate$.
+$BroadcastBlockUpdate$ is the process that inputs messages from $broadcastBlockUpdate$ and broadcasts them.
+Note that although $BroadcastBlockUpdate$ only manages $broadcastBlockUpdate$, it is general enough to be repurposed for any other channel.
 
-To explain how $\overline{BlockUpdate}$ works we first need to introduce broadcast tasks.
+To explain how $BroadcastBlockUpdate$ works we first need to introduce broadcast tasks.
 
 \begin{align*}
     BroadcastTask &= (peers, data)
@@ -86,22 +86,22 @@ To explain how $\overline{BlockUpdate}$ works we first need to introduce broadca
 
 A broadcast task represents some data that should be lifted to a list of peers.
 
-$\overline{BlockUpdate}$ consists of two parts: $BlockUpdateSetup$ and $BlockUpdateExecute$
+$BroadcastBlockUpdate$ consists of two parts: $BlockUpdateSetup$ and $BlockUpdateExecute$
 
 \begin{align*}
-    \overline{BlockUpdate} &= BlockUpdateSetup \para BlockUpdateExecute
+    BroadcastBlockUpdate &= BlockUpdateSetup \para BlockUpdateExecute
 \end{align*}
 
 The idea is to have $BlockUpdateSetup$ setup the broadcast tasks and have $BlockUpdateExecute$ execute them.
 
-$BlockUpdateSetup$ inputs messages on $\overline{blockUpdate}$ and lifts a $BroadcastTask$ with the known peers and the message data to $blockUpdateTasks$
+$BlockUpdateSetup$ inputs messages on $broadcastBlockUpdate$ and lifts a $BroadcastTask$ with the known peers and the message data to $blockUpdateTasks$
 
 \begin{align*}
-    BlockUpdateSetup &=\ !\overline{blockUpdate}.(data).peers(localpeers).\\
+    BlockUpdateSetup &=\ !broadcastBlockUpdate.(data).peers(localpeers).\\
     &\quad (peers\lift{}{localpeers}\ |\ blockUpdateTasks\lift{}{(localpeers,data)})
 \end{align*}
 
-$BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data. If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is $BroadcastTask$ with the tail of the task peers and the message data.
+$BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data. If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is a $BroadcastTask$ with the tail of the task peers and the message data.
 
 \begin{align*}
     BlockUpdateExecute &=\ !blockUpdateTasks(task).(blockUpdateOf(head(peersOf(task)))\\
