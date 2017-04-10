@@ -1,18 +1,13 @@
 \subsubsection{Tuple operation}
 The operation for getting Terms out of a tuple could look like this recursive operation, where \textit{n} determines the index starting from 1.
 \begin{figure}[h]
-    \begin{center}
-        \begin{align*}
-            first&(M_1, M_2) = M_1\\
-            second&(M_1, M_2) = M_2\\
-            \\
-            f(1) \eqdef & first(M_1, M_2)\\
-            f(n) \eqdef & second(M_1, f(n-1))\\
-            \\
-            index(M, n) \eqdef &[n = 1]first(M)\para \\
-            &[n > 1]index(second(M), n-1)
-        \end{align*}
-    \end{center}
+    \begin{align*}
+        &first \quad (M_1, M_2) = M_1\\
+        &second \quad (M_1, M_2) = M_2\\
+        &f(1) \eqdef first(M_1, M_2)\\
+        &f(n) \eqdef second(M_1, f(n-1))\\
+        &index( \quad M, n) \eqdef [n = 1]first(M)\para [n > 1]index(second(M), n-1)
+    \end{align*}
     \caption{The operation for indexing a tuple. Where \textit{M} is a tuple, and \textit{n} is a number bigger than  or equal to 1}
 \end{figure}
 \FloatBarrier
