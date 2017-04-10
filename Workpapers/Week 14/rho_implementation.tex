@@ -25,7 +25,7 @@ In this section, an implementation of a simple blockchain written in $\rho$-calc
 \begin{align*}
     User &=\ !mineBlock \lift{}{data}\ |\ !addPeer\lift{}{peer}\\
     Client &= MineBlock\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\ BroadcastBlockUpdate\ |\\
-    &\quad \ BroadcastQueryLatest\ |\ \ BroadcastQueryAll \ |\ peers\lift{}{0}\ |\ blockchain\lift{}{newBlockchain}
+    &\quad \ BroadcastQueryLatest\ |\ \ BroadcastQueryAll \ |\ peers\lift{}{emptyList}\ |\ blockchain\lift{}{newBlockchain}
 \end{align*}
 
 \subsection{Client}
@@ -63,7 +63,7 @@ The client stores its peers as a list lifted on the channel $peers$, similar to 
 When the client receives a new peer from its user, the peer is added to its peers.
 
 \begin{align*}
-    AddPeer &=\ !addPeer(peer).(peers(localpeers).peers\lift{}{(peer,localpeers)}|\\
+    AddPeer &=\ !addPeer(peer).(peers(localpeers).peers\lift{}{append(peer,localpeers)}|\\
         &\quad queryLatestOf(peer)\lift{}{0})\\
 \end{align*}
 
@@ -105,6 +105,6 @@ $BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received
 
 \begin{align*}
     BlockUpdateExecute &=\ !blockUpdateTasks(task).(blockUpdateOf(head(peersOf(task)))\\
-    &\quad \lift{}{dataOf(task)}\ |\ [isEmpty(tail(peersOf(task))),\nil,\\
+    &\quad \lift{}{dataOf(task)}\ |\ [tail(peersOf(task))=emptyList,\nil,\\
     &\quad blockUpdateTasks\lift{}{(tail(peersOf(task)),dataOf(task))})
 \end{align*}
