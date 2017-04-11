@@ -14,3 +14,9 @@ Rho-Calculus is developed and described by L. G. Meredith and M. Radestock in \c
 M::=\; & n \mid s \mid (M_1,...,M_k) \mid fM &for\ all\ k \geq 2
 \end{align*}
 Our additional syntax rule, where $M$ is terms, $n$ is numbers, $s$ is strings and $f$ is a operation.
+
+\begin{align*}
+\phi ::=& \ =|\neq|<|>|\leq|\geq\\
+P::=& \ [M_1\phi M_2] P
+\end{align*}
+In addition to terms and process we need to use boolean arithmetic, which will be determined by \ensuremath{\phi}, and an additional rule is applied to \textit{P}.

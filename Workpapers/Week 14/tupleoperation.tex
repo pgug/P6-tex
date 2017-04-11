@@ -1,13 +1,9 @@
 \subsubsection{Tuple operation}
-The operation for getting terms out of a tuple could look like this recursive operation, where \textit{n} determines the index starting from 1.
+The operation for getting terms out of a tuple could look like this projection, where \textit{k} determines the index starting from 1.
 \begin{figure}[h]
     \begin{align*}
-        &first \quad (M_1, M_2) = M_1\\
-        &second \quad (M_1, M_2) = M_2\\
-        &f(1) \eqdef first(M_1, M_2)\\
-        &f(n) \eqdef second(M_1, f(n-1))\\
-        &index( \quad M, n) \eqdef [n = 1]first(M)\para [n > 1]index(second(M), n-1)
+        \pi^k((M_1,..., M_n))=M_k \text{ If } 1\leq k \leq n
     \end{align*}
-    \caption{The operation for indexing a tuple. Where \textit{M} is a tuple, and \textit{n} is a number bigger than  or equal to 1}
+    \caption{The operation for indexing a tuple. Where \textit{M} is a tuple, and \textit{k} is the index and bigger than  or equal to 1}
 \end{figure}
 \FloatBarrier
