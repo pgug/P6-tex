@@ -24,4 +24,27 @@ The comparison operations runs the process \textit{P} if the statement holds tru
 
 \FloatBarrier
 
+\subsubsection{List operations}
+
+The list operations allows the abstraction of lists. They are described as follows:
+
+\begin{description}
+	\item[head(list)] The first element of the list
+	\item[tail(list)] The list without its first element
+	\item[append(x, list)] The list with element x appended to its beginning.
+\end{description}
+
+These operations are defined by the rules of Figure \ref{listoprules}.
+
+\begin{figure}[h]
+	\begin{align*}
+		&head(append(M_1, M_2)) = M_1 \tag{Head} \\
+		&tail(append(M_1, M_2)) = M_2 \tag{Tail}
+	\end{align*}
+	\caption{The rules of the list operations}
+	\label{listoprules}
+\end{figure}
+
+\FloatBarrier
+
 
