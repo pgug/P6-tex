@@ -1,5 +1,5 @@
 \section{Implementation of blockchain}
-In this section, an implementation of a simple blockchain written in $\rho$-calculus will be presented.
+In this section, an implementation of a blockchain written in $\rho$-calculus will be presented. This is based on Naivechain, a naive implementation of a blockchain in javascript.
 
 \subsection{Prerequisites}
 
@@ -21,11 +21,15 @@ In this section, an implementation of a simple blockchain written in $\rho$-calc
 
 \subsection{Overview}
 
+\begin{align*}
+	Blockchain &=\ !(User\para Client)
+\end{align*}
 
 \begin{align*}
     User &=\ !mineBlock \lift{}{data}\ |\ !addPeer\lift{}{peer}\\
-    Client &= MineBlock\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\ BroadcastBlockUpdate\ |\\
-    &\quad \ BroadcastQueryLatest\ |\ \ BroadcastQueryAll \ |\ peers\lift{}{emptyList}\ |\ blockchain\lift{}{newBlockchain}
+    Client &= MineBlock\ |\ AddPeer\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\\
+    &\quad \ BroadcastBlockUpdate\ |\ BroadcastQueryLatest\ |\ \ BroadcastQueryAll\ |\\
+    &\quad \ peers\lift{}{emptyList}\ |\ blockchain\lift{}{newBlockchain}
 \end{align*}
 
 \subsection{Client}
