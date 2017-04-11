@@ -2,38 +2,28 @@
 Our description of the syntax of the rho-calculus.
 
 \subsubsection{Process}
-\textbf{Nil}
-Nil is a process that does not do anything.
-\\
-\textbf{Input}
-The input process receives \textit{y} on channel \textit{x} and runs afterwards the process \textit{P}.
-\\
-\textbf{Lift}
-The lift process sends \textit{M} on channel \textit{x}, and terminates afterwards.
-\\
-\textbf{Drop}
-The drop process drops \textit{x} so \textit{x} becomes a process.
-\\
-\textbf{Parallel}
-The parallel process runs process \textit{P} and process \textit{Q} in parallel.
+\begin{description}
+\item[Nil] Nil is a process that does not do anything.
+\item[Input] The input process receives \textit{y} on channel \textit{x} and runs afterwards the process \textit{P}.
+\item[Lift]The lift process sends \textit{M} on channel \textit{x}, and terminates afterwards.
+\item[Drop] The drop process drops \textit{x} so \textit{x} becomes a process.
+\item[Parallel] The parallel process runs process \textit{P} and process \textit{Q} in parallel.
+\end{description}
+
 
 \subsubsection{Names}
-\textbf{Quote}
-The quote takes a process \textit{P} and it becomes a name.
+\begin{description}
+\item[Quote] The quote takes a process \textit{P} and it becomes a name.
+\end{description}
+
 
 \subsubsection{Terms}
-\textbf{Numbers} 
-Numbers is a term for numbers.
-\\
-\textbf{Strings}
-Strings is a term for text.
-\\
-\textbf{Tuples}
-%Tuples takes a number of terms bigger than or equal to two, and combines it into one term.
+\begin{description}
+\item[Numbers] Numbers is a term for numbers.
+\item[Strings] Strings is a term for text.
+\item[Tuples] Tuples is a set of \textit{terms}, where the numbers of \textit{terms} is bigger than or equal to two.
+\item[Operations] Operations is a way we can describe function or procedures.
+\end{description}
 
-Tuples is a set of \textit{terms}, where the numbers of \textit{terms} is bigger than or equal to two.
-\\
-\textbf{Operations}
-%Operations takes a term and returns a term. Both the input and output term can be a tuple and that way the operation can takes multiple input and output.
+%\subsubsection{Boolean Arithmetic}
 
-Operations is a way we can describe function or procedures.
