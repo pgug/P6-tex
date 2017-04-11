@@ -72,11 +72,11 @@ The client also needs to query this peer for its latest block.
 This is done by indexing the $queryLatest$ channel from the peer and lifting a message on it.
 
 \subsection{Broadcasting}
-In order for our client to communicate with more than one peer, we use broadcasting.
-When a message is broadcast, it is lifted to all peers exactly once.
+In order for our client to communicate with more than one peer, we need a system that enforces each message to be lifted to all peers exactly once. This is known as broadcasting, but since there is no primitive in the rho-calculus for this, we will describe a process that enforces broadcasting.
+
 In previous client descriptions, any message that should be broadcast, is lifted on a channel with a broadcast prefix like $broadcastBlockUpdate$.
-$BroadcastBlockUpdate$ is the process that inputs messages from $broadcastBlockUpdate$ and broadcasts them.
-Note that although $BroadcastBlockUpdate$ only manages $broadcastBlockUpdate$, it is general enough to be repurposed for any other channel.
+We will describe the process, $BroadcastBlockUpdate$, that inputs messages from $broadcastBlockUpdate$ and broadcasts them.
+Note that although $BroadcastBlockUpdate$ only manages $broadcastBlockUpdate$, it is general enough to be repurposed for any other channel that needs broadcasting.
 
 To explain how $BroadcastBlockUpdate$ works we first need to introduce broadcast tasks.
 
@@ -94,14 +94,14 @@ $BroadcastBlockUpdate$ consists of two parts: $BlockUpdateSetup$ and $BlockUpdat
 
 The idea is to have $BlockUpdateSetup$ setup the broadcast tasks and have $BlockUpdateExecute$ execute them.
 
-$BlockUpdateSetup$ inputs messages on $broadcastBlockUpdate$ and lifts a $BroadcastTask$ with the known peers and the message data to $blockUpdateTasks$
+$BlockUpdateSetup$ inputs messages on $broadcastBlockUpdate$ and lifts a broadcast task with the known peers and the message data to $blockUpdateTasks$
 
 \begin{align*}
     BlockUpdateSetup &=\ !broadcastBlockUpdate.(data).peers(localpeers).\\
     &\quad (peers\lift{}{localpeers}\ |\ blockUpdateTasks\lift{}{(localpeers,data)})
 \end{align*}
 
-$BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data. If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is a $BroadcastTask$ with the tail of the task peers and the message data.
+$BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$. When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data. If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is a broadcast task with the tail of the task peers and the message data.
 
 \begin{align*}
     BlockUpdateExecute &=\ !blockUpdateTasks(task).(blockUpdateOf(head(peersOf(task)))\\
