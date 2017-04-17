@@ -23,8 +23,9 @@ In this section, an implementation of a blockchain written in $\rho$-calculus wi
 The Rho-code is base on a javascript code of a block chain called naivechain \cite{naivechain}.
 The names in the code is shortened for a better and shorter look. The enlarged names can be seen in the table \tabref{tab:short}.
 
-\begin{table}
+\begin{table}[h]
 \begin{center}
+\resizebox{!}{0.48\textheight}{
 \begin{tabular}{c|c}
 a	&append					\\ \hline
 aP	&addPeer				\\ \hline
@@ -68,12 +69,14 @@ qO	&queryLatestOf			\\ \hline
 t	&task					\\ \hline
 u	&blockUpdate			\\ \hline
 uT	&blockUpdateTasks		\\ \hline
-U	&User					\\ \hline
-\end{tabular}
+U	&User					\\ 
+\end{tabular}}
 \end{center}
 \caption{The table over the shortened names in the rho-code.}
 \label{tab:short}
 \end{table}
+
+\FloatBarrier
 
 
 \begin{align*}
