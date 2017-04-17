@@ -2,6 +2,7 @@
 In this section, an implementation of a blockchain client written in $\rho$-calculus will be presented.
 This is based on Naivechain, a naive implementation of a blockchain client in javascript \cite{naivechain}.
 
+
 \subsection{Operations}
 
 We use several operations to abstract the blockchain.
@@ -21,6 +22,51 @@ We use several operations to abstract the blockchain.
 
 \subsection{Overview}
 
+The names in the code is shortened for a better and shorter look. The enlarged names can be seen in the table \tabref{tab:short}.
+
+\begin{table}[h]
+\begin{center}
+\resizebox{!}{0.48\textheight}{
+\begin{tabular}{c|c}
+ap	&addPeer				\\ \hline
+AP	&AddPeer				\\ \hline
+b	&blockchain				\\ \hline
+ba	&broadcastQueryAll		\\ \hline
+bt	&blockUpdateTasks		\\ \hline
+bu	&broadcastBlockUpdate	\\ \hline
+BA	&BroadcastQueryAll 		\\ \hline
+BE	&BlockUpdateExecute		\\ \hline
+BL	&BroadcastQueryLatest 	\\ \hline
+BS	&BlockUpdateSetup		\\ \hline
+BU	&BroadcastBlockUpdate 	\\ \hline
+c	&chain					\\ \hline
+C	&Client					\\ \hline
+d	&data					\\ \hline
+el	&emptyList				\\ \hline
+lc	&localChain				\\ \hline
+lp	&localPeers				\\ \hline
+mb	&mineBlock				\\ \hline
+MB	&MineBlock				\\ \hline
+n	&null					\\ \hline
+nb	&newBlockchain			\\ \hline
+p	&peer					\\ \hline
+ps	&peers					\\ \hline
+qa	&queryAll				\\ \hline
+QA	&QueryAll				\\ \hline
+ql	&queryLatest			\\ \hline
+QL	&QueryLatest			\\ \hline
+t	&task					\\ \hline
+u	&blockUpdate			\\ \hline
+U	&BlockUpdate			\\ \hline
+ut	&blockUpdateTasks		\\ \hline
+\end{tabular}}
+\end{center}
+\caption{The table over the shortened names in the rho-code.}
+\label{tab:short}
+\end{table}
+
+\FloatBarrier
+
 The blockchain consists of an arbitrary number of clients working in parallel. For this implementation we will limit our view to a single client.
 
 The client consists of an agent for each receivable message type: $MineBlock$, $AddPeer$, $QueryLatest$, $QueryAll$ and $BlockUpdate$.
@@ -32,9 +78,9 @@ This ensures mutual exclusion of the blockchain with respect to the agents.
 This is also the case for the list of peers.
 
 \begin{align*}
-	Client &= MineBlock\ |\ AddPeer\ |\ QueryLatest\ |\ QueryAll\ |\ BlockUpdate\ |\\
-	&\quad \ BroadcastBlockUpdate\ |\ BroadcastQueryLatest\ |\ \ BroadcastQueryAll\ |\\
-	&\quad \ peers\lift{}{emptyList}\ |\ blockchain\lift{}{newBlockchain}
+    C &= MB\ |\ AP\ |\ QL\ |\ QA\ |\ U\ |\\
+    &\quad \ BU\ |\ BL\ |\ \ BA\ |\\
+    &\quad \ p\lift{}{el}\ |\ b\lift{}{nb}
 \end{align*}
 
 In our explaination we have sectioned the agents into what they manage: Queries, the blockchain, the peers and broadcasting.
@@ -46,15 +92,13 @@ $QueryAll$ and $QueryLatest$ manage queries.
 When a $QueryAll$ message is received, the blockchain is lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
-    QueryAll &=\ !queryAll(null).blockchain(chain).(blockchain\lift{}{chain}|\\
-    &\quad \ broadcastBlockUpdate\lift{}{chain})
+    QA &=\ !qa(n).b(c).(b\lift{}{c}| \ bu\lift{}{c})
 \end{align*}
 
 A $QueryLatest$ message is handled by lifting the last block of the blockchain on $broadcastBlockUpdate$.
 
 \begin{align*}
-	QueryLatest &=\ !queryLatest(null).blockchain(chain).(blockchain\\
-	&\quad \lift{}{chain}\ |\ \ broadcastBlockUpdate\lift{}{getLatest(chain)})
+	QL &=\ !ql(n).b(c).(b \lift{}{c}\ |\ \ bu\lift{}{getLatest(c)})
 \end{align*}
 
 \subsection{Blockchain}
@@ -66,9 +110,8 @@ This block is both added to the blockchain and lifted on $broadcastBlockUpdate$.
 Both instances of $newBlock$ are the same block, since they have the same arguments.
 
 \begin{align*}
-    MineBlock &=\ !mineBlock(data).blockchain(chain).(blockchain\\
-    &\quad \lift{}{addToChain(newBlock(data,getLatest(chain)),chain)}|\\
-    &\quad \ broadcastBlockUpdate\lift{}{newBlock(data, getLatest(chain))})
+    MB &=\ !mb(d).b(c).(b \lift{}{addToChain(newBlock(d,getLatest(c)),c)}| \ bu\\
+    &\quad \lift{}{newBlock(d, getLatest(c))})
 \end{align*}
 
 $BlockUpdate$ handles most of the consensus logic.
@@ -78,56 +121,32 @@ We also refer to the clients own blockchain as the local blockchain.
 When a blockchain is received, 4 different cases are considered.
 
 \begin{align*}
-	BlockUpdate &=\ !blockUpdate(chain).blockchain(localchain).[indexOf(\\
-	&\quad getLatest(chain))>indexOf(getLatest(localchain)),[hashOf(getLatest(\\
-	&\quad localchain))=prevHashOf(getLatest(chain)),P_0,\\
-	&\quad [getLength(chain)=1,P_1,P_2]],P_3]
+	U &=\ !u(c).b(lc).[indexOf( getLatest(c))>indexOf(getLatest(lc)),\\
+	&\quad[hashOf(getLatest(lc))=previousHashOf(getLatest(c)),P_0,\\ &\quad[getLength(c)=1,P_1,P_2]],P_3]
 \end{align*}
 
 If the index of the last received block is less than or equal to the index of the last local block, then no change is needed to the local blockchain.
 
 \begin{align*}
-	P_3 &= blockchain\lift{}{localchain}
+	P_3 &= b\lift{}{lc}
 \end{align*}
 
 Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
-    P_0 &=\ blockchain\lift{}{addToChain(getLatest(chain),localchain)}|\\
-    &\quad \ broadcastBlockUpdate\lift{}{getLatest(chain)}
+	P_0 &=\ b\lift{}{addToChain(getLatest(c),lc)}| \ bu\lift{}{getLatest(c)}
 \end{align*}
 
 Else if the length of the received blockchain is 1, a $QueryAll$ message is sent.
 
 \begin{align*}
-    P_1 &= P_3\ |\ broadcastQueryAll \lift{}{0}
+    P_1 &= P_3\ |\ ba \lift{}{0}
 \end{align*}
 
 Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
-    P_2 &= [isValid(chain) \land getLength(chain) > getLength(localchain),\\
-    &\quad blockchain\lift{}{chain}\ |\ broadcastBlockUpdate \lift{}{getLatest(chain)},P_3]
-\end{align*}
-
-\begin{align*}
-    MineBlock &=\ !mineBlock(data).blockchain(chain).(blockchain\\
-        &\quad \lift{}{addToChain(newBlock(data,getLatest(chain)),chain)}|\\
-        &\quad \ broadcastBlockUpdate\lift{}{newBlock(data, getLatest(chain))})\\
-    QueryLatest &=\ !queryLatest(null).blockchain(chain).(blockchain\\
-        &\quad \lift{}{chain}\ |\ \ broadcastBlockUpdate\lift{}{getLatest(chain)})\\
-    QueryAll &=\ !queryAll(null).blockchain(chain).(blockchain\lift{}{chain}|\\
-        &\quad \ broadcastBlockUpdate\lift{}{chain})\\
-    BlockUpdate &=\ !blockUpdate(chain).blockchain(localchain).[indexOf(\\
-        &\quad getLatest(chain))>indexOf(getLatest(localchain)),[hashOf(getLatest(\\
-        &\quad localchain))=prevHashOf(getLatest(chain)),P_0,\\
-        &\quad [getLength(chain)=1,P_1,P_2]],P_3]\\
-    P_0 &=\ blockchain\lift{}{addToChain(getLatest(chain),localchain)}|\\
-        &\quad \ broadcastBlockUpdate\lift{}{getLatest(chain)}\\
-    P_1 &= P_3\ |\ broadcastQueryAll \lift{}{0}\\
-    P_2 &= [isValid(chain) \land getLength(chain) > getLength(localchain),\\
-        &\quad blockchain\lift{}{chain}\ |\ broadcastBlockUpdate \lift{}{getLatest(chain)},P_3]\\
-    P_3 &= blockchain\lift{}{localchain}
+    P_2 &= [isValid(c) \land getLength(c) > getLength(lc), b\lift{}{c}\ |\ bu \lift{}{getLatest(c)},P_3]
 \end{align*}
 
 \subsection{Peers}
@@ -136,15 +155,15 @@ The subset of these clients that our client can communicate with is called its p
 Each peer is represented as a tuple of channel names, that lets the client know where to lift messages.
 
 \begin{align*}
-    Peer &= (blockUpdate, queryLatest, queryAll)
+    Peer &= (u, ql, qa)
 \end{align*}
 
 $AddPeer$ manages the peers.
 When the client receives an $AddPeer$ message, the received peer is added to peers.
 
 \begin{align*}
-    AddPeer &=\ !addPeer(peer).(peers(localpeers).peers\lift{}{append(peer,localpeers)}|\\
-        &\quad queryLatestOf(peer)\lift{}{0})\\
+    AP &=\ !ap(p).(ps(lp).ps\lift{}{append(p,lp)}|\\
+        &\quad queryLatestOf(p)\lift{}{0})\\
 \end{align*}
 
 This is done by inputting from peers into the name $localpeers$, and lifting $localpeers$ on peers again, with the new peer added.
@@ -162,7 +181,7 @@ Note that although $BroadcastBlockUpdate$ only manages $broadcastBlockUpdate$, i
 To explain how $BroadcastBlockUpdate$ works we first need to introduce broadcast tasks.
 
 \begin{align*}
-    BroadcastTask &= (peers, data)
+    BroadcastTask &= (ps, d)
 \end{align*}
 
 A broadcast task represents some data that should be lifted to a list of peers.
@@ -170,7 +189,7 @@ A broadcast task represents some data that should be lifted to a list of peers.
 $BroadcastBlockUpdate$ consists of two parts: $BlockUpdateSetup$ and $BlockUpdateExecute$
 
 \begin{align*}
-    BroadcastBlockUpdate &= BlockUpdateSetup \para BlockUpdateExecute
+    BU &= BS \para BE
 \end{align*}
 
 $BlockUpdateSetup$ sets up the broadcast tasks and $BlockUpdateExecute$ executes them.
@@ -178,8 +197,8 @@ $BlockUpdateSetup$ sets up the broadcast tasks and $BlockUpdateExecute$ executes
 $BlockUpdateSetup$ inputs messages on $broadcastBlockUpdate$ and lifts a broadcast task with the known peers and the message data to $blockUpdateTasks$
 
 \begin{align*}
-    BlockUpdateSetup &=\ !broadcastBlockUpdate.(data).peers(localpeers).\\
-    &\quad (peers\lift{}{localpeers}\ |\ blockUpdateTasks\lift{}{(localpeers,data)})
+    BS &=\ !bu.(d).ps(lp).\\
+    &\quad (ps\lift{}{lp}\ |\ ut\lift{}{(lp,d)})
 \end{align*}
 
 $BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$.
@@ -187,7 +206,7 @@ When a task is received, it lifts a message on the $blockUpdate$ channel of the 
 If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is a broadcast task with the tail of the task peers and the message data.
 
 \begin{align*}
-    BlockUpdateExecute &=\ !blockUpdateTasks(task).(blockUpdateOf(head(peersOf(task)))\\
-    &\quad \lift{}{dataOf(task)}\ |\ [tail(peersOf(task))=emptyList,\nil,\\
-    &\quad blockUpdateTasks\lift{}{(tail(peersOf(task)),dataOf(task))})
+    BE &=\ !ut(t).(blockUpdateOf(head(peersOf(t)))\\
+    &\quad \lift{}{dataOf(t)}\ |\ [tail(peersOf(t))=el,\nil,\\
+    &\quad bt\lift{}{(tail(peersOf(t)),dataOf(t))})
 \end{align*}
