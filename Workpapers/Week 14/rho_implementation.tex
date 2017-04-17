@@ -1,22 +1,14 @@
 \section{Implementation of blockchain}
 In this section, an implementation of a blockchain client written in $\rho$-calculus will be presented. This is based on Naivechain, a naive implementation of a blockchain client in javascript \cite{naivechain}.
 
-\subsection{Prerequisites}
-
-\subsubsection{Operations}
+\subsection{Operations}
 
 \begin{align*}
     &newBlock(data,latest)\\
     &getLatest(chain)\\
     &addToChain(block,chain)\\
     &getLength(chain)\\
-    &isValid(chain)\\
-\end{align*}
-
-\subsubsection{Condition syntax}
-
-\begin{align*}
-    if &= [cond,True,False] = [cond].True\ |\ [\neg cond].False
+    &isValid(chain)
 \end{align*}
 
 \subsection{Overview}

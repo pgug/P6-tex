@@ -21,3 +21,7 @@ Our additional syntax rule, where $M$ is terms, $n$ is numbers, $s$ is strings a
 P::=& \ [\phi] P
 \end{align*}
 In addition to terms and process we need to use boolean arithmetic, which will be determined by \ensuremath{\phi}, and an additional rule is applied to \textit{P}, and \ensuremath{\gamma} will determine the boolean operation.
+
+\begin{align*}
+if &= [cond,True,False] = [cond].True\ |\ [\neg cond].False
+\end{align*}
