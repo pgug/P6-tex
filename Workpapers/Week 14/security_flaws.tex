@@ -9,21 +9,20 @@
 %zero-knowledge proofs
 
 \subsection{Distributed fault tolerance}
-Since the blockchain protocol is a distributed database, then the protocol must also contain fault tolerance regarding problems like, a node in the network dies or is attacked, a miner encounters an error during a mining process etc.
+Since the blockchain protocol is a distributed database, then the protocol must also contain fault tolerance regarding problems like, a node in the network dies or is attacked, a miner encounters an error during a mining process.
 %lidt længere og mere hvorfor det her er skide vigtigt
 
 \subsection{Immutability}
-The blockchain is all about having a database that has a unmodified history, which it also uses to verify new blocks, therefor the blockchain or rather the blocks in the chain must be designed to be immutable. The blocks must never be modified after creation, which is very relevant for use cases of currency. Changing blocks would mean that users could change already made transactions and thereby use already used money which would not make sense.
+The blockchain is all about having a database that has a unmodified history, which it also uses to verify new blocks, therefor the blockchain or rather the blocks in the chain must be designed to be immutable. The blocks must never be modified after creation, which is very relevant for use cases of currency. Changing blocks would mean that users could change already made transactions and thereby use already used money which would cause serious issues.
 %skal have en bedre start, og 1 eller 2 argumenter ekstra
 
 \subsection{Consensus}
-Consensus is the process by which the protocol, or rather the nodes in the network agrees if the new block is valid or not, and is allowed to be added to the chain. The popular choices of consensus protocols are proof-of-stake and proof-of-work. The proof-of-work protocol is proved to be to be valid, but the proof-of-stake is still under evaluation, and therefore relevant to analyze.\ref{web:consensus}
+Consensus is the process by which the protocol, or rather the nodes in the network agrees if the new block is valid or not, and is allowed to be added to the chain. The popular choices of consensus protocols are proof-of-stake and proof-of-work. The proof-of-work protocol is proved to be valid, but the proof-of-stake is still under evaluation, and therefore relevant to analyze. New protocols for achieving consensus are quickly appearing, and can therefore be relevant to consider to analyze and verify them.\ref{web:consensus}
 %lidt rodet men kan skal bare lige rydes op
 
 \subsection{Authenticity}
 Authenticity is very important for databases, since user rights are often used for different access rights. Zero knowledge proof is a way to verify whether a user, or in blockchains case a node, is who it claims to be. The advantage with zero knowledge proof is that no information is shared. Zero knowledge proofs works as such:\\
 A prover tries to prove his claim to a verifier. The verifier then has a challenge that the prover must be able to clear to convince the verifier that the provers claim is true. To clear the challenge the prover needs some information, which the verifier wants to confirm whether the prover has. The verifier does not actually want the information, that the prover claims to own since it is very important that the information is not leaked. If the prover clears the challenge, the verifier will ask the challenge once more and this will continue until the verifier is convinced that the provers claim is true.\ref{art:zero_knowledge_proofs}
-
 
 
 %Nok bedre med en bedre forklaring
