@@ -1,9 +1,12 @@
 \subsubsection{Tuple operation}
-The operation for getting terms out of a tuple could look like this projection, where \textit{k} determines the index starting from 1.
+The operation for getting terms out of a tuple could look like the projection in \figref{tupleop}, where \textit{k} determines the index starting from 1.
 \begin{figure}[h]
     \begin{align*}
         \pi^k((M_1,..., M_n))=M_k \text{ If } 1\leq k \leq n
     \end{align*}
     \caption{The operation for indexing a tuple. Where \textit{M} is a tuple, and \textit{k} is the index and bigger than  or equal to 1}
+\label{tupleop}
 \end{figure}
+
+In our implementation we use tuples to represent a group of attributes. To index an attribute from a tuple, we use the name of the attribute instead of a number. As an example, indexing the hash of a block can be expressed as $\pi^{hash}(block)$.
 \FloatBarrier
