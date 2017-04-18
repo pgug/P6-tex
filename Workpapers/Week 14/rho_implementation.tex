@@ -72,7 +72,11 @@ ut	&blockUpdateTasks		\\ \hline
 The blockchain consists of an arbitrary number of clients working in parallel. For this implementation we will limit our view to a single client.
 
 The client consists of an agent for each receivable message type: $MineBlock$, $AddPeer$, $QueryLatest$, $QueryAll$ and $BlockUpdate$.
-These agents are in parallel with eachother and performs a corresponding task when the message type is received.
+These agents are in parallel with eachother and performs a corresponding task wh
+\begin{align*}
+	U &=\ !u(c).b(lc).[indexOf( getLatest(c))>indexOf(getLatest(lc)),\\
+	&\quad[hashOf(getLatest(lc))=previousHashOf(getLatest(c)),P_0,\\ &\quad[getLength(c)=1,P_1,P_2]],P_3]
+\end{align*}en the message type is received.
 The client also consists of 3 other agents, one for each message type that it can send.
 The client also initializes its peers and blockchain by lifting on their respective channels.
 Whenever an agent needs the blockchain, it is input from $blockchain$ and lifted back when the agent is done modifying it.
@@ -123,8 +127,8 @@ We also refer to the clients own blockchain as the local blockchain.
 When a blockchain is received, 4 different cases are considered.
 
 \begin{align*}
-	U &=\ !u(c).b(lc).[indexOf( getLatest(c))>indexOf(getLatest(lc)),\\
-	&\quad[hashOf(getLatest(lc))=previousHashOf(getLatest(c)),P_0,\\ &\quad[getLength(c)=1,P_1,P_2]],P_3]
+	U &=\ !u(c).b(lc).if\ indexOf( getLatest(c))>indexOf(getLatest(lc))\ then\\
+	&\quad if\ hashOf(getLatest(lc))=previousHashOf(getLatest(c))\ then\ P_0\ else\\ &\quad if\ getLength(c)=1\ then\ P_1\ else\ P_2\ else\ P_3
 \end{align*}
 
 If the index of the last received block is less than or equal to the index of the last local block, then no change is needed to the local blockchain.
@@ -133,7 +137,11 @@ If the index of the last received block is less than or equal to the index of th
 	P_3 &= b\lift{}{lc}
 \end{align*}
 
-Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
+Else if the previous hash of the last received block matches the hash of the last
+\begin{align*}
+	U &=\ !u(c).b(lc).[indexOf( getLatest(c))>indexOf(getLatest(lc)),\\
+	&\quad[hashOf(getLatest(lc))=previousHashOf(getLatest(c)),P_0,\\ &\quad[getLength(c)=1,P_1,P_2]],P_3]
+\end{align*} local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
 	P_0 &=\ b\lift{}{addToChain(getLatest(c),lc)}| \ bu\lift{}{getLatest(c)}
@@ -148,7 +156,7 @@ Else if the length of the received blockchain is 1, a $QueryAll$ message is sent
 Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
-    P_2 &= [isValid(c) \land getLength(c) > getLength(lc), b\lift{}{c}\ |\ bu \lift{}{getLatest(c)},P_3]
+    P_2 &= if\ isValid(c) \land getLength(c) > getLength(lc)\ then\  b\lift{}{c}\ |\ bu \lift{}{getLatest(c)}\ else\ P_3
 \end{align*}
 
 \subsection{Peers}
@@ -209,6 +217,6 @@ If the tail of the task peers is non-empty, it also lifts the remainder of the t
 
 \begin{align*}
     BE &=\ !ut(t).(blockUpdateOf(head(peersOf(t)))\\
-    &\quad \lift{}{dataOf(t)}\ |\ [tail(peersOf(t))=el,\nil,\\
-    &\quad bt\lift{}{(tail(peersOf(t)),dataOf(t))})
+    &\quad \lift{}{dataOf(t)}\ |\ if\ tail(peersOf(t))=el\ then\ \nil\ else\\
+    &\quad bt\lift{}{(tail(peersOf(t)),dataOf(t))}
 \end{align*}
