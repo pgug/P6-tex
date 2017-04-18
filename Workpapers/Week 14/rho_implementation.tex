@@ -72,11 +72,7 @@ ut	&blockUpdateTasks		\\ \hline
 The blockchain consists of an arbitrary number of clients working in parallel. For this implementation we will limit our view to a single client.
 
 The client consists of an agent for each receivable message type: $MineBlock$, $AddPeer$, $QueryLatest$, $QueryAll$ and $BlockUpdate$.
-These agents are in parallel with eachother and performs a corresponding task wh
-\begin{align*}
-	U &=\ !u(c).b(lc).[indexOf( getLatest(c))>indexOf(getLatest(lc)),\\
-	&\quad[hashOf(getLatest(lc))=previousHashOf(getLatest(c)),P_0,\\ &\quad[getLength(c)=1,P_1,P_2]],P_3]
-\end{align*}en the message type is received.
+These agents are in parallel with eachother and performs a corresponding task when the message type is received.
 The client also consists of 3 other agents, one for each message type that it can send.
 The client also initializes its peers and blockchain by lifting on their respective channels.
 Whenever an agent needs the blockchain, it is input from $blockchain$ and lifted back when the agent is done modifying it.
