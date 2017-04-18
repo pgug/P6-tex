@@ -137,11 +137,7 @@ If the index of the last received block is less than or equal to the index of th
 	P_3 &= b\lift{}{lc}
 \end{align*}
 
-Else if the previous hash of the last received block matches the hash of the last
-\begin{align*}
-	U &=\ !u(c).b(lc).[indexOf( getLatest(c))>indexOf(getLatest(lc)),\\
-	&\quad[hashOf(getLatest(lc))=previousHashOf(getLatest(c)),P_0,\\ &\quad[getLength(c)=1,P_1,P_2]],P_3]
-\end{align*} local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
+Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
 	P_0 &=\ b\lift{}{addToChain(getLatest(c),lc)}| \ bu\lift{}{getLatest(c)}
