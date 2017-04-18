@@ -43,6 +43,8 @@ c	&chain					\\ \hline
 C	&Client					\\ \hline
 d	&data					\\ \hline
 el	&emptyList				\\ \hline
+h	&hash					\\ \hline
+i	&index					\\ \hline
 lc	&localChain				\\ \hline
 lp	&localPeers				\\ \hline
 mb	&mineBlock				\\ \hline
@@ -50,6 +52,7 @@ MB	&MineBlock				\\ \hline
 n	&null					\\ \hline
 nb	&newBlockchain			\\ \hline
 p	&peer					\\ \hline
+ph	&previousHash			\\ \hline
 ps	&peers					\\ \hline
 qa	&queryAll				\\ \hline
 QA	&QueryAll				\\ \hline
@@ -123,14 +126,14 @@ We also refer to the clients own blockchain as the local blockchain.
 When a blockchain is received, 4 different cases are considered.
 
 \begin{align*}
-	U &=\ !u(c).b(lc).if\ indexOf( getLatest(c)) \leq indexOf(getLatest(lc))\ then\\
+	U &=\ !u(c).b(lc).if\ \pi^{i}( getLatest(c)) \leq \pi^{i}(getLatest(lc))\ then\\
 	&\quad b\lift{}{lc}\ else\ P_0
 \end{align*}
 
 If the index of the last received block is less than or equal to the index of the last local block, then no change is needed to the local blockchain.
 
 \begin{align*}
-	P_0 &= if\ hashOf(getLatest(lc))=previousHashOf(getLatest(c))\ then\\
+	P_0 &= if\ \pi^{h}(getLatest(lc))=\pi^{ph}(getLatest(c))\ then\\
 	&\quad b\lift{}{addToChain(getLatest(c),lc)}\ | \ bu\lift{}{getLatest(c)}\ else\ P_1
 \end{align*}
 
@@ -162,7 +165,7 @@ When the client receives an $AddPeer$ message, the received peer is added to pee
 
 \begin{align*}
     AP &=\ !ap(p).(ps(lp).ps\lift{}{append(p,lp)}|\\
-        &\quad queryLatestOf(p)\lift{}{0})\\
+        &\quad \pi^{ql}(p)\lift{}{0})\\
 \end{align*}
 
 This is done by inputting from peers into the name $localpeers$, and lifting $localpeers$ on peers again, with the new peer added.
@@ -205,7 +208,7 @@ When a task is received, it lifts a message on the $blockUpdate$ channel of the 
 If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is a broadcast task with the tail of the task peers and the message data.
 
 \begin{align*}
-    BE &=\ !ut(t).(blockUpdateOf(head(peersOf(t)))\\
-    &\quad \lift{}{dataOf(t)}\ |\ if\ tail(peersOf(t))=el\ then\ \nil\ else\\
-    &\quad bt\lift{}{(tail(peersOf(t)),dataOf(t))}
+    BE &=\ !ut(t).(\pi^{u}(head(\pi^{p}(t)))\\
+    &\quad \lift{}{\pi^{d}(t)}\ |\ if\ tail(\pi^{ps}(t))=el\ then\ \nil\ else\\
+    &\quad bt\lift{}{(tail(\pi^{ps}(t)),\pi^{d}(t))}
 \end{align*}
