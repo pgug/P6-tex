@@ -127,33 +127,30 @@ We also refer to the clients own blockchain as the local blockchain.
 When a blockchain is received, 4 different cases are considered.
 
 \begin{align*}
-	U &=\ !u(c).b(lc).if\ indexOf( getLatest(c))>indexOf(getLatest(lc))\ then\\
-	&\quad if\ hashOf(getLatest(lc))=previousHashOf(getLatest(c))\ then\ P_0\ else\\ &\quad if\ getLength(c)=1\ then\ P_1\ else\ P_2\ else\ P_3
+	U &=\ !u(c).b(lc).if\ indexOf( getLatest(c)) \leq indexOf(getLatest(lc))\ then\\
+	&\quad b\lift{}{lc}\ else\ P_0
 \end{align*}
 
 If the index of the last received block is less than or equal to the index of the last local block, then no change is needed to the local blockchain.
 
 \begin{align*}
-	P_3 &= b\lift{}{lc}
+	P_0 &= if\ hashOf(getLatest(lc))=previousHashOf(getLatest(c))\ then\\
+	&\quad b\lift{}{addToChain(getLatest(c),lc)}\ | \ bu\lift{}{getLatest(c)}\ else\ P_1
 \end{align*}
 
 Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
-	P_0 &=\ b\lift{}{addToChain(getLatest(c),lc)}| \ bu\lift{}{getLatest(c)}
+	P_1 &= if\ getLength(c)=1\ then\ (b\lift{}{lc}\ |\ ba \lift{}{0})\ else\ P_2
 \end{align*}
 
 Else if the length of the received blockchain is 1, a $QueryAll$ message is sent.
 
 \begin{align*}
-    P_1 &= P_3\ |\ ba \lift{}{0}
+	P_2 &= if\ isValid(c) \land getLength(c) > getLength(lc)\ then\  (b\lift{}{c}\ |\ bu \lift{}{getLatest(c)})\ else\ b\lift{}{lc}
 \end{align*}
 
 Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $broadcastBlockUpdate$.
-
-\begin{align*}
-    P_2 &= if\ isValid(c) \land getLength(c) > getLength(lc)\ then\  b\lift{}{c}\ |\ bu \lift{}{getLatest(c)}\ else\ P_3
-\end{align*}
 
 \subsection{Peers}
 The client exists in a network with an arbitrarily large number of other clients.
