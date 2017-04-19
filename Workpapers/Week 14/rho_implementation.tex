@@ -126,28 +126,28 @@ We also refer to the clients own blockchain as the local blockchain.
 When a blockchain is received, 4 different cases are considered.
 
 \begin{align*}
-	U &=\ !u(c).b(lc).if\ \pi^{i}( getLatest(c)) \leq \pi^{i}(getLatest(lc))\ then\\
-	&\quad b\lift{}{lc}\ else\ P_0
+	U &=\ !u(c).b(lc).\If{\pi^{i}( getLatest(c)) \leq \pi^{i}(getLatest(lc))}{\\
+	&\quad b\lift{}{lc}}{P_0}
 \end{align*}
 
 If the index of the last received block is less than or equal to the index of the last local block, then no change is needed to the local blockchain.
 
 \begin{align*}
-	P_0 &= if\ \pi^{h}(getLatest(lc))=\pi^{ph}(getLatest(c))\ then\\
-	&\quad b\lift{}{addToChain(getLatest(c),lc)}\ | \ bu\lift{}{getLatest(c)}\ else\ P_1
+	P_0 &=\If{\pi^{h}(getLatest(lc))=\pi^{ph}(getLatest(c))}{\\
+	&\quad b\lift{}{addToChain(getLatest(c),lc)}\ | \ bu\lift{}{getLatest(c)}}{P_1}
 \end{align*}
 
 Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
 
 \begin{align*}
-	P_1 &= if\ getLength(c)=1\ then\ (b\lift{}{lc}\ |\ ba \lift{}{0})\ else\ P_2
+	P_1 &=\If{getLength(c)=1}{(b\lift{}{lc}\ |\ ba \lift{}{0})}{P_2}
 \end{align*}
 
 Else if the length of the received blockchain is 1, a $QueryAll$ message is sent.
 
 \begin{align*}
-	P_2 &= if\ isValid(c) \land getLength(c) > getLength(lc)\ then\\
-	&\quad(b\lift{}{c}\ |\ bu \lift{}{getLatest(c)})\ else\ b\lift{}{lc}
+	P_2 &=\If{isValid(c) \land getLength(c) > getLength(lc)}{\\
+	&\quad(b\lift{}{c}\ |\ bu \lift{}{getLatest(c)})}{b\lift{}{lc}}
 \end{align*}
 
 Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $broadcastBlockUpdate$.
@@ -207,6 +207,6 @@ When a task is received, it lifts a message on the $blockUpdate$ channel of the 
 If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is a broadcast task with the tail of the task peers and the message data.
 
 \begin{align*}
-    BE &=\ !ut(t).(\pi^{u}(head(\pi^{p}(t)))\lift{}{\pi^{d}(t)}\ |\ if\ tail(\pi^{ps}(t))=el\ then\ \nil\\
-    &\quad\ else\ bt\lift{}{(tail(\pi^{ps}(t)),\pi^{d}(t))}
+    BE &=\ !ut(t).(\pi^{u}(head(\pi^{p}(t)))\lift{}{\pi^{d}(t)}\ |\If{tail(\pi^{ps}(t))=el}{\nil\\
+    &\quad}{bt\lift{}{(tail(\pi^{ps}(t)),\pi^{d}(t))}}
 \end{align*}

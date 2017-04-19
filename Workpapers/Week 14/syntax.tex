@@ -23,5 +23,5 @@ P::=& \ [\phi] P
 In addition to terms and process we need to use boolean arithmetic, which will be determined by \ensuremath{\phi}, and an additional rule is applied to \textit{P}, and \ensuremath{\gamma} will determine the boolean operation.
 
 \begin{align*}
-	if\ Cond\ then\ P\ else\ Q = [Cond].P | [\neg Cond].Q
+	\If{\phi}{P}{Q} = [\phi].P | [\neg \phi].Q
 \end{align*}
