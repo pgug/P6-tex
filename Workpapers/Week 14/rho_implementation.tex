@@ -1,6 +1,6 @@
 \section{Implementation of blockchain}
 In this section, an implementation of a blockchain client written in $\rho$-calculus will be presented.
-This is based on Naivechain, a naive implementation of a blockchain client in javascript \cite{naivechain}.
+This is based on Naivechain, a naive implementation of a blockchain client in JavaScript \cite{naivechain}.
 
 
 \subsection{Operations}
@@ -74,7 +74,7 @@ ut	&blockUpdateTasks		\\ \hline
 
 The blockchain consists of an arbitrary number of clients working in parallel. For this implementation we will limit our view to a single client.
 
-The client consists of an agent for each receivable message type: $MineBlock$, $AddPeer$, $QueryLatest$, $QueryAll$ and $BlockUpdate$.
+The client consists of an agent for each receivable message type: MineBlock, AddPeer, QueryLatest, QueryAll and BlockUpdate.
 These agents are in parallel with eachother and performs a corresponding task when the message type is received.
 The client also consists of 3 other agents, one for each message type that it can send.
 The client also initializes its peers and blockchain by lifting on their respective channels.
@@ -92,15 +92,15 @@ In our explaination we have sectioned the agents into what they manage: Queries,
 
 \subsection{Queries}
 
-$QueryAll$ and $QueryLatest$ manage queries.
+$QA$ and $QL$ manage queries.
 
-When a $QueryAll$ message is received, the blockchain is lifted on $broadcastBlockUpdate$.
+When a $QueryAll$ message is received, the blockchain is lifted on $bu$.
 
 \begin{align*}
     QA &=\ !qa(n).b(c).(b\lift{}{c}| \ bu\lift{}{c})
 \end{align*}
 
-A $QueryLatest$ message is handled by lifting the last block of the blockchain on $broadcastBlockUpdate$.
+A $QueryLatest$ message is handled by lifting the last block of the blockchain on $bu$.
 
 \begin{align*}
 	QL &=\ !ql(n).b(c).(b \lift{}{c}\ |\ \ bu\lift{}{getLatest(c)})
@@ -108,10 +108,10 @@ A $QueryLatest$ message is handled by lifting the last block of the blockchain o
 
 \subsection{Blockchain}
 
-$MineBlock$ and $BlockUpdate$ manage the blockchain.
+$MB$ and $U$ manage the blockchain.
 
 When a $MineBlock$ message is received, a new block is made containing the received data.
-This block is both added to the blockchain and lifted on $broadcastBlockUpdate$.
+This block is both added to the blockchain and lifted on $bu$.
 Both instances of $newBlock$ are the same block, since they have the same arguments.
 
 \begin{align*}
@@ -119,7 +119,7 @@ Both instances of $newBlock$ are the same block, since they have the same argume
     &\quad \lift{}{newBlock(d, getLatest(c))})
 \end{align*}
 
-$BlockUpdate$ handles most of the consensus logic.
+$U$ handles most of the consensus logic.
 To simplify wording, we refer to the last block of the received blockchain as the last received block.
 We also refer to the clients own blockchain as the local blockchain.
 
@@ -137,7 +137,7 @@ If the index of the last received block is less than or equal to the index of th
 	&\quad b\lift{}{addToChain(getLatest(c),lc)}\ | \ bu\lift{}{getLatest(c)}}{P_1}
 \end{align*}
 
-Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $broadcastBlockUpdate$.
+Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $bu$.
 
 \begin{align*}
 	P_1 &=\If{getLength(c)=1}{(b\lift{}{lc}\ |\ ba \lift{}{0})}{P_2}
@@ -150,7 +150,7 @@ Else if the length of the received blockchain is 1, a $QueryAll$ message is sent
 	&\quad(b\lift{}{c}\ |\ bu \lift{}{getLatest(c)})}{b\lift{}{lc}}
 \end{align*}
 
-Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $broadcastBlockUpdate$.
+Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $bu$.
 
 \subsection{Peers}
 The client exists in a network with an arbitrarily large number of other clients.
@@ -161,26 +161,26 @@ Each peer is represented as a tuple of channel names, that lets the client know 
     Peer &= (u, ql, qa)
 \end{align*}
 
-$AddPeer$ manages the peers.
+$AP$ manages the peers.
 When the client receives an $AddPeer$ message, the received peer is added to peers.
 
 \begin{align*}
     AP &=\ !ap(p).(ps(lp).ps\lift{}{append(p,lp)}\ |\ \pi^{ql}(p)\lift{}{0})\\
 \end{align*}
 
-This is done by inputting from peers into the name $localpeers$, and lifting $localpeers$ on peers again, with the new peer added.
+This is done by inputting from peers into the name $lp$, and lifting $lp$ on peers again, with the new peer added.
 The client also needs to query this peer for its latest block.
-This is done by indexing the $queryLatest$ channel from the peer and lifting a message on it.
+This is done by indexing the $ql$ channel from the peer and lifting a message on it.
 
 \subsection{Broadcasting} \label{broadcast}
 In order for our client to communicate with more than one peer, we need a system that enforces each message to be lifted to all peers exactly once.
 This is known as broadcasting, but since there is no primitive in the rho-calculus for this, we will describe a process that enforces broadcasting.
 
-In previous client descriptions, any message that should be broadcast, is lifted on a channel with a broadcast prefix like $broadcastBlockUpdate$.
-We will describe the process, $BroadcastBlockUpdate$, that inputs messages from $broadcastBlockUpdate$ and broadcasts them.
-Note that although $BroadcastBlockUpdate$ only manages $broadcastBlockUpdate$, it is general enough to be repurposed for $BroadcastQueryLatest$ and $BroadcastQueryAll$.
+In previous client descriptions, any message that should be broadcast, is lifted on a channel with a broadcast prefix like $bu$.
+We will describe the process, $BU$, that inputs messages from $bu$ and broadcasts them.
+Note that although $BU$ only manages $bu$, it is general enough to be repurposed for $BL$ and $BA$.
 
-To explain how $BroadcastBlockUpdate$ works we first need to introduce broadcast tasks.
+To explain how $BU$ works we first need to introduce broadcast tasks.
 
 \begin{align*}
     BroadcastTask &= (ps, d)
@@ -188,23 +188,23 @@ To explain how $BroadcastBlockUpdate$ works we first need to introduce broadcast
 
 A broadcast task represents some data that should be lifted to a list of peers.
 
-$BroadcastBlockUpdate$ consists of two parts: $BlockUpdateSetup$ and $BlockUpdateExecute$
+$BU$ consists of two parts: $BS$ and $BE$
 
 \begin{align*}
     BU &= BS \para BE
 \end{align*}
 
-$BlockUpdateSetup$ sets up the broadcast tasks and $BlockUpdateExecute$ executes them.
+$BS$ sets up the broadcast tasks and $BE$ executes them.
 
-$BlockUpdateSetup$ inputs messages on $broadcastBlockUpdate$ and lifts a broadcast task with the known peers and the message data to $blockUpdateTasks$
+$BS$ inputs messages on $bu$ and lifts a broadcast task with the known peers and the message data to $bt$
 
 \begin{align*}
     BS &=\ !bu.(d).ps(lp).(ps\lift{}{lp}\ |\ ut\lift{}{(lp,d)})
 \end{align*}
 
-$BlockUpdateExecute$ inputs tasks on $blockUpdateTasks$.
-When a task is received, it lifts a message on the $blockUpdate$ channel of the head of the task peers with the task message data.
-If the tail of the task peers is non-empty, it also lifts the remainder of the task to $blockUpdateTasks$, that is a broadcast task with the tail of the task peers and the message data.
+$BE$ inputs tasks on $bt$.
+When a task is received, it lifts a message on the $u$ channel of the head of the task peers with the task message data.
+If the tail of the task peers is non-empty, it also lifts the remainder of the task to $bt$, that is a broadcast task with the tail of the task peers and the message data.
 
 \begin{align*}
     BE &=\ !ut(t).(\pi^{u}(head(\pi^{p}(t)))\lift{}{\pi^{d}(t)}\ |\If{tail(\pi^{ps}(t))=el}{\nil\\
