@@ -1,0 +1,8 @@
+\subsection{Type Security}
+
+\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
+
+\fig{\frac{\Gamma \vdash M:Secret \quad \Gamma \vdash c:Secure}{\Gamma \vdash \lift{c}{M}}}{}{}
+
+\fig{\frac{\Gamma \vdash M:Public \quad \Gamma \vdash c:Insecure}{\Gamma \vdash \lift{c}{M}}}{}{}
+
