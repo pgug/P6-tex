@@ -25,4 +25,22 @@ B::=int|string}{The syntax of the typed security.}{}
 
 \fig{\frac{E \vdash x}{E\vdash \quot{P}}\quad where \quot{P} \equiv_N x}{Type rules for quot}{typequot}
 
+\fig{\frac{E\vdash \phi \quad E\vdash P}{E \vdash [\phi] P}}{Type rule for boolean aritmetics}{typebool}
+
+\fig{\frac{E\vdash M_1:T \quad E\vdash M_2:T}{E\vdash M_1 \gamma M_2}}{Type rules for condition}{typecond}
+
+\fig{\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \land \phi _2}}{Type rule for and}{typeand}
+
+\fig{\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \lor \phi _2}}{Type rule for or}{typeor}
+
+\fig{\frac{E\vdash \phi :T }{E\vdash \neg \phi }}{Type rule for not}{typenot}
+
+\fig{\frac{E\vdash f:T_1\times ... \times T_n\ra T\quad E\vdash M_i:T_i\quad 1\leq i \leq n}{E\vdash f(M_1,...,M_n):T}}{Type rule for operation}{typeoper}
+
+\fig{\frac{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n)}T = max(T_i)\quad 1\leq i\leq n}{Type rule for tuple}{typetuple}
+
+\fig{E\vdash n: Int^0\\E\vdash s:String^0}{Type rule for numbers and strings}{typevar}
+
+\fig{\frac{E\vdash M:T \quad T\leq T'}{E\vdash M:T'}}{Type rules for upgrading security level}{typeup}
+
 \FloatBarrier
