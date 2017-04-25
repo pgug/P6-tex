@@ -8,3 +8,21 @@
 
 \FloatBarrier
 
+\fig{T::=l|ch^l[T]|B^l\\
+B::=int|string}{The syntax of the typed security.}{}
+
+\fig{E: names \rightharpoonup types}{}{}
+
+\fig{E \vdash \nil}{Type rules for nil}{typenil}
+
+\fig{\frac{E(x) \vdash ch^l[T]\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}}{Type rule for input}{typeinp}
+
+\fig{\frac{E(x) \vdash ch^l[T] \quad E \vdash M:T}{E\vdash \lift{x}{M}}}{Type rule for lift}{typelift}
+
+\fig{\frac{E \vdash P}{E\vdash \drop{x}}\quad where \drop{x} \equiv P}{Type rules for drop}{typedrop}
+
+\fig{\frac{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}}{Type rules for parallel}{typepara}
+
+\fig{\frac{E \vdash x}{E\vdash \quot{P}}\quad where \quot{P} \equiv_N x}{Type rules for quot}{typequot}
+
+\FloatBarrier
