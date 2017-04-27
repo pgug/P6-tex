@@ -1,11 +1,13 @@
 \subsection{Structural Congruence}
+The structural congruence of processes is denoted by the relation $\equiv$.
+
 \begin{figure}[h]
     \begin{align*}
-        P\para 0 \equiv &P \equiv 0\para P\\
+        P\para 0 \equiv\ &P \equiv 0\para P\\
         P\para Q &\equiv Q\para P\\
         P\para (Q\para R)&\equiv (P\para Q)\para R
     \end{align*}
-    \caption{The structural congruence for parallel process.}
+    \caption{The rules of structural congruence for processes}
 \end{figure}
 
 %\begin{figure}[h]
@@ -18,18 +20,44 @@
 %    \label{fig:equi}
 %\end{figure}
 
+\FloatBarrier
+
+\subsection{Name Equivalence}
+The equivalence of names is denoted by the relation $\equiv _N$
+
 \begin{figure}[h]
-    \begin{align}
-        & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q} \tag{Equivalence}
-    \end{align}
-    \caption{Structural Congruence for Equivalence}
-    \label{fig:equi}
+	\begin{align}
+	& \infrule{}{\quot{\drop{x}}\equiv _N x} \tag{Drop and Quote}
+	\end{align}
+	\caption{Name equivalence rule for drop and quote}
+	\label{fig:dropquot}
 \end{figure}
+
 \noindent
-The structural equivalence for $P$ and $Q$, as seen in \figref{fig:equi}
+The rule in \figref{fig:dropquot} states that if $x$ is dropped, and then quoted, then it should stay equivalent with $x$.
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}} \tag{Structural equivalence}
+	\end{align}
+	\caption{Name equivalence rule for structural congruence}
+	\label{fig:strucequiv}
+\end{figure}
+
+\noindent
+The rule in \figref{fig:strucequiv} states, that if $P$ and $Q$ are structural congruent with each other, then the quoted $P$ and $Q$ are name equivalent with each other.
+
 \FloatBarrier
 
 \subsection{Reduction Rules}
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}} \tag{Comm}
+	\end{align}
+	\caption{Communication rule for when a \textit{Term} is lifted instead of a \textit{Process}.}
+	\label{fig:com}
+\end{figure}
 
 %\begin{figure}[h]
 %    \begin{center}
@@ -42,15 +70,21 @@ The structural equivalence for $P$ and $Q$, as seen in \figref{fig:equi}
 %\end{figure}
 %\noindent
 
-\begin{figure}[h]
-    \begin{align}
-        & \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}} \tag{Comm}
-    \end{align}
-    \caption{Communication rule for when a \textit{Term} is lifted instead of a \textit{Process}.}
-    \label{fig:com}
+\begin{figure}[!h]
+	\begin{align}
+	& \infrule{P\ra P'}{P\para Q\ra P'\para Q} \tag{Parallel}
+	\end{align}
+	\caption{Reduction rule for parallel processes}
+	\label{fig:para}
 \end{figure}
-\noindent
-The communication rule for input and output is seen in \figref{fig:com}.
+
+\begin{figure}[h]
+	\begin{align}
+		& \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q} \tag{Equivalence}
+	\end{align}
+	\caption{Reduction rule for structural congruence}
+	\label{fig:equi}
+\end{figure}
 
 %\begin{figure}[h]
 %    \begin{center}
@@ -63,16 +97,6 @@ The communication rule for input and output is seen in \figref{fig:com}.
 %\end{figure}
 %\noindent
 
-\begin{figure}[h]
-    \begin{align}
-        & \infrule{}{\quot{\drop{x}}\equiv _N x} \tag{Drop and Quote}
-    \end{align}
-    \caption{Reduction rule for Drop and Quote}
-    \label{fig:dropquot}
-\end{figure}
-\noindent
-The drop and quote rules are applied to $x$ in \figref{fig:dropquot}. Where if $x$ if first dropped, and then quoted then it should be name equivalent with $x$.
-
 %\begin{figure}[h]
 %    \begin{center}
 %        \begin{tabular}[c]{ll}
@@ -83,16 +107,6 @@ The drop and quote rules are applied to $x$ in \figref{fig:dropquot}. Where if $
 %    \label{fig:strucequiv}
 %\end{figure}
 %\noindent
-
-\begin{figure}[h]
-    \begin{align}
-        & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}} \tag{Structural equivalence}
-    \end{align}
-    \caption{Reduction rule for Structural equivalence}
-    \label{fig:strucequiv}
-\end{figure}
-\noindent
-The structural equivalence of $P$ and $Q$, where if $P$ and $Q$ are congruent with each other, the quoted version of $P$ and $Q$ are name equivalent with each other, see \figref{fig:strucequiv}.
 
 %\begin{figure}[!h]
 %    \begin{center}
@@ -105,13 +119,4 @@ The structural equivalence of $P$ and $Q$, where if $P$ and $Q$ are congruent wi
 %\end{figure}
 %\noindent
 
-\begin{figure}[!h]
-    \begin{align}
-        & \infrule{P\ra P'}{P\para Q\ra P'\para Q} \tag{Parallel}
-    \end{align}
-    \caption{Reduction rule for Parallel}
-    \label{fig:para}
-\end{figure}
-\noindent
-The reduction rule for $P$ parallel with $Q$ as seen in \figref{fig:para}.
 \FloatBarrier
