@@ -8,20 +8,22 @@
     x,y ::= \; & \quot{P} & \text{quote}\\
 \end{align*}
 
-Rho-Calculus is developed and described by L. G. Meredith and M. Radestock in \citep{Meredith2005}. We are building upon their work, to make a calculus strong enough to handle a block chain protocol.
+Rho-Calculus is developed and described by L. G. Meredith and M. Radestock in \citep{Meredith2005}. We are building upon their work and extend the calculus to handle a blockchain protocol.
 
 \begin{align*}
 M::=\; & n \mid s \mid (M_1,...,M_k) \mid fM &for\ all\ k \geq 2
 \end{align*}
-Our additional syntax rule, where $M$ ranges over the set of terms, $n$ is the set of numbers, $s$ is the set of strings and $f$ is the set of operations.
+We add an additional syntax rule, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations.
 
 \begin{align*}
 \gamma ::=& \ =|\neq|<|>|\leq|\geq\\
-\phi ::=& \ M_1\gamma M_2|\phi\land\phi|\phi\lor\phi|\neg\phi\\
+\phi ::=& \ M_1\gamma M_2|\phi\land\phi|\phi\lor\phi|\neg\phi|\top|\bot\\
 P::=& \ [\phi] P
 \end{align*}
-In addition to terms and process we need to use boolean arithmetic, which will be determined by \ensuremath{\phi}, and an additional rule is applied to \textit{P}, and \ensuremath{\gamma} will determine the boolean operation.
+In addition to terms and processes we need to use conditional processes. This requires boolean expressions, denoted by \ensuremath{\phi}.
 
 \begin{align*}
 	\If{\phi}{P}{Q} = [\phi].P | [\neg \phi].Q
 \end{align*}
+
+To ease the writing of conditional branching, we use an if-then-else syntax.
