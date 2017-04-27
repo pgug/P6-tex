@@ -4,42 +4,39 @@ We are going to use a syntax for type security, so we can analyse the blockchain
 \fig{T::=l|ch^l[T]|B^l\\
 B::=int|string}{The syntax of the typed security.}{typesyntax}
 
-The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in  \figref{typeup} to apply. 
+The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in  \figref{typeup} to apply.\\\\
 
 \fig{E: names \rightharpoonup types}{E hold when }{}
 
-\fig{E \vdash \nil}{Type rules for nil.}{typenil}
-E hold for nil, simply because nil do not do anything.
+\fig{E \vdash \nil}{Type rules for nil. \textit{E} holds for nil, simply because nil do not do anything.}{typenil}
 
-\fig{\frac{E(x) \vdash ch^l[T]\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}}{Type rule for input.}{typeinp}
-E holds for input when \textit{x} is of type channel and E holds for \textit{y} in \textit{P}.
+\fig{\frac{E(x) \vdash ch^l[T]\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}}{Type rule for input. \textit{E} holds for input when \textit{x} is of type channel and \textit{E} holds for \textit{y} in \textit{P}.}{typeinp}
 
-\fig{\frac{E(x) \vdash ch^l[T] \quad E \vdash M:T}{E\vdash \lift{x}{M}}}{Type rule for lift.}{typelift}
-E holds for lift when \textit{x} is of type channel and E hold for \textit{M}
+\fig{\frac{E(x) \vdash ch^l[T] \quad E \vdash M:T}{E\vdash \lift{x}{M}}}{Type rule for lift. \textit{E} holds for lift when \textit{x} is of type channel and \textit{E} holds for \textit{M}.}{typelift}
 
-\fig{\frac{E \vdash P}{E\vdash \drop{x}}\quad where \drop{x} \equiv P}{Type rules for drop.}{typedrop}
+\fig{\frac{E \vdash P}{E\vdash \drop{x}}\quad where \drop{x} \equiv P}{Type rules for drop. \textit{E} holds for drop when \textit{E} holds for the process \textit{P} that is equals to \textit{x}.}{typedrop}
 
-\fig{\frac{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}}{Type rules for parallel.}{typepara}
+\fig{\frac{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}}{Type rules for parallel. \textit{E} holds for parallel when \textit{E} holds for both \textit{P} and \textit{Q}.}{typepara}
 
-\fig{\frac{E \vdash x}{E\vdash \quot{P}}\quad where \quot{P} \equiv_N x}{Type rules for quot.}{typequot}
+\fig{\frac{E \vdash x}{E\vdash \quot{P}}\quad where \quot{P} \equiv_N x}{Type rules for quot. E holds for quot when E hold for \textit{x} equals to \textit{P}.}{typequot}
 
-\fig{\frac{E\vdash \phi \quad E\vdash P}{E \vdash [\phi] P}}{Type rule for boolean arithmetics.}{typebool}
+\fig{\frac{E\vdash \phi \quad E\vdash P}{E \vdash [\phi] P}}{Type rule for boolean arithmetics. \textit{E} holds for boolean arithmetics when \textit{E} holds for both  \textit{\ensuremath{\phi}} and for \textit{P}.}{typebool}
 
-\fig{\frac{E\vdash M_1:T \quad E\vdash M_2:T}{E\vdash M_1 \gamma M_2}}{Type rules for condition.}{typecond}
+\fig{\frac{E\vdash M_1:T \quad E\vdash M_2:T}{E\vdash M_1 \gamma M_2}}{Type rules for condition. \textit{E} holds for condition when \textit{E} holds for both \textit{\ensuremath{M_1}} and \textit{\ensuremath{M_2}}.}{typecond}
 
-\fig{\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \land \phi _2}}{Type rule for and.}{typeand}
+\fig{\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \land \phi _2}}{Type rule for and. \textit{E} holds for and when \textit{E} holds for both \textit{\ensuremath{\phi _1}} and \textit{\ensuremath{\phi _2}}.}{typeand}
 
-\fig{\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \lor \phi _2}}{Type rule for or.}{typeor}
+\fig{\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \lor \phi _2}}{Type rule for or. \textit{E} holds for or when \textit{E} holds for both \textit{\ensuremath{\phi _1}} and \textit{\ensuremath{\phi _2}}.}{typeor}
 
-\fig{\frac{E\vdash \phi :T }{E\vdash \neg \phi }}{Type rule for not.}{typenot}
+\fig{\frac{E\vdash \phi :T }{E\vdash \neg \phi }}{Type rule for not. \textit{E} holds for not when \textit{E} holds for \textit{\ensuremath{\phi}}.}{typenot}
 
-\fig{\frac{E\vdash f:T_1\times ... \times T_n\ra T\quad E\vdash M_i:T_i\quad 1\leq i \leq n}{E\vdash f(M_1,...,M_n):T}}{Type rule for operation.}{typeoper}
+\fig{\frac{E\vdash f:T_1\times ... \times T_n\ra T\quad E\vdash M_i:T_i\quad 1\leq i \leq n}{E\vdash f(M_1,...,M_n):T}}{Type rule for operation. \textit{E} holds for operation when \textit{E} holds for all \textit{M}.}{typeoper}
 
-\fig{\frac{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n)}T = max(T_i)\quad 1\leq i\leq n}{Type rule for tuple.}{typetuple}
+\fig{\frac{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n)}T = max(T_i)\quad 1\leq i\leq n}{Type rule for tuple. \textit{E} holds for tuple when \textit{E} holds for all \textit{M}}{typetuple}
 
-\fig{E\vdash n: Int^0\\E\vdash s:String^0}{Type rule for numbers and strings.}{typevar}
+\fig{E\vdash n: Int^0\\E\vdash s:String^0}{Type rule for numbers and strings. \textit{E} holds for \textit{n} if is of type int. And \textit{E} holds for \textit{s} when it is of type string.}{typevar}
 
-\fig{\frac{E\vdash M:T \quad T\leq T'}{E\vdash M:T'}}{Type rules for upgrading security level.}{typeup}
+\fig{\frac{E\vdash M:T \quad T\leq T'}{E\vdash M:T'}}{Type rules for upgrading security level. \textit{E} holds for security upgrade when \textit{T'} is bigger than or equal to \textit{T}.}{typeup}
 
 \FloatBarrier
 
