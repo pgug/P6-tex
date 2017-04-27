@@ -1,5 +1,5 @@
-\subsection{Reduction Example}
-The replication can run \textit{P} parallel with \textit{!P} infinity many times.
+\subsection{Replication}
+The replication $!P$ proceeds as an arbitrary number of copies of $P$ parallel. This is shown by the reduction example in \figref{fig:reductionexample}. The replication was developed by L. G. Meredith and M. Radestock\citep{Meredith2005}.
 %\begin{figure}[h]
 %    \begin{center}
 %        \begin{tabular}[c]{cll}
@@ -25,13 +25,11 @@ The replication can run \textit{P} parallel with \textit{!P} infinity many times
         &\equiv \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y}) \tag{Substitution} \\
         &\ra \lift{x}{\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}}}\para\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}} \tag{Comm}\\
         &\equiv \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y})\para P \tag{DropQuote} \\
-        &\equiv !P\para P \tag{Substitution}
+        &\equiv\ 
+        !P\para P \tag{Substitution}
     \end{align}
     \caption{Reduction example of replication}
     \label{fig:reductionexample}
 \end{figure}
 
-
-\noindent
-In \figref{fig:reductionexample} we have by reduction proved that $!P$ can run $P$ in parallel infinity many times, by applying the rule again. The Replication is a coding developed by  L. G. Meredith and M. Radestock in \citep{Meredith2005}
 \FloatBarrier
