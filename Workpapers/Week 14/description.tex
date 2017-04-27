@@ -1,28 +1,19 @@
 \subsection{Description}
-Our description of the syntax of the rho-calculus.
+This section describes of the syntax of the rho-calculus.
 
 \subsubsection{Process}
 \begin{description}
-\item[Nil] Nil is a process that does not do anything.
-\item[Input] The input process receives \textit{y} on channel \textit{x} and runs afterwards the process \textit{P}.
-\item[Lift]The lift process sends \textit{M} on channel \textit{x}, and terminates afterwards.
-\item[Drop] The drop process drops \textit{x} so \textit{x} becomes a process.
-\item[Parallel] The parallel process runs process \textit{P} and process \textit{Q} in parallel.
+\item[Nil] Does nothing.
+\item[Input] Receives a term lifted on channel \textit{x} and proceeds as process \textit{P} with the term replacing \textit{y}.
+\item[Lift] Lifts a term \textit{M} on channel \textit{x}.
+\item[Drop] Drops a name \textit{x}, so it becomes a process, and proceeds as the resulting process.
+\item[Parallel] Proceeds as both process \textit{P} and process \textit{Q} in parallel.
 \end{description}
 
 
 \subsubsection{Names}
 \begin{description}
-\item[Quote] The quote takes a process \textit{P} and it becomes a name.
-\end{description}
-
-
-\subsubsection{Terms}
-\begin{description}
-\item[Numbers] Numbers is a term for numbers.
-\item[Strings] Strings is a term for text.
-\item[Tuples] Tuples is a set of \textit{terms}, where the numbers of \textit{terms} is bigger than or equal to two.
-\item[Operations] Operations is a way we can describe function or procedures.
+\item[Quote] Quotes a process \textit{P} so it becomes a name.
 \end{description}
 
 %\subsubsection{Boolean Arithmetic}
