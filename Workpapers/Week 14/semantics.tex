@@ -118,5 +118,23 @@ The rule in \figref{fig:strucequiv} states, that if $P$ and $Q$ are structural c
 %    \label{fig:para}
 %\end{figure}
 %\noindent
+\subsubsection{Conditional processes}
+All conditions are boolean expression. These are evaluated using common boolean arithmetics.
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{}{[\top]P\ra P} \tag{True}
+	\end{align}
+	\caption{Reduction rule for conditional processes given true}
+	\label{fig:true}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{}{[\bot]P\ra \nil} \tag{False}
+	\end{align}
+	\caption{Reduction rule for conditional processes given false}
+	\label{fig:true}
+\end{figure}
 
 \FloatBarrier
