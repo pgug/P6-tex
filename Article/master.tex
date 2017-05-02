@@ -1,5 +1,4 @@
 \input{Setup/Latex_includes/preamble}% package inclusion and set up of the document
-\input{../Makroer/rho-makroer}
 
 \begin{document}
 
@@ -26,25 +25,28 @@
 % Introduction %
 
 % Blockchain %
-\input{Sections/Blockchain/blockchain_introduction}
+\input{Sections/Blockchain/blockchain_introduction.tex}
 
 % Security %
 
 % Rho %
+\input{Sections/Syntax/syntax.tex}
+\input{Sections/Semantics/semantics.tex}
 
 % Type security %
+\input{Sections/Typesystem/typesystem.tex}
 
 % Blockchain implementation %
+\input{Sections/Implementation/rho_implementaion.tex}
 
 % Type system implementation %
 
 % Conclusion / Reflection %
 
-
 %%% Bibliography %%%
 \clearpage
 \fancyhf{}
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{15pt} 
 \rfoot{\thepage}
 \lfoot{D608F17}
 \lhead{* \enspace |\enspace \leftmark}
@@ -60,7 +62,7 @@
 \pagenumbering{arabic}% resets `page` counter to 1
 \renewcommand*{\thepage}{\thechapter \arabic{page}}
 \fancyhf{}
-\setlength{\headheight}{15pt}
+\setlength{\headheight}{15pt} 
 \rfoot{\thepage}
 \lfoot{D608F17}
 \lhead{\thechapter \enspace |\enspace \leftmark}
