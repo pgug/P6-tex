@@ -5,10 +5,10 @@
 %%% Front matter %%%
 \pagestyle{empty} %disable headers and footers
 \pagenumbering{roman} %use roman page numbering in the frontmatter
-\input{Setup/Opsaetning/frontpage}
-\input{Setup/Opsaetning/colophon}
-\input{Setup/Opsaetning/titlepages}
-\input{Setup/Opsaetning/preface}
+\input{Sections/preface/frontpage}
+\input{Sections/preface/colophon}
+\input{Sections/preface/titlepages}
+\input{Sections/preface/preface}
 
 \cleardoublepage
 \pdfbookmark[1]{Contents}{label:contents}
@@ -20,6 +20,24 @@
 %%% Main matter %%%
 \pagenumbering{arabic} %use Arabic page numbering in the main-matter
 
+
+%%% Sections %%%
+% Introduction %
+
+% Blockchain %
+\input{Sections/Blockchain/blockchain_introduction.tex}
+
+% Security %
+
+% Rho %
+
+% Type security %
+
+% Blockchain implementation %
+
+% Type system implementation %
+
+% Conclusion / Reflection %
 
 
 %%% Bibliography %%%
