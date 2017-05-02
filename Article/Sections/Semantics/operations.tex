@@ -1,0 +1,34 @@
+\subsubsection{Encryption and Decryption}
+The operation of encryption and decryption is each others inverse.
+\begin{figure}[h]
+    \begin{align*}
+        &dec(enc(M_1, M_2),M_2) = M_1 \tag{Decrypt}
+    \end{align*}
+    \caption{Operations for encrypting and decrypting a message $M_1\ \mathrm{with\ key}\ M_2$.}
+\end{figure}
+\FloatBarrier
+
+\subsubsection{List operations}
+
+The list operations allows the abstraction of lists. They are described as follows:
+
+\begin{description}
+	\item[head(list)] The first element of the list
+	\item[tail(list)] The list without its first element
+	\item[append(x, list)] The list with element $x$ appended to its beginning.
+\end{description}
+
+These operations are defined by the rules of \figref{listoprules}.
+
+\begin{figure}[h]
+	\begin{align*}
+		&head(append(M_1, M_2)) = M_1 \tag{Head} \\
+		&tail(append(M_1, M_2)) = M_2 \tag{Tail}
+	\end{align*}
+	\caption{The rules of the list operations}
+	\label{listoprules}
+\end{figure}
+
+\FloatBarrier
+
+

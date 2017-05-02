@@ -1,0 +1,39 @@
+\subsection{Type Security}
+We are going to use a syntax for type security, so we can analyse the blockchains security protocol, and validate that it is indeed safe.\\\\
+
+
+
+\fig{T::=l\mid ch^l[T]\mid B^l\\
+B::=int\mid string}{The syntax of the typed security.}{typesyntax}
+
+The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in  \figref{typeup} to apply.\\\\
+
+\fig{E: names \rightharpoonup types}{E hold when }{}
+
+\begin{figure}
+\begin{align}
+\tag{Nil} &E \vdash \nil\\
+\tag{Input} &\frac{E(x) \vdash ch^l[T]\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}\\
+\tag{Lift} &\frac{E(x) \vdash ch^l[T] \quad E \vdash M:T}{E\vdash \lift{x}{M}}\\
+\tag{drop} &\frac{E \vdash P}{E\vdash \drop{x}}& where \drop{x} \equiv P\\
+\tag{Parallel} &\frac{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}\\
+\tag{Quot} &\frac{E \vdash x}{E\vdash \quot{P}}& where\ \quot{P} \equiv_N x\\
+\tag{Bool} &\frac{E\vdash \phi \quad E\vdash P}{E \vdash [\phi] P}\\
+\tag{Condition} &\frac{E\vdash M_1:T \quad E\vdash M_2:T}{E\vdash M_1 \gamma\ M_2:T}\\
+\tag{And} &\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \land \phi _2:T}\\
+\tag{Or} &\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \lor \phi _2:T}\\
+\tag{not} &\frac{E\vdash \phi :T }{E\vdash \neg \phi :T}\\
+\tag{Operation} &\frac{E\vdash f:T_1\times ... \times T_n\ra T\quad E\vdash M_i:T_i\quad 1\leq i \leq n}{E\vdash f(M_1,...,M_n):T}\\
+\tag{Tuple} &\frac{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n):T}&T = max(T_i)& 1\leq i\leq n\\
+\tag{Int} &E\vdash n: Int^0\\
+\tag{String} &E\vdash s:String^0\\
+\tag{Type Upgrade} &\frac{E\vdash M:T \quad T\leq T'}{E\vdash M:T'}\end{align}
+\end{figure}
+
+\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
+
+\fig{\frac{\Gamma \vdash M:Secret \quad \Gamma \vdash c:Secure}{\Gamma \vdash \lift{c}{M}}}{}{}
+
+\fig{\frac{\Gamma \vdash M:Public \quad \Gamma \vdash c:Insecure}{\Gamma \vdash \lift{c}{M}}}{}{}
+
+\FloatBarrier

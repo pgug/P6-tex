@@ -1,0 +1,143 @@
+\subsection{Structural Congruence}
+The structural congruence of processes is denoted by the relation $\equiv$.
+
+\begin{figure}[h]
+    \begin{align*}
+        P\para 0 \equiv\ &P \equiv 0\para P\\
+        P\para Q &\equiv Q\para P\\
+        P\para (Q\para R)&\equiv (P\para Q)\para R
+    \end{align*}
+    \caption{The rules of structural congruence for processes}
+\end{figure}
+
+%\begin{figure}[h]
+%    \begin{center}
+%        \begin{tabular}[c]{ll}
+%            \runa{Equivalence} & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
+%        \end{tabular}
+%    \end{center}
+%    \caption{Structural Congruence for Equivalence}
+%    \label{fig:equi}
+%\end{figure}
+
+\FloatBarrier
+
+\subsection{Name Equivalence}
+The equivalence of names is denoted by the relation $\equiv _N$
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{}{\quot{\drop{x}}\equiv _N x} \tag{Drop and Quote}
+	\end{align}
+	\caption{Name equivalence rule for drop and quote}
+	\label{fig:dropquot}
+\end{figure}
+
+\noindent
+The rule in \figref{fig:dropquot} states that if $x$ is dropped, and then quoted, then it should stay equivalent with $x$.
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}} \tag{Structural equivalence}
+	\end{align}
+	\caption{Name equivalence rule for structural congruence}
+	\label{fig:strucequiv}
+\end{figure}
+
+\noindent
+The rule in \figref{fig:strucequiv} states, that if $P$ and $Q$ are structural congruent with each other, then the quoted $P$ and $Q$ are name equivalent with each other.
+
+\FloatBarrier
+
+\subsection{Reduction Rules}
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}} \tag{Comm}
+	\end{align}
+	\caption{Communication rule for when a term is lifted instead of a process.}
+	\label{fig:com}
+\end{figure}
+
+%\begin{figure}[h]
+%    \begin{center}
+%        \begin{tabular}[c]{ll}
+%            \runa{Comm} & \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}
+%        \end{tabular}
+%    \end{center}
+%    \caption{Communication rule for when a \textit{Term} is lifted instead of a \textit{Process}.}
+%    \label{fig:com}
+%\end{figure}
+%\noindent
+
+\begin{figure}[!h]
+	\begin{align}
+	& \infrule{P\ra P'}{P\para Q\ra P'\para Q} \tag{Parallel}
+	\end{align}
+	\caption{Reduction rule for parallel processes}
+	\label{fig:para}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{align}
+		& \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q} \tag{Equivalence}
+	\end{align}
+	\caption{Reduction rule for structural congruence}
+	\label{fig:equi}
+\end{figure}
+
+%\begin{figure}[h]
+%    \begin{center}
+%        \begin{tabular}[c]{ll}
+%            \runa{Drop and Quote} & \infrule{}{\quot{\drop{x}}\equiv _N x}
+%        \end{tabular}
+%    \end{center}
+%    \caption{Reduction rule for Drop and Quote}
+%    \label{fig:dropquot}
+%\end{figure}
+%\noindent
+
+%\begin{figure}[h]
+%    \begin{center}
+%        \begin{tabular}[c]{ll}
+%            \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
+%        \end{tabular}
+%    \end{center}
+%    \caption{Reduction rule for Structural equivalence}
+%    \label{fig:strucequiv}
+%\end{figure}
+%\noindent
+
+%\begin{figure}[!h]
+%    \begin{center}
+%        \begin{tabular}[c]{ll}
+%            \runa{Parallel} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
+%        \end{tabular}
+%    \end{center}
+%    \caption{Reduction rule for Parallel}
+%    \label{fig:para}
+%\end{figure}
+%\noindent
+
+\FloatBarrier
+
+\subsubsection{Conditional processes}
+All conditions are boolean expression. These are evaluated using common boolean arithmetics.
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{}{[\top]P\ra P} \tag{True}
+	\end{align}
+	\caption{Reduction rule for conditional processes given true}
+	\label{fig:true}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{align}
+	& \infrule{}{[\bot]P\ra \nil} \tag{False}
+	\end{align}
+	\caption{Reduction rule for conditional processes given false}
+	\label{fig:true}
+\end{figure}
+
+\FloatBarrier

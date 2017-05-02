@@ -1,0 +1,20 @@
+\subsection{Description}
+This section describes of the syntax of the rho-calculus.
+
+\subsubsection{Process}
+\begin{description}
+\item[Nil] Does nothing.
+\item[Input] Receives a term lifted on channel \textit{x} and proceeds as process \textit{P} with the term replacing \textit{y}.
+\item[Lift] Lifts a term \textit{M} on channel \textit{x}.
+\item[Drop] Drops a name \textit{x}, so it becomes a process, and proceeds as the resulting process.
+\item[Parallel] Proceeds as both process \textit{P} and process \textit{Q} in parallel.
+\end{description}
+
+
+\subsubsection{Names}
+\begin{description}
+\item[Quote] Quotes a process \textit{P}, so it becomes a name.
+\end{description}
+
+%\subsubsection{Boolean Arithmetic}
+

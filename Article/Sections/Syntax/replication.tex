@@ -1,0 +1,36 @@
+\subsection{Replication}
+Our implementation makes use of replication, denoted by $!P$, to express inexhaustible processes.
+The replication $!P$ proceeds as an arbitrary number of copies of $P$ in parallel. This is shown by the reduction example in \figref{fig:reductionexample}. The replication was developed by L. G. Meredith and M. Radestock\citep{Meredith2005}.
+%\begin{figure}[h]
+%    \begin{center}
+%        \begin{tabular}[c]{cll}
+%            & !P & \runa{Initial} \\
+
+%            $\equiv$ & \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y}) & \runa{Substitution} \\
+
+%            $\ra$ & \lift{x}{\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}}}\para\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}} & \runa{Communication} \\
+
+%            $\equiv$ & \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y})\para P & \runa{DropQuote} \\
+
+%            $\equiv$ & !P\para P & \runa{Substitution}
+%        \end{tabular}
+%    \end{center}
+%    \caption{Reduction example of replication}
+%    \label{fig:reductionexample}
+%\end{figure}
+
+
+\begin{figure}[h]
+    \begin{align}
+        &!P \tag{Initial} \\
+        &\equiv \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y}) \tag{Substitution} \\
+        &\ra \lift{x}{\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}}}\para\drop{\quot{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}} \tag{Comm}\\
+        &\equiv \lift{x}{\inp{x}{y}(\lift{x}{\drop{y}}\para\drop{y})\para P}\para\inp{x}{y}(\lift{x}{\drop{y}}\para \drop{y})\para P \tag{DropQuote} \\
+        &\equiv\ 
+        !P\para P \tag{Substitution}
+    \end{align}
+    \caption{Reduction example of replication}
+    \label{fig:reductionexample}
+\end{figure}
+
+\FloatBarrier
