@@ -14,7 +14,8 @@ The rho-calculus have a syntax for parallelism which will be useful for modellin
     x,y ::= \; & \quot{P} & \text{quote}\\
 \end{align*}
 
-We are building upon their work and extend the calculus to handle a blockchain protocol.
+Although it is possible to implement a blockchain protocol in the rho-calculus, it would require convoluted structures to express even simple concepts.
+We choose to extend the rho-calculus to allow easier modeling of those concepts.
 
 \begin{align*}
 M::=\; & n \mid s \mid (M_1,...,M_k) \mid fM &for\ all\ k \geq 2
