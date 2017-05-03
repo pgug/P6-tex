@@ -1,10 +1,12 @@
 \subsection{Evaluating Terms}
-We have found that some operations are useful to have defined, when coding a blockchain protocol in rho-calculus. These will be described in this section.
+In order to make use of our terms we need to define how to evaluate them.
+The operation terms are intended to operate on terms, so it is sufficient to define how to evaluate these operations.
+The operations defined in this section are chosen specifically for modeling a blockchain protocol and could be different given another goal.
 
 \input{Sections/Semantics/tupleoperation.tex}
 
 \subsubsection{Encryption and Decryption}
-The operation of encryption and decryption is each others inverse.
+The operations of encryption and decryption are each others inverse.
 \begin{figure}[h]
     \begin{align*}
         &dec(enc(M_1, M_2),M_2) = M_1 \tag{Decrypt}
