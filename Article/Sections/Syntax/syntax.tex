@@ -22,7 +22,12 @@ We choose to extend the rho-calculus to allow easier modeling of those concepts.
 \\
 We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations.
 \begin{align*}
-M::=\; & n \mid s \mid (M_1,...,M_k) \mid fM \mid x&for\ all\ k \geq 2
+M::=\; & n &\text{number}\\
+ &\mid s &\text{string}\\
+ &\mid (M_1,...,M_k)&\text{tuple}\\
+ &\mid fM &\text{operation}\\
+ &\mid x&\text{name}\\
+ &for\ all\ k \geq 2
 \end{align*}
 In addition to terms and processes we need to use conditional processes. This requires boolean expressions, denoted by \ensuremath{\phi}.
 \begin{align*}
