@@ -30,7 +30,7 @@ The client consists of an agent for each receivable message type: MineBlock, Add
 These agents are in parallel with each other and performs a corresponding task when the message type is received.
 The client also consists of three other agents, one for each message type that it can send.
 The client also initializes its peers and blockchain by lifting on their respective channels.
-Whenever an agent needs the blockchain, it is input from $blockchain$ and lifted back when the agent is done modifying it.
+Whenever an agent needs the blockchain, it is input from $b$ and lifted back when the agent is done modifying it.
 This ensures mutual exclusion of the blockchain with respect to the agents.
 This is also the case for the list of peers.
 
@@ -46,13 +46,13 @@ In our explanation we have sectioned the agents into what they manage: Queries, 
 
 $QA$ and $QL$ manage queries.
 
-When a $QueryAll$ message is received, the blockchain is lifted on $bu$.
+When a QueryAll message is received, the blockchain is lifted on $bu$.
 
 \begin{align*}
     QA &=\ !qa(n).b(c).(b\lift{}{c}| \ bu\lift{}{c})
 \end{align*}
 
-A $QueryLatest$ message is handled by lifting the last block of the blockchain on $bu$.
+A QueryLatest message is handled by lifting the last block of the blockchain on $bu$.
 
 \begin{align*}
 	QL &=\ !ql(n).b(c).(b \lift{}{c}\ |\ \ bu\lift{}{getLatest(c)})
@@ -62,7 +62,7 @@ A $QueryLatest$ message is handled by lifting the last block of the blockchain o
 
 $MB$ and $U$ manage the blockchain.
 
-When a $MineBlock$ message is received, a new block is made containing the received data.
+When a MineBlock message is received, a new block is made containing the received data.
 This block is both added to the blockchain and lifted on $bu$.
 Both instances of $newBlock$ are the same block, since they have the same arguments.
 
@@ -95,7 +95,7 @@ Else if the previous hash of the last received block matches the hash of the las
 	P_1 &=\If{getLength(c)=1}{(b\lift{}{lc}\ |\ ba \lift{}{0})}{P_2}
 \end{align*}
 
-Else if the length of the received blockchain is one, a $QueryAll$ message is sent.
+Else if the length of the received blockchain is one, a QueryAll message is sent.
 
 \begin{align*}
 	P_2 &=\If{isValid(c) \land getLength(c) > getLength(lc)}{\\
@@ -114,7 +114,7 @@ Each peer is represented as a tuple of channel names, that lets the client know 
 \end{align*}
 
 $AP$ manages the peers.
-When the client receives an $AddPeer$ message, the received peer is added to peers.
+When the client receives an AddPeer message, the received peer is added to peers.
 
 \begin{align*}
     AP &=\ !ap(p).(ps(lp).ps\lift{}{append(p,lp)}\ |\ \pi^{ql}(p)\lift{}{0})\\
@@ -128,7 +128,7 @@ This is done by indexing the $ql$ channel from the peer and lifting a message on
 In order for our client to communicate with more than one peer, we need a system that enforces each message to be lifted to all peers exactly once.
 This is known as broadcasting, but since there is no primitive in the rho-calculus for this, we will describe a process that enforces broadcasting.
 
-In previous client descriptions, any message that should be broadcast, is lifted on a channel with a broadcast prefix like $bu$.
+In previous client descriptions, any message that should be broadcast, is lifted on a channel like $bu$.
 We will describe the process, $BU$, that inputs messages from $bu$ and broadcasts them.
 Note that although $BU$ only manages $bu$, it is general enough to be repurposed for $BL$ and $BA$.
 
