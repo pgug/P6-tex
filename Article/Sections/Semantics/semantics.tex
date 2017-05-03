@@ -55,72 +55,38 @@ We make use of the following reduction rules.
 These are similar to the reduction rules of the rho-calculus as described in \citep{Meredith2005}. The only difference is the communication rule reflecting the syntax changes.
 
 \begin{figure}[h]
-	\begin{align}
-	& \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}} \tag{Comm}
-	\end{align}
-	\caption{Communication rule for when a term is lifted instead of a process.}
-	\label{fig:com}
+\begin{align}
+\tag{Comm} \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}&\\
+\tag{Parallel} \infrule{P\ra P'}{P\para Q\ra P'\para Q}&\\
+\tag{Equivalence} \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}&
+\end{align}
 \end{figure}
 
 %\begin{figure}[h]
-%    \begin{center}
-%        \begin{tabular}[c]{ll}
-%            \runa{Comm} & \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}
-%        \end{tabular}
-%    \end{center}
-%    \caption{Communication rule for when a \textit{Term} is lifted instead of a \textit{Process}.}
-%    \label{fig:com}
+%	\begin{align}
+%	& \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}} \tag{Comm}
+%	\end{align}
+%	\caption{Communication rule for when a term is lifted instead of a process.}
+%	\label{fig:com}
 %\end{figure}
-%\noindent
-
-\begin{figure}[!h]
-	\begin{align}
-	& \infrule{P\ra P'}{P\para Q\ra P'\para Q} \tag{Parallel}
-	\end{align}
-	\caption{Reduction rule for parallel processes}
-	\label{fig:para}
-\end{figure}
-
-\begin{figure}[h]
-	\begin{align}
-		& \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q} \tag{Equivalence}
-	\end{align}
-	\caption{Reduction rule for structural congruence}
-	\label{fig:equi}
-\end{figure}
-
-%\begin{figure}[h]
-%    \begin{center}
-%        \begin{tabular}[c]{ll}
-%            \runa{Drop and Quote} & \infrule{}{\quot{\drop{x}}\equiv _N x}
-%        \end{tabular}
-%    \end{center}
-%    \caption{Reduction rule for Drop and Quote}
-%    \label{fig:dropquot}
-%\end{figure}
-%\noindent
-
-%\begin{figure}[h]
-%    \begin{center}
-%        \begin{tabular}[c]{ll}
-%            \runa{Structural equivalence} & \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
-%        \end{tabular}
-%    \end{center}
-%    \caption{Reduction rule for Structural equivalence}
-%    \label{fig:strucequiv}
-%\end{figure}
-%\noindent
-
+%
+%
 %\begin{figure}[!h]
-%    \begin{center}
-%        \begin{tabular}[c]{ll}
-%            \runa{Parallel} & \infrule{P\ra P'}{P\para Q\ra P'\para Q}
-%        \end{tabular}
-%    \end{center}
-%    \caption{Reduction rule for Parallel}
-%    \label{fig:para}
+%	\begin{align}
+%	& \infrule{P\ra P'}{P\para Q\ra P'\para Q} \tag{Parallel}
+%	\end{align}
+%	\caption{Reduction rule for parallel processes}
+%	\label{fig:para}
 %\end{figure}
-%\noindent
+%
+%\begin{figure}[h]
+%	\begin{align}
+%		& \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q} \tag{Equivalence}
+%	\end{align}
+%	\caption{Reduction rule for structural congruence}
+%	\label{fig:equi}
+%\end{figure}
+
 
 \FloatBarrier
 
