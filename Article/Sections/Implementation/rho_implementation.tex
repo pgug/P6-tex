@@ -27,8 +27,8 @@ We use several operations to abstract the blockchain. These operations are also 
 The blockchain consists of an arbitrary number of clients working in parallel. For this implementation we will limit our view to a single client.
 
 The client consists of an agent for each receivable message type: MineBlock, AddPeer, QueryLatest, QueryAll and BlockUpdate.
-These agents are in parallel with eachother and performs a corresponding task when the message type is received.
-The client also consists of 3 other agents, one for each message type that it can send.
+These agents are in parallel with each other and performs a corresponding task when the message type is received.
+The client also consists of three other agents, one for each message type that it can send.
 The client also initializes its peers and blockchain by lifting on their respective channels.
 Whenever an agent needs the blockchain, it is input from $blockchain$ and lifted back when the agent is done modifying it.
 This ensures mutual exclusion of the blockchain with respect to the agents.
@@ -40,7 +40,7 @@ This is also the case for the list of peers.
     &\quad \ p\lift{}{el}\ |\ b\lift{}{nb}
 \end{align*}
 
-In our explaination we have sectioned the agents into what they manage: Queries, the blockchain, the peers and broadcasting.
+In our explanation we have sectioned the agents into what they manage: Queries, the blockchain, the peers and broadcasting.
 
 \subsection{Queries}
 
@@ -75,7 +75,7 @@ $U$ handles most of the consensus logic.
 To simplify wording, we refer to the last block of the received blockchain as the last received block.
 We also refer to the clients own blockchain as the local blockchain.
 
-When a blockchain is received, 4 different cases are considered.
+When a blockchain is received, four different cases are considered.
 
 \begin{align*}
 	U &=\ !u(c).b(lc).\If{\pi^{i}( getLatest(c)) \leq \pi^{i}(getLatest(lc))}{\\
@@ -95,7 +95,7 @@ Else if the previous hash of the last received block matches the hash of the las
 	P_1 &=\If{getLength(c)=1}{(b\lift{}{lc}\ |\ ba \lift{}{0})}{P_2}
 \end{align*}
 
-Else if the length of the received blockchain is 1, a $QueryAll$ message is sent.
+Else if the length of the received blockchain is one, a $QueryAll$ message is sent.
 
 \begin{align*}
 	P_2 &=\If{isValid(c) \land getLength(c) > getLength(lc)}{\\
