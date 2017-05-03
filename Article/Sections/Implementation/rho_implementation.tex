@@ -2,26 +2,6 @@
 In this section, an implementation of a blockchain client written in $\rho$-calculus will be presented.
 This is based on Naivechain, a naive implementation of a blockchain client in JavaScript \cite{naivechain}.
 
-
-\subsection{Operations}
-
-We use several operations to abstract the blockchain. These operations are also capable of treating a singular block as a blockchain.
-
-\begin{description}
-	\item[newBlock(data, previous)]
-	A block that succeeds previous and contains data.
-	\item[getLatest(chain)]
-	The last block of the chain
-	\item[addToChain(block, chain)]
-	The chain with block added to it.
-	\item[getLength(chain)]
-	The length of the chain represented as a number.
-	\item[isValid(chain)]
-	The validity of the chain represented as a boolean.
-\end{description}
-
-%\input{identifier.tex}
-
 \subsection{Overview}
 
 The blockchain consists of an arbitrary number of clients working in parallel. For this implementation we will limit our view to a single client.
