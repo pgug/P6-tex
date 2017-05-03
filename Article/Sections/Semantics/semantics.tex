@@ -55,11 +55,13 @@ We make use of the following reduction rules.
 These are similar to the reduction rules of the rho-calculus as described in \citep{Meredith2005}. The only difference is the communication rule reflecting the syntax changes.
 
 \begin{figure}[h]
-\begin{align}
-\tag{Comm} \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}&\\
-\tag{Parallel} \infrule{P\ra P'}{P\para Q\ra P'\para Q}&\\
-\tag{Equivalence} \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}&
-\end{align}
+	\begin{align}
+	\tag{Comm} \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}&\\
+	\tag{Parallel} \infrule{P\ra P'}{P\para Q\ra P'\para Q}&\\
+	\tag{Equivalence} \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}&
+	\end{align}
+	\caption{Reduction rules}
+	\label{redrule}
 \end{figure}
 
 %\begin{figure}[h]
@@ -95,19 +97,28 @@ The reduction rule of a given conditional process is decided by its boolean expr
 
 \begin{figure}[h]
 	\begin{align}
-	& \infrule{}{[\top]P\ra P} \tag{True}
-	\end{align}
-	\caption{Reduction rule for conditional processes given true}
-	\label{fig:true}
-\end{figure}
-
-\begin{figure}[h]
-	\begin{align}
+	& \infrule{}{[\top]P\ra P} \tag{True}\\
 	& \infrule{}{[\bot]P\ra \nil} \tag{False}
 	\end{align}
-	\caption{Reduction rule for conditional processes given false}
-	\label{fig:false}
+	\caption{Reduction rules for conditions.}
+	\label{condition}
 \end{figure}
+
+%\begin{figure}[h]
+%	\begin{align}
+%	& \infrule{}{[\top]P\ra P} \tag{True}
+%	\end{align}
+%	\caption{Reduction rule for conditional processes given true}
+%	\label{fig:true}
+%\end{figure}
+%
+%\begin{figure}[h]
+%	\begin{align}
+%	& \infrule{}{[\bot]P\ra \nil} \tag{False}
+%	\end{align}
+%	\caption{Reduction rule for conditional processes given false}
+%	\label{fig:false}
+%\end{figure}
 
 \FloatBarrier
 
