@@ -3,8 +3,8 @@ We are making a tool of type security for checking the rho-calculus.
 We will check that a message of high security level can not be send on a channel of low security level.
 This will ensure that the integrity of the system is not broken or is not been miss used.
 
-\fig{T::=l\mid ch^l[T]\mid B^l\\
-B::=int\mid string}{The syntax of the typed security.}{typesyntax}
+\fig{T::=&l\mid ch^l[T]\mid B^l\\
+B::=&int\mid string}{The syntax of the typed security.}{typesyntax}
 
 The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in \figref{fig:typerules} (Type Upgrade) to apply.\\\\
 
@@ -33,10 +33,10 @@ The syntax for your type security is shown in \figref{typesyntax}. Where \textit
 \label{fig:typerules}
 \end{figure}
 
-\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
-
-\fig{\frac{\Gamma \vdash M:Secret \quad \Gamma \vdash c:Secure}{\Gamma \vdash \lift{c}{M}}}{}{secret}
-
-\fig{\frac{\Gamma \vdash M:Public \quad \Gamma \vdash c:Insecure}{\Gamma \vdash \lift{c}{M}}}{}{public}
+%\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
+%
+%\fig{\frac{\Gamma \vdash M:Secret \quad \Gamma \vdash c:Secure}{\Gamma \vdash \lift{c}{M}}}{}{secret}
+%
+%\fig{\frac{\Gamma \vdash M:Public \quad \Gamma \vdash c:Insecure}{\Gamma \vdash \lift{c}{M}}}{}{public}
 
 \FloatBarrier
