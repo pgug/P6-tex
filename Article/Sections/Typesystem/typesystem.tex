@@ -6,14 +6,15 @@ This will ensure that the integrity of the system is not broken or is not been m
 \fig{T::=&l\mid ch^l[T]\mid B^l\\
 B::=&int\mid string}{The syntax of the typed security.}{typesyntax}
 
-The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in \figref{fig:typerules} (Type Upgrade) to apply.\\\\
+\noindent The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in \figref{fig:typerules} (Type Upgrade) to apply. \textit{l} which is the level of security is in $ \mathbb{Z} $ and is ordered according to the order in $ \mathbb{Z} $.\\\\
 
 \fig{E: names \rightharpoonup types}{Type environment E holds names and their types.}{typenames}
 
-\textit{E} determines the type environment, and everything on the right side of the $ \vdash $ should hold for the type environment \textit{E}. \textit{x:T} determines that x is of type T , if it hold we can say that it is well typed, which in our context will make it secure.
+\noindent \textit{E} determines the type environment, and everything on the right side of the $ \vdash $ should hold for the type environment \textit{E}. \textit{x:T} determines that x is of type T , if it holds we can say that it is well typed, which in our context will make it secure.
 
 \begin{figure}
 \begin{align}
+\tag{} & \frac{P\ra P'}{E\vdash P \ra E\vdash P'}\\
 \tag{Nil} &E \vdash \nil\\
 \tag{Input} &\frac{E(x) \vdash ch^l[T]\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}\\
 \tag{Lift} &\frac{E(x) \vdash ch^l[T] \quad E \vdash M:T}{E\vdash \lift{x}{M}}\\
@@ -34,6 +35,8 @@ The syntax for your type security is shown in \figref{typesyntax}. Where \textit
 \caption{Type rules}
 \label{fig:typerules}
 \end{figure}
+
+\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
 
 %\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
 %
