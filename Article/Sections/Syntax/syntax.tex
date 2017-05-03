@@ -4,7 +4,6 @@ It is developed and described by L. G. Meredith and M. Radestock in \citep{Mered
 The rho-calculus will be used to model a system, and later a security type rule will be applied.
 The rho-calculus have a syntax for parallelism which will be useful for modelling client/server systems, were security can be an issue, and security can be a major part of the specification. 
 
-\subsection{Syntax}
 \begin{align*}
     P  ::= \; &  \nil & \text{nil} \\
       & \mid \inp{x}{y}P & \text{input} \\
@@ -14,26 +13,24 @@ The rho-calculus have a syntax for parallelism which will be useful for modellin
     x,y ::= \; & \quot{P} & \text{quote}\\
 \end{align*}
 
-Although it is possible to implement a blockchain protocol in the rho-calculus, it would require convoluted structures to express even simple concepts.
-We choose to extend the rho-calculus to allow easier modeling of those concepts.
+\input{Sections/Syntax/description.tex}
 
+\subsection{Additional Syntax}
+Although it is possible to implement a blockchain protocol in the rho-calculus, it would require convoluted structures to express even simple concepts.
+We choose to extend the rho-calculus to allow easier modeling of those concepts.\\
+\\
+We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations.
 \begin{align*}
 M::=\; & n \mid s \mid (M_1,...,M_k) \mid fM &for\ all\ k \geq 2
 \end{align*}
-We add an additional syntax rule, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations.
-
-\begin{align*}
-\gamma ::=& \ =|\neq|<|>|\leq|\geq\\
-\phi ::=& \ M_1\gamma M_2|\phi\land\phi|\phi\lor\phi|\neg\phi|\top|\bot\\
-P::=& \ [\phi] P
-\end{align*}
 In addition to terms and processes we need to use conditional processes. This requires boolean expressions, denoted by \ensuremath{\phi}.
-
+\begin{align*}
+P::=& \ [\phi] P\\
+\phi ::=& \ M_1\gamma M_2|\phi\land\phi|\phi\lor\phi|\neg\phi|\top|\bot\\
+\gamma ::=& \ =|\neq|<|>|\leq|\geq
+\end{align*}
+To ease the writing of conditional branching, we allow an if-then-else syntax.
 \begin{align*}
 	\If{\phi}{P}{Q} = [\phi].P | [\neg \phi].Q
 \end{align*}
-
-To ease the writing of conditional branching, we use an if-then-else syntax.
-
-\input{Sections/Syntax/description.tex}
 \input{Sections/Syntax/replication.tex}
