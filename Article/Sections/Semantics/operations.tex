@@ -1,23 +1,29 @@
 \subsection{Evaluating Terms}
 In order to make use of our terms we need to define how to evaluate them.
 The operation terms are intended to operate on terms, so it is sufficient to define how to evaluate these operations.
+Operations can also define abstract datatypes which we will make use of.
 The operations defined in this section are chosen specifically for modeling a blockchain protocol and could be different given another goal.
 
 \input{Sections/Semantics/tupleoperation.tex}
 
 \subsubsection{Encryption and Decryption}
-The operations of encryption and decryption are each others inverse.
+There exist no general way of retrieving the term used in an operation.
+This enables us to encrypt a term by using it in an encryption operation.
+We also define a decrypt operation that allows retrieval of the encrypted term.
+Together with a key we can define operations for symmetric-key encryption with the rule in \figref{decryptrule}.
+
 \begin{figure}[h]
     \begin{align*}
         &dec(enc(M_1, M_2),M_2) = M_1 \tag{Decrypt}
     \end{align*}
     \caption{Operations for encrypting and decrypting a message $M_1\ \mathrm{with\ key}\ M_2$.}
+    \label{decryptrule}
 \end{figure}
 \FloatBarrier
 
 \subsubsection{List operations}
-
-The list operations allows the abstraction of lists. They are described as follows:
+The list operations enables the abstraction of lists.
+They are described as follows:
 
 \begin{description}
 	\item[head(list)] The first element of the list
