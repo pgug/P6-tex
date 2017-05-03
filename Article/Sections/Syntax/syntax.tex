@@ -27,11 +27,11 @@ M::=\; & n \mid s \mid (M_1,...,M_k) \mid fM \mid x&for\ all\ k \geq 2
 In addition to terms and processes we need to use conditional processes. This requires boolean expressions, denoted by \ensuremath{\phi}.
 \begin{align*}
 P::=& \ [\phi] P\\
-\phi ::=& \ M_1\gamma M_2|\phi\land\phi|\phi\lor\phi|\neg\phi|\top|\bot\\
-\gamma ::=& \ =|\neq|<|>|\leq|\geq
+\phi ::=& \ M_1\gamma M_2 \mid \phi\land\phi \mid \phi\lor\phi \mid \neg\phi \mid \top \mid \bot\\
+\gamma ::=& \ = \mid \neq \mid < \mid > \mid \leq \mid \geq
 \end{align*}
 To ease the writing of conditional branching, we allow an if-then-else syntax.
 \begin{align*}
-	\If{\phi}{P}{Q} = [\phi].P | [\neg \phi].Q
+	\If{\phi}{P}{Q} = [\phi].P \mid [\neg \phi].Q
 \end{align*}
 \input{Sections/Syntax/replication.tex}
