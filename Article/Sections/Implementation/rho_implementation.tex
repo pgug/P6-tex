@@ -1,9 +1,7 @@
-\section{Implementation of blockchain}
 In this section, an implementation of a blockchain client written in $\rho$-calculus will be presented.
 This is based on Naivechain, a naive implementation of a blockchain client in JavaScript \cite{naivechain}.
 
-\subsection{Overview}
-
+\section{Overview}
 The blockchain consists of an arbitrary number of clients working in parallel. For this implementation we will limit our view to a single client.
 
 The client consists of an agent for each receivable message type: MineBlock, AddPeer, QueryLatest, QueryAll and BlockUpdate.
@@ -22,7 +20,7 @@ This is also the case for the list of peers.
 
 In our explanation we have sectioned the agents into what they manage: Queries, the blockchain, the peers and broadcasting.
 
-\subsection{Queries}
+\section{Queries}
 
 $QA$ and $QL$ manage queries.
 
@@ -38,7 +36,7 @@ A QueryLatest message is handled by lifting the last block of the blockchain on 
 	QL &=\ !ql(n).b(c).(b \lift{}{c}\ |\ \ bu\lift{}{getLatest(c)})
 \end{align*}
 
-\subsection{Blockchain}
+\section{Blockchain}
 
 $MB$ and $U$ manage the blockchain.
 
@@ -84,7 +82,7 @@ Else if the length of the received blockchain is one, a QueryAll message is sent
 
 Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $bu$.
 
-\subsection{Peers}
+\section{Peers}
 The client exists in a network with an arbitrarily large number of other clients.
 The subset of these clients that our client can communicate with is called its peers.
 Each peer is represented as a tuple of channel names, that lets the client know where to lift messages.
@@ -104,7 +102,7 @@ This is done by inputting from peers into the name $lp$, and lifting $lp$ on pee
 The client also needs to query this peer for its latest block.
 This is done by indexing the $ql$ channel from the peer and lifting a message on it.
 
-\subsection{Broadcasting} \label{broadcast}
+\section{Broadcasting} \label{broadcast}
 In order for our client to communicate with more than one peer, we need a system that enforces each message to be lifted to all peers exactly once.
 This is known as broadcasting, but since there is no primitive in the rho-calculus for this, we will describe a process that enforces broadcasting.
 
