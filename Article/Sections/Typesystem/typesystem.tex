@@ -4,7 +4,7 @@ We will construct a type system on top of our existing calculus, that will inclu
 That way we can define integrity as a behavior of our types.
 
 \fig{T::=&l\mid ch^l[T]\mid B^l\mid T\times T\\
-B::=&int\mid string}{The syntax of the typed security.}{typesyntax}
+B::=&int\mid string\mid list\mid bool}{The syntax of the typed security.}{typesyntax}
 
 \noindent The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in \figref{fig:typerules} (Type Upgrade) to apply. \textit{l} which is the level of security is in $ \mathbb{Z} $ and is ordered according to the order in $ \mathbb{Z} $.\\\\
 
@@ -23,13 +23,16 @@ B::=&int\mid string}{The syntax of the typed security.}{typesyntax}
 \tag{Quot} &\frac{E \vdash x}{E\vdash \quot{P}}& where\ \quot{P} \equiv_N x\\
 \tag{Bool} &\frac{E\vdash \phi \quad E\vdash P}{E \vdash [\phi] P}\\
 \tag{Condition} &\frac{E\vdash M_1:T \quad E\vdash M_2:T}{E\vdash M_1 \gamma\ M_2:T}\\
-\tag{And} &\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \land \phi _2:T}\\
-\tag{Or} &\frac{E\vdash \phi _1:T \quad E\vdash \phi _2:T}{E\vdash \phi _1 \lor \phi _2:T}\\
-\tag{not} &\frac{E\vdash \phi :T }{E\vdash \neg \phi :T}\\
+\tag{And} &\frac{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \land \phi _2:bool}\\
+\tag{Or} &\frac{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \lor \phi _2:bool}\\
+\tag{not} &\frac{E\vdash \phi :bool }{E\vdash \neg \phi :bool}\\
 \tag{Operation} &\frac{E\vdash f:T_1\times ... \times T_n\ra T\quad E\vdash M_i:T_i\quad 1\leq i \leq n}{E\vdash f(M_1,...,M_n):T}\\
 \tag{Tuple} &\frac{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n):T}&T = max(T_i)& 1\leq i\leq n\\
-\tag{Int} &E\vdash n: Int^0\\
-\tag{String} &E\vdash s:String^0\\
+\tag{Int} &E\vdash n: int^L\\
+\tag{String} &E\vdash s:string^L\\
+\tag{Append} &\frac{E \vdash x:T^L \quad E \vdash y:list^L}{E \vdash append(x,y):list^L}\\
+\tag{Head} &\frac{E \vdash x:list^L}{E \vdash head(x):T^L}\\
+\tag{Tail} &\frac{E \vdash x:list^L}{E \vdash tail(x):list^L}\\
 \tag{Type Upgrade} &\frac{T\leq T'}{E, M:T\vdash M:T'}
 \end{align}
 \caption{Type rules}
