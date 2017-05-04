@@ -49,14 +49,14 @@ The blockchain operations enables the abstraction of blockchains.
 They are described as follows:
 
 \begin{description}
-	\item[newBlock(data, previous)]
+	\item[\op{newBlock}(data, previous)]
 	A block that succeeds previous and contains data.
-	\item[getLatest(chain)]
+	\item[\op{getLatest}(chain)]
 	The last block of the chain
-	\item[addToChain(block, chain)]
+	\item[\op{addToChain}(block, chain)]
 	The chain with block added to it.
-	\item[getLength(chain)]
+	\item[\op{getLength}(chain)]
 	The length of the chain represented as a number.
-	\item[isValid(chain)]
+	\item[\op{isValid}(chain)]
 	The validity of the chain represented as a boolean.
 \end{description}

@@ -35,7 +35,7 @@ When a QueryAll message is received, the blockchain is lifted on $bu$.
 A QueryLatest message is handled by lifting the last block of the blockchain on $bu$.
 
 \begin{align*}
-	QL &=\ !ql(n).b(c).(b \lift{}{c}\ |\ \ bu\lift{}{getLatest(c)})
+	QL &=\ !ql(n).b(c).(b \lift{}{c}\ |\ \ bu\lift{}{\mop{getLatest}(c)})
 \end{align*}
 
 \subsection{Blockchain}
@@ -47,8 +47,8 @@ This block is both added to the blockchain and lifted on $bu$.
 Both instances of $newBlock$ are the same block, since they have the same arguments.
 
 \begin{align*}
-    MB &=\ !mb(d).b(c).(b \lift{}{addToChain(newBlock(d,getLatest(c)),c)}| \ bu\\
-    &\quad \lift{}{newBlock(d, getLatest(c))})
+    MB &=\ !mb(d).b(c).(b \lift{}{\mop{addToChain}(\mop{newBlock}(d,\mop{getLatest}(c)),c)}| \ bu\\
+    &\quad \lift{}{\mop{newBlock}(d, \mop{getLatest}(c))})
 \end{align*}
 
 $U$ handles most of the consensus logic.
@@ -58,28 +58,28 @@ We also refer to the clients own blockchain as the local blockchain.
 When a blockchain is received, four different cases are considered.
 
 \begin{align*}
-	U &=\ !u(c).b(lc).\If{\pi^{i}( getLatest(c)) \leq \pi^{i}(getLatest(lc))}{\\
+	U &=\ !u(c).b(lc).\If{\pi^{i}( \mop{getLatest}(c)) \leq \pi^{i}(\mop{getLatest}(lc))}{\\
 	&\quad b\lift{}{lc}}{P_0}
 \end{align*}
 
 If the index of the last received block is less than or equal to the index of the last local block, then no change is needed to the local blockchain.
 
 \begin{align*}
-	P_0 &=\If{\pi^{h}(getLatest(lc))=\pi^{ph}(getLatest(c))}{\\
-	&\quad b\lift{}{addToChain(getLatest(c),lc)}\ | \ bu\lift{}{getLatest(c)}}{P_1}
+	P_0 &=\If{\pi^{h}(\mop{getLatest}(lc))=\pi^{ph}(\mop{getLatest}(c))}{\\
+	&\quad b\lift{}{\mop{addToChain}(\mop{getLatest}(c),lc)}\ | \ bu\lift{}{\mop{getLatest}(c)}}{P_1}
 \end{align*}
 
 Else if the previous hash of the last received block matches the hash of the last local block, then the last received block is both added to the local blockchain and lifted on $bu$.
 
 \begin{align*}
-	P_1 &=\If{getLength(c)=1}{(b\lift{}{lc}\ |\ ba \lift{}{0})}{P_2}
+	P_1 &=\If{\mop{getLength}(c)=1}{(b\lift{}{lc}\ |\ ba \lift{}{0})}{P_2}
 \end{align*}
 
 Else if the length of the received blockchain is one, a QueryAll message is sent.
 
 \begin{align*}
-	P_2 &=\If{isValid(c) \land getLength(c) > getLength(lc)}{\\
-	&\quad(b\lift{}{c}\ |\ bu \lift{}{getLatest(c)})}{b\lift{}{lc}}
+	P_2 &=\If{\mop{isValid}(c) \land \mop{getLength}(c) > \mop{getLength}(lc)}{\\
+	&\quad(b\lift{}{c}\ |\ bu \lift{}{\mop{getLatest}(c)})}{b\lift{}{lc}}
 \end{align*}
 
 Finally if the received blockchain is valid and longer than the local blockchain, then the local blockchain is replaced by the received blockchain and the last received block is lifted on $bu$.
@@ -97,7 +97,7 @@ $AP$ manages the peers.
 When the client receives an AddPeer message, the received peer is added to peers.
 
 \begin{align*}
-    AP &=\ !ap(p).(ps(lp).ps\lift{}{append(p,lp)}\ |\ \pi^{ql}(p)\lift{}{0})\\
+    AP &=\ !ap(p).(ps(lp).ps\lift{}{\mop{append}(p,lp)}\ |\ \pi^{ql}(p)\lift{}{0})\\
 \end{align*}
 
 This is done by inputting from peers into the name $lp$, and lifting $lp$ on peers again, with the new peer added.
