@@ -1,4 +1,4 @@
-\subsection{Evaluating Terms}
+\section{Evaluating Terms}
 In order to make use of our terms we need to define how to evaluate them.
 The operation terms are intended to operate on terms, so it is sufficient to define how to evaluate these operations.
 Operations can also define abstract datatypes which we will make use of.
@@ -6,7 +6,7 @@ The operations defined in this section are chosen specifically for modeling a bl
 
 \input{Sections/Semantics/tupleoperation.tex}
 
-\subsubsection{Encryption and Decryption}
+\subsection{Encryption and Decryption}
 There exist no general way of retrieving the term used in an operation.
 This enables us to encrypt a term by using it in an encryption operation.
 We also define a decrypt operation that allows retrieval of the encrypted term.
@@ -21,7 +21,7 @@ Together with a key we can define operations for symmetric-key encryption with t
 \end{figure}
 \FloatBarrier
 
-\subsubsection{List}
+\subsection{List}
 The list operations enables the abstraction of lists.
 They are described as follows:
 
@@ -43,21 +43,20 @@ These operations are defined by the rules of \figref{listoprules}.
 \end{figure}
 \FloatBarrier
 
-\subsection{Blockchain}
+\section{Blockchain}
 
-The blockchain operations enables the abstraction of blockchains. These operations are also capable of treating a singular block as a blockchain.
+The blockchain operations enables the abstraction of blockchains.
+They are described as follows:
 
 \begin{description}
-	\item[newBlock(data, previous)]
+	\item[\op{newBlock}(data, previous)]
 	A block that succeeds previous and contains data.
-	\item[getLatest(chain)]
+	\item[\op{getLatest}(chain)]
 	The last block of the chain
-	\item[addToChain(block, chain)]
+	\item[\op{addToChain}(block, chain)]
 	The chain with block added to it.
-	\item[getLength(chain)]
+	\item[\op{getLength}(chain)]
 	The length of the chain represented as a number.
-	\item[isValid(chain)]
+	\item[\op{isValid}(chain)]
 	The validity of the chain represented as a boolean.
 \end{description}
-
-
