@@ -30,14 +30,22 @@ B::=&int\mid string\mid list\mid bool}{The syntax of the typed security.}{typesy
 \tag{Tuple} &\frac{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n):T}&T = max(T_i)& 1\leq i\leq n\\
 \tag{Int} &E\vdash n: int^L\\
 \tag{String} &E\vdash s:string^L\\
-\tag{Append} &\frac{E \vdash x:T^L \quad E \vdash y:list^L}{E \vdash append(x,y):list^L}\\
-\tag{Head} &\frac{E \vdash x:list^L}{E \vdash head(x):T^L}\\
-\tag{Tail} &\frac{E \vdash x:list^L}{E \vdash tail(x):list^L}\\
 \tag{Type Upgrade} &\frac{T\leq T'}{E, M:T\vdash M:T'}
 \end{align}
 \caption{Type rules}
 \label{fig:typerules}
 \end{figure}
+
+\begin{align}
+\tag{Append} &\frac{E \vdash x:T^L \quad E \vdash y:list^L}{E \vdash append(x,y):list^L}\\
+\tag{Head} &\frac{E \vdash x:list^L}{E \vdash head(x):T^L}\\
+\tag{Tail} &\frac{E \vdash x:list^L}{E \vdash tail(x):list^L}\\
+\tag{newBlock}& \frac{E \vdash data:T \quad E \vdash previus : T}{E \vdash newBlock(data, previus) :T}\\
+\tag{getLatest}& \frac{E \vdash chain :T}{E \vdash getLatest(chain):T}\\
+\tag{addToChain}& \frac{E \vdash block:T \quad E \vdash chain:T}{E \vdash addToChain(block, chain):T}\\
+\tag{getLenght}& \frac{E \vdash chain:T}{E \vdash getLenght(chain):int}\\
+\tag{isValid}& \frac{E \vdash chain:T}{E \vdash isValid(chain):bool}
+\end{align}
 
 \textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
 
