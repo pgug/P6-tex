@@ -28,8 +28,8 @@ B::=&int\mid string\mid list\mid bool}{The syntax of the typed security.}{typesy
 \tag{not} &\frac{E\vdash \phi :bool }{E\vdash \neg \phi :bool}\\
 \tag{Operation} &\frac{E\vdash f:T_1\times ... \times T_n\ra T\quad E\vdash M_i:T_i\quad 1\leq i \leq n}{E\vdash f(M_1,...,M_n):T}\\
 \tag{Tuple} &\frac{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n):T}&T = max(T_i)& 1\leq i\leq n\\
-\tag{Int} &E\vdash n: int^L\\
-\tag{String} &E\vdash s:string^L\\
+\tag{Int} &E\vdash n: int^l\\
+\tag{String} &E\vdash s:string^l\\
 \tag{Type Upgrade} &\frac{T\leq T'}{E, M:T\vdash M:T'}
 \end{align}
 \caption{Type rules}
@@ -37,9 +37,9 @@ B::=&int\mid string\mid list\mid bool}{The syntax of the typed security.}{typesy
 \end{figure}
 
 \begin{align}
-\tag{Append} &\frac{E \vdash x:T^L \quad E \vdash y:list^L}{E \vdash append(x,y):list^L}\\
-\tag{Head} &\frac{E \vdash x:list^L}{E \vdash head(x):T^L}\\
-\tag{Tail} &\frac{E \vdash x:list^L}{E \vdash tail(x):list^L}\\
+\tag{Append} &\frac{E \vdash x:T^l \quad E \vdash y:list^l}{E \vdash append(x,y):list^l}\\
+\tag{Head} &\frac{E \vdash x:list^l}{E \vdash head(x):T^l}\\
+\tag{Tail} &\frac{E \vdash x:list^l}{E \vdash tail(x):list^l}\\
 \tag{newBlock}& \frac{E \vdash data:T \quad E \vdash previus : T}{E \vdash newBlock(data, previus) :T}\\
 \tag{getLatest}& \frac{E \vdash chain :T}{E \vdash getLatest(chain):T}\\
 \tag{addToChain}& \frac{E \vdash block:T \quad E \vdash chain:T}{E \vdash addToChain(block, chain):T}\\
