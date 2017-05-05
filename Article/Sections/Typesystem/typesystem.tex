@@ -42,7 +42,7 @@ If x is not given a type, then it is simply well-typed.
 \textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
 \begin{align}
 \tag{Append} &\frac{E \vdash x:T^l \quad E \vdash y:list^l}{E \vdash append(x,y):list^l}\\
-\tag{Head} &\frac{E \vdash x:list^l}{E \vdash head(x):T^l}\\
+\tag{Head} &\frac{E \vdash x:list^l}{E \vdash head(x):l}\\
 \tag{Tail} &\frac{E \vdash x:list^l}{E \vdash tail(x):list^l}\\
 \tag{newBlock}& \frac{E \vdash data:T \quad E \vdash previus : T}{E \vdash newBlock(data, previus) :T}\\
 \tag{getLatest}& \frac{E \vdash chain :T}{E \vdash getLatest(chain):T}\\
