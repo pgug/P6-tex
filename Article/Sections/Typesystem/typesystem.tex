@@ -4,13 +4,18 @@ We will construct a type system on top of our existing calculus, that will inclu
 That way we can define integrity as a behavior of our types.
 
 \fig{T::=&l\mid ch^l[T]\mid B^l\mid T\times T\\
-B::=&int\mid string\mid list\mid bool}{The syntax of the typed security.}{typesyntax}
+B::=&int\mid string\mid list\mid bool}{The syntax of our type system.}{typesyntax}
 
-\noindent The syntax for your type security is shown in \figref{typesyntax}. Where \textit{l} is the level of security, and \textit{ch} is the channel. The set of security levels should be ordered for type rule in \figref{fig:typerules} (Type Upgrade) to apply. \textit{l} which is the level of security is in $ \mathbb{Z} $ and is ordered according to the order in $ \mathbb{Z} $.\\\\
+\noindent The syntax of our type system is shown in \figref{typesyntax}.
+$l$ are the security levels that ranges over $\mathbb{N}_0$.
+This ensures an ordering between different security levels.
 
-\fig{E: names \rightharpoonup types}{Type environment E holds names and their types.}{typenames}
+\fig{E: names \rightharpoonup types}{Type environment E partially maps names to types.}{typenames}
 
-\noindent \textit{E} determines the type environment, and everything on the right side of the $ \vdash $ should hold for the type environment \textit{E}. \textit{x:T} determines that x is of type T , if it holds we can say that it is well typed, which in our context will make it secure.
+\noindent A type judgment $x:T$ denotes that x is well-typed at type T.
+These judgments can be collected to form a type environment, denoted $E$, that partially maps names to types.
+$E\vdash x:T$ denotes that x is well-typed at type T in context $E$.
+If x is not given a type, then it is simply well-typed.
 
 \begin{figure}
 \begin{align}
