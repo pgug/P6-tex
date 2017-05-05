@@ -17,9 +17,9 @@ These judgments can be collected to form a type environment, denoted $E$, that p
 $E\vdash x:T$ denotes that x is well-typed at type T in context $E$.
 If x is not given a type, then it is simply well-typed.
 
-\begin{figure}
+
 \begin{align}
-\tag{} & \frac{P\ra P'}{E\vdash P \ra E\vdash P'}\\
+%\tag{} & \frac{P\ra P'}{E\vdash P \ra E\vdash P'}\\
 \tag{Nil} &E \vdash \nil\\
 \tag{Input} &\frac{E(x) = ch^l[T]\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}\\
 \tag{Lift} &\frac{E(x) = ch^l[T] \quad E \vdash M:T}{E\vdash \lift{x}{M}}\\
@@ -37,10 +37,9 @@ If x is not given a type, then it is simply well-typed.
 \tag{String} &E\vdash s:string^l\\
 \tag{Type Upgrade} &\frac{T\leq T'}{E, M:T\vdash M:T'}
 \end{align}
-\caption{Type rules}
-\label{fig:typerules}
-\end{figure}
 
+
+\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
 \begin{align}
 \tag{Append} &\frac{E \vdash x:T^l \quad E \vdash y:list^l}{E \vdash append(x,y):list^l}\\
 \tag{Head} &\frac{E \vdash x:list^l}{E \vdash head(x):T^l}\\
@@ -52,7 +51,6 @@ If x is not given a type, then it is simply well-typed.
 \tag{isValid}& \frac{E \vdash chain:T}{E \vdash isValid(chain):bool}
 \end{align}
 
-\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
 
 %\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
 %
