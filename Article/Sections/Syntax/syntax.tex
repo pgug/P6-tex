@@ -24,11 +24,10 @@ We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ran
 \begin{align*}
 M::=\; & n &\text{number}\\
  &\mid s &\text{string}\\
- &\mid (M_1,...,M_k)&\text{tuple}\\
+ &\mid (M_1,...,M_k)\quad\quad\quad \text{for all k $\geq$ 2} &\text{tuple}\\
  &\mid fM &\text{operation}\\
- &\mid x&\text{name}\\
- &for\ all\ k \geq 2
-\end{align*}
+ &\mid x &\text{name}\\
+ \end{align*}
 In addition to terms and processes we need to use conditional processes. This requires boolean expressions, denoted by \ensuremath{\phi}.
 \begin{align*}
 P::=& \ [\phi] P\\
@@ -37,6 +36,7 @@ P::=& \ [\phi] P\\
 \end{align*}
 To ease the writing of conditional branching, we allow an if-then-else syntax.
 \begin{align*}
-	\If{\phi}{P}{Q} = [\phi].P \mid [\neg \phi].Q
+	\If{\phi}{P}{Q} \eqdef [\phi].P \mid [\neg \phi].Q
 \end{align*}
+
 \input{Sections/Syntax/replication.tex}
