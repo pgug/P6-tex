@@ -3,19 +3,7 @@
 \begin{document}
 
 %%% Front matter %%%
-\pagestyle{empty} %disable headers and footers
-\pagenumbering{roman} %use roman page numbering in the frontmatter
-\input{Sections/preface/frontpage}
-%\input{Sections/preface/colophon}
-\input{Sections/preface/titlepages}
-\input{Sections/preface/preface}
-
-%\cleardoublepage
-\pdfbookmark[1]{Contents}{label:contents}
-\pagestyle{fancy} %enable headers and footers again
-\setcounter{tocdepth}{1}
-\tableofcontents
-%\cleardoublepage
+\input{front.tex}
 
 %%% Main matter %%%
 \pagenumbering{arabic} %use Arabic page numbering in the main-matter
@@ -23,26 +11,26 @@
 
 %%% Sections %%%
 % Introduction %
-\chapter{Introduction}
+%\chapter{Introduction}
 \input{Sections/Introduction/introduction.tex}
 
 % Blockchain %
-\chapter{Blockchain}
+%\chapter{Blockchain}
 \input{Sections/Blockchain/blockchain_introduction.tex}
 
 % Security %
 
 % Rho %
-\chapter{Rho}
+%\section{Rho}
 \input{Sections/Syntax/syntax.tex}
 \input{Sections/Semantics/semantics.tex}
 
 % Type security %
-\chapter{Type security}
+%\chapter{Type security}
 \input{Sections/Typesystem/typesystem.tex}
 
 % Blockchain implementation %
-\chapter{Implementation of blockchain}
+%\chapter{Implementation of blockchain}
 \input{Sections/Implementation/rho_implementation.tex}
 
 % Type system implementation %
