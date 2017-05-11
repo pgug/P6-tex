@@ -1,16 +1,20 @@
-\subsection{Type Security}
+\section{Type Security}
 In order to determine whether a protocol is secure or not, we need a model that can express security.
 We will construct a type system on top of our existing calculus, that will include security levels.
 That way we can define integrity as a behavior of our types.
+\begin{align*}
+	T::=&l\mid ch^l[T]\mid B^l\mid T\times T\\
+	B::=&int\mid string\mid list\mid bool
+\end{align*}
 
-\fig{T::=&l\mid ch^l[T]\mid B^l\mid T\times T\\
-B::=&int\mid string\mid list\mid bool}{The syntax of our type system.}{typesyntax}
-
-\noindent The syntax of our type system is shown in \figref{typesyntax}.
+\noindent The syntax of our type system is shown above.
 $l$ are the security levels that ranges over $\mathbb{N}_0$.
 This ensures an ordering between different security levels.
 
-\fig{E: names \rightharpoonup types}{Type environment E partially maps names to types.}{typenames}
+Below is the Type environment E that partially maps names to types.
+\begin{align*}
+E: names \rightharpoonup types
+\end{align*}
 
 \noindent A type judgment $x:T$ denotes that x is well-typed at type T.
 These judgments can be collected to form a type environment, denoted $E$, that partially maps names to types.

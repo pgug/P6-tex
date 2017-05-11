@@ -1,12 +1,9 @@
 \subsubsection{Projection}
-A projection operation for retrieving terms from a tuple is useful when working with tuples. This operation is shown in \figref{tupleop}, where \textit{k} determines the index of the retrieved term.
-\begin{figure}[h]
-    \begin{align*}
-        \pi^k(M)=\pi^k((M_1,..., M_n))=M_k \text{ where } 1\leq k \leq n
-    \end{align*}
-    \caption{The operation for projecting a tuple, where $M$ is a tuple, and $k$ is a number.}
-\label{tupleop}
-\end{figure}
+A projection operation for retrieving terms from a tuple is useful when working with tuples. This operation is shown below, where \textit{k} determines the index of the retrieved term.
+\begin{align*}
+    \pi^k(M)=\pi^k((M_1,..., M_n))=M_k \text{ where } 1\leq k \leq n
+\end{align*}
+
 
 In our implementation we use tuples to represent a group of attributes. To project an attribute from a tuple, we use the name of the attribute instead of a number. As an example, projecting the hash of a block can be expressed as $\pi^{hash}(block)$.
 \FloatBarrier

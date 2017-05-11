@@ -1,50 +1,30 @@
 \subsection{Equivalence Relations}
 The structural congruence of processes is denoted by the relation $\equiv$.
 
-\begin{figure}[h]
-    \begin{align*}
-        P\para 0 \equiv\ &P \equiv 0\para P\\
-        P\para Q &\equiv Q\para P\\
-        P\para (Q\para R)&\equiv (P\para Q)\para R
-    \end{align*}
-    \caption{The rules of structural congruence for processes}
-\end{figure}
+\begin{align*}
+	P\para 0 \equiv\ &P \equiv 0\para P\\
+    P\para Q &\equiv Q\para P\\
+    P\para (Q\para R)&\equiv (P\para Q)\para R
+\end{align*}
 
-%\begin{figure}[h]
-%    \begin{center}
-%        \begin{tabular}[c]{ll}
-%            \runa{Equivalence} & \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
-%        \end{tabular}
-%    \end{center}
-%    \caption{Structural Congruence for Equivalence}
-%    \label{fig:equi}
-%\end{figure}
 
 \FloatBarrier
 
 The equivalence of names is denoted by the relation $\equiv _N$
 
-\begin{figure}[h]
-	\begin{align}
+\begin{align}
 	& \infrule{}{\quot{\drop{x}}\equiv _N x} \tag{Drop and Quote}
-	\end{align}
-	\caption{Name equivalence rule for drop and quote}
-	\label{fig:dropquot}
-\end{figure}
+\end{align}
 
 \noindent
-The rule in \figref{fig:dropquot} states that if $x$ is dropped, and then quoted, then it should stay name equivalent with $x$.
+The rule states that if $x$ is dropped, and then quoted, then it should stay name equivalent with $x$.
 
-\begin{figure}[h]
-	\begin{align}
+\begin{align}
 	& \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}} \tag{Structural equivalence}
-	\end{align}
-	\caption{Name equivalence rule for structural congruence}
-	\label{fig:strucequiv}
-\end{figure}
+\end{align}
 
 \noindent
-The rule in \figref{fig:strucequiv} states, that if $P$ and $Q$ are structural congruent with each other, then the quoted $P$ and $Q$ are name equivalent with each other.
+The rule states, that if $P$ and $Q$ are structural congruent with each other, then the quoted $P$ and $Q$ are name equivalent with each other.
 
 \FloatBarrier
 
@@ -54,72 +34,24 @@ We make use of the following reduction rules.
 \subsubsection{Base rules}
 These are similar to the reduction rules of the rho-calculus as described in \citep{Meredith2005}. The only difference is the communication rule reflecting the syntax changes.
 
-\begin{figure}[h]
-	\begin{align}
+\begin{align}
 	\tag{Comm} \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}&\\
 	\tag{Parallel} \infrule{P\ra P'}{P\para Q\ra P'\para Q}&\\
 	\tag{Equivalence} \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}&
-	\end{align}
-	\caption{Reduction rules}
-	\label{redrule}
-\end{figure}
-
-%\begin{figure}[h]
-%	\begin{align}
-%	& \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}} \tag{Comm}
-%	\end{align}
-%	\caption{Communication rule for when a term is lifted instead of a process.}
-%	\label{fig:com}
-%\end{figure}
-%
-%
-%\begin{figure}[!h]
-%	\begin{align}
-%	& \infrule{P\ra P'}{P\para Q\ra P'\para Q} \tag{Parallel}
-%	\end{align}
-%	\caption{Reduction rule for parallel processes}
-%	\label{fig:para}
-%\end{figure}
-%
-%\begin{figure}[h]
-%	\begin{align}
-%		& \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q} \tag{Equivalence}
-%	\end{align}
-%	\caption{Reduction rule for structural congruence}
-%	\label{fig:equi}
-%\end{figure}
-
+\end{align}
 
 \FloatBarrier
 
 \subsubsection{Rules for conditional processes}
 The reduction rule of a given conditional process is decided by its boolean expression. These are evaluated using common boolean arithmetics.
 
-\begin{figure}[h]
-	\begin{align}
-	& \infrule{}{[\top]P\ra P} \tag{True}\\
-	& \infrule{}{[\bot]P\ra \nil} \tag{False}
-	\end{align}
-	\caption{Reduction rules for conditions.}
-	\label{condition}
-\end{figure}
-
-%\begin{figure}[h]
-%	\begin{align}
-%	& \infrule{}{[\top]P\ra P} \tag{True}
-%	\end{align}
-%	\caption{Reduction rule for conditional processes given true}
-%	\label{fig:true}
-%\end{figure}
-%
-%\begin{figure}[h]
-%	\begin{align}
-%	& \infrule{}{[\bot]P\ra \nil} \tag{False}
-%	\end{align}
-%	\caption{Reduction rule for conditional processes given false}
-%	\label{fig:false}
-%\end{figure}
+\begin{align}
+	& \infrule{\phi \ra \top}{[\phi]P\ra P} \tag{True}\\
+	& \infrule{\phi \ra \bot}{[\phi]P\ra \nil} \tag{False}
+\end{align}
+	
 
 \FloatBarrier
+\input{Sections/Syntax/replication.tex}
 
 \input{Sections/Semantics/operations.tex}
