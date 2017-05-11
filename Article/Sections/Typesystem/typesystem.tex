@@ -59,12 +59,12 @@ If $x$ is not given a type, then it is simply well-typed.
 
 \begin{align}
 \tag{BasicSubBasic} &\infrule{l\leq l'}{B^l\leq B^{l'}}\\
-\tag{Level-level} &L(l)=l\\
-\tag{Channel-level} &L(ch[T]) = L(T)\\
-\tag{Tuple-level} &L(T_1\times...\times T_n)=\max_{i=1}^{n}{L(T_i)}\\
-\tag{Basic-level} &L(B^l)=l\\
-\tag{TypeSubLevel} &T\leq L(T)\\
-\tag{TermAsChannel} &\infrule{L(E(x))=l}{E\vdash x:ch[l]}\\
+\tag{Level-level} &\level{l}=l\\
+\tag{Channel-level} &\level{ch[T]} = \level{T}\\
+\tag{Tuple-level} &\level{T_1\times...\times T_n}=\max_{i=1}^{n}{\level{T_i}}\\
+\tag{Basic-level} &\level{B^l}=l\\
+\tag{TypeSubLevel} &T\leq \level{T}\\
+\tag{TermAsChannel} &\infrule{\level{E(x)}=l}{E\vdash x:ch[l]}\\
 \tag{TupleSubTuple} &\infrule{T_i\leq T'}{T_1\times...\times T_i\times...\times T_n\leq T_1\times...\times T'\times...\times T_n}
 \end{align}
 
