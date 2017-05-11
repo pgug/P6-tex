@@ -1,8 +1,6 @@
 \section{Introduction}
-Blockchain implementations are very important in modern technology such as bitcoin, since a lot of money is invested in bitcoin and other blockchain based technology's it is important to verify that the blockchain provides the security you will expect of it.\\
-\\
-We have discussed security related features of a blockchain implementation and which security features could be interesting to analyze based on importance for the blockchain and general interest from the authors.\\
-\\
-In the article we have developed some extensions to the rho language, the extensions are made so we can implement a blockchain for analysis of security features.\\
-\\
-We have made a simple implementation of a blockchain, furthermore there is also developed a type-system for the blockchain on top of our rho implantation. These implementations is developed to test wherever the blockchain protocol is safe.
+The distributed algorithm blockchain has become very popular these couple of years. The algorithm became widely known because of bitcoin, to create a decentralized cryptocurrency. The popularity has made others make their own blockchain implementation, one example of such is the RChain protocol. The RChain protocol is at the time of writing only a description, as to how it could be implemented in the calculus rho-calculus. We took inspiration from the RChain protocol, which is also one of the reasons we chose to use the rho-calculus for our implementation. Further reasons will be discussed later in the article \textbf{mulig ref}. Our implementation is based upon the implementation of a blockchain called naivechain\cite{naivechain}.
+
+\subsection*{Blockchain introduction}
+The blockchain is a distributed algorithm (protocol) mostly known from bitcoin. The protocol consists of a chain of blocks, hence the name, where anyone in the network can add new blocks to the chain. To ensure that the blocks are valid consensus has to be achieved. This is done with a consensus protocol and depending on the protocol the process is different, but a common property is that the network will eventually agree on the same chain.\\
+Since the blockchain is often used in security critical systems, the protocol needs to have a verified security system. In this article, the security flaw focused on is the possible flaws with integrity. This is done by adding a type security layer on top of our blockchain implementation.
