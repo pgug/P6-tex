@@ -1,15 +1,28 @@
 \section{Type Security}
 In order to determine whether a protocol is secure or not, we need a model that can express security.
 We will construct a type system on top of our existing calculus, that will include security levels.
-That way we can define integrity as a behavior of our types.
+That way we can define integrity as a behaviour of our types.
 \begin{align*}
-	T::=\ &l\mid ch[T]\mid T\times T\mid B^l\\
-	B::=\ &int\mid string\mid list\mid bool
+	T::=&l \tag{Security Level}\\
+	\mid& ch[T] \tag{Channel}\\
+	\mid& B^l \tag{Type}\\
+	\mid& T \times T \tag{Cardinality}\\
+	B::=&int 
+	\mid string 
+	\mid list 
+	\mid bool 
 \end{align*}
 
 \noindent The syntax of our type system is shown above.
 $l$ are the security levels that ranges over $\mathbb{N}_0$.
 This ensures an ordering between different security levels.
+
+\begin{description}
+\item[Security level] is the level of security and ranges over natural number $\mathbb{N}_0$.
+\item[Channel] have a security level $l$ where T is send. T must be of a security level $l$ equal to or below the the channels security level $l$.
+\item[Type] have a security level $l$.
+\item[Cardinality] \todo{Frandsen forklar!!!}
+\end{description}
 
 Below is the Type environment E that partially maps names to types.
 \begin{align*}
