@@ -4,24 +4,22 @@ We will construct a type system on top of our existing calculus, that will inclu
 That way we can define integrity as a behaviour of our types.
 \begin{align*}
 	T::=&l \tag{Security Level}\\
-	\mid& ch[T] \tag{Channel}\\
-	\mid& B^l \tag{Type}\\
-	\mid& T \times T \tag{Cardinality}\\
+	&\mid ch[T] \tag{Channel}\\
+	&\mid T_1 \times...\times T_n \tag{Tuple}\\
+	&\mid B^l \tag{Basic}\\
 	B::=&int 
 	\mid string 
 	\mid list 
 	\mid bool 
 \end{align*}
 
-\noindent The syntax of our type system is shown above.
-$l$ are the security levels that ranges over $\mathbb{N}_0$.
-This ensures an ordering between different security levels.
+\noindent The syntax of our type system is shown above. It is described as follows:
 
 \begin{description}
-\item[Security level] is the level of security and ranges over natural number $\mathbb{N}_0$.
-\item[Channel] have a security level $l$ where T is send. T must be of a security level $l$ equal to or below the the channels security level $l$.
-\item[Type] have a security level $l$.
-\item[Cardinality] \todo{Frandsen forklar!!!}
+\item[Security levels] range over the natural numbers $\mathbb{N}_0$. This ensures an ordering between different security levels, so that $l$ is at most as secure as $l'$ if $l\leq l'$. $0$ is therefore considered the lowest level of security.
+\item[Channels] allow terms of type $T$ to be sent and received.
+\item[Tuples] have types composed of all the types of the contained terms.
+\item[Basic Types] have a given security level $l$.
 \end{description}
 
 Below is the Type environment E that partially maps names to types.
