@@ -22,16 +22,20 @@ That way we can define integrity as a behaviour of our types.
 \item[Basic Types] have a given security level $l$.
 \end{description}
 
-Below is the Type environment E that partially maps names to types.
+\noindent A type judgment $x:T$ denotes that $x$ is well-typed at type $T$.
+These judgments can be collected to form a type environment, denoted $E$, that partially maps names to types.
 \begin{align*}
 E: names \rightharpoonup types
 \end{align*}
 
-\noindent A type judgment $x:T$ denotes that $x$ is well-typed at type $T$.
-These judgments can be collected to form a type environment, denoted $E$, that partially maps names to types.
-$E\vdash x:T$ denotes that $x$ is well-typed at type $T$ in context $E$.
-If $x$ is not given a type, then it is simply well-typed.
+\noindent $E\vdash x:T$ denotes that $x$ is well-typed at type $T$ in context $E$.
+If $x$ is not given a type, then it is simply well-typed. $E(x)$ denotes the actual type of $x$, while $E\vdash x:T$ 
 
+\begin{align*}
+\tag{Lookup}\label{rule:derive} &\infrule{E(x)=T}{E\vdash x:T}
+\end{align*}
+
+The \ref{rule:derive} rule \todo{In progress}
 
 \begin{align}
 \tag{Nil} &E \vdash \nil\\
@@ -52,7 +56,9 @@ If $x$ is not given a type, then it is simply well-typed.
 \tag{Tuple} &\infrule{E\vdash M_i:T_i \quad (1\leq i\leq n)}{E\vdash (M_1,...,M_n):T_1\times...\times T_n}\\
 \tag{Int} &E\vdash n: int^l\\
 \tag{String} &E\vdash s:string^l\\
-\tag{Subsumption} &\infrule{T\leq T'}{E, M:T\vdash M:T'}
+\tag{Subsumption} &\infrule{E\vdash M:T\quad T\leq T'}{E\vdash M:T'}\\
+\tag{Transitive} &\infrule{T\leq T''\quad T''\leq T'}{T\leq T'}\\
+\tag{LessOrEqual} &\infrule{T=T'}{T\leq T'}
 \end{align}
 
 \begin{align}
