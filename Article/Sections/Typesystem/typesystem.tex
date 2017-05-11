@@ -19,7 +19,6 @@ If x is not given a type, then it is simply well-typed.
 
 
 \begin{align}
-\tag{Action} & \infrule{E \vdash P \quad P\ra P'}{E\vdash P'}\\
 \tag{Nil} &E \vdash \nil\\
 \tag{Input} &\infrule{E(x) = ch^l[T]\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}\\
 \tag{Lift} &\infrule{E(x) = ch^l[T] \quad E \vdash M:T}{E\vdash \lift{x}{M}}\\
@@ -52,6 +51,13 @@ If x is not given a type, then it is simply well-typed.
 \tag{addToChain}& \infrule{E \vdash block:T \quad E \vdash chain:T}{E \vdash addToChain(block, chain):T}\\
 \tag{getLenght}& \infrule{E \vdash chain:T}{E \vdash getLenght(chain):int}\\
 \tag{isValid}& \infrule{E \vdash chain:T}{E \vdash isValid(chain):bool}
+\end{align}
+
+\begin{align}
+\tag{Action} & \infrule{E \vdash P \quad P\ra P'}{E\vdash P'}\\
+\tag{Not Wrong}& \infrule{E \vdash P}{P \nrightarrow wrong}\\
+\tag{Para Wrong}& \infrule{P \ra wrong}{P\para Q \ra wrong}\\
+\tag{Wrong}& \infrule{E(x) = ch^l[T] \quad E \vdash M:T \quad L(T) > l }{\lift{x}{M} \ra wrong}\\
 \end{align}
 
 
