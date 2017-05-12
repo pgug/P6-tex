@@ -3,11 +3,11 @@ In order to determine whether a protocol is secure or not, we need a model that 
 We will construct a type system on top of our existing calculus, that will include security levels.
 That way we can define integrity as a behaviour of our types.
 \begin{align*}
-	T::=&l \tag{Security Level}\\
+	T::=&\;l \tag{Security Level}\\
 	&\mid ch[T] \tag{Channel}\\
 	&\mid T_1 \times...\times T_n \tag{Tuple}\\
 	&\mid B^l \tag{Basic}\\
-	B::=&int 
+	B::=&\;int 
 	\mid string 
 	\mid list 
 	\mid bool 

@@ -4,11 +4,12 @@ It is developed and described by L. G. Meredith and M. Radestock in \citep{Mered
 We will use rho-calculus to model a system, and later a security type rule will be applied.
 Because rho-calculus is a small calculus, there will not be many reduction rules to look through, and the type rules for the reduction rules will then be faster to make than with a bigger calculus.
 The rho-calculus have a syntax for parallelism which will be useful for modelling client/server systems, were security can be an issue, and security can be a major part of the specification. 
-Our syntax is similar to the one described in \citep{Meredith2005}, however our lift includes a term $M$ that will be explained in section \ref{sec:addsyntax}.
+%Our syntax is similar to the one described in \citep{Meredith2005}, however our lift includes a term $M$ that will be explained in section \ref{sec:addsyntax}.
+The syntax here is as the syntax described in \citep{Meredith2005}, we would like to add some syntax rules on top on this, to make it easier to modelling systems in the calculus.
 \begin{align*}
     P  ::= \; &  \nil & \text{nil} \\
       & \mid \inp{x}{y}P & \text{input} \\
-      & \mid \lift{x}{M} & \text{lift} \\
+      & \mid \lift{x}{P} & \text{lift} \\
       & \mid \drop{x} & \text{drop} \\
       & \mid P \para Q & \text{parallel} \\[3mm]
     x,y ::= \; & \quot{P} & \text{quote}\\
@@ -20,13 +21,14 @@ Our syntax is similar to the one described in \citep{Meredith2005}, however our 
 Although it is possible to implement a blockchain protocol in the rho-calculus, it would require convoluted structures to express even simple concepts.
 We choose to extend the rho-calculus to allow easier modeling of those concepts.\\
 \\
-We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations.
+We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations. We have also added a possibility of lifting a term, instead of a process.
 \begin{align*}
 M::=\; & n &\text{number}\\
  &\mid s &\text{string}\\
  &\mid (M_1,...,M_k)\quad\quad\quad \text{for all k $\geq$ 2} &\text{tuple}\\
  &\mid fM &\text{operation}\\
- &\mid x &\text{name}\\
+ &\mid x &\text{name}\\ 
+P::=\;& \lift{x}{M}&\text{lift}
  \end{align*}
 In addition to terms and processes we need to use conditional processes. This requires boolean expressions, denoted by \ensuremath{\phi}.
 \begin{align*}
