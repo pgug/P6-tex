@@ -64,7 +64,7 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 \tag{Tuple-level} &\level{T_1\times...\times T_n}=\max_{i=1}^{n}{\level{T_i}}\\
 \tag{Basic-level} &\level{B^l}=l\\
 \tag{TypeSubLevel} &T\leq \level{T}\\
-\tag{TermAsChannel} &\infrule{\level{E(x)}=l}{E\vdash x:ch[l]}
+\tag{TermAsChannel} &\infrule{E(x)=T\quad \level{T}=l}{E\vdash x:ch[l]}
 \end{align*}
 
 \begin{align*}
