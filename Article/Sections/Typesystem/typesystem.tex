@@ -89,16 +89,17 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 \end{align*}
 
 %\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
-\begin{align*}
-\tag{Append} &\infrule{E \vdash x:T^l \quad E \vdash y:list^l}{E \vdash append(x,y):list^l}\\
-\tag{Head} &\infrule{E \vdash x:list^l}{E \vdash head(x):l}\\
-\tag{Tail} &\infrule{E \vdash x:list^l}{E \vdash tail(x):list^l}\\
-\tag{newBlock}& \infrule{E \vdash data:T \quad E \vdash previus : T}{E \vdash newBlock(data, previus) :T}\\
-\tag{getLatest}& \infrule{E \vdash chain :T}{E \vdash getLatest(chain):T}\\
-\tag{addToChain}& \infrule{E \vdash block:T \quad E \vdash chain:T}{E \vdash addToChain(block, chain):T}\\
-\tag{getLenght}& \infrule{E \vdash chain:T}{E \vdash getLenght(chain):int}\\
-\tag{isValid}& \infrule{E \vdash chain:T}{E \vdash isValid(chain):bool}
-\end{align*}
+
+%\begin{align*}
+%\tag{Append} &\infrule{E \vdash x:T^l \quad E \vdash y:list^l}{E \vdash append(x,y):list^l}\\
+%\tag{Head} &\infrule{E \vdash x:list^l}{E \vdash head(x):l}\\
+%\tag{Tail} &\infrule{E \vdash x:list^l}{E \vdash tail(x):list^l}\\
+%\tag{newBlock}& \infrule{E \vdash data:T \quad E \vdash previus : T}{E \vdash newBlock(data, previus) :T}\\
+%\tag{getLatest}& \infrule{E \vdash chain :T}{E \vdash getLatest(chain):T}\\
+%\tag{addToChain}& \infrule{E \vdash block:T \quad E \vdash chain:T}{E \vdash addToChain(block, chain):T}\\
+%\tag{getLenght}& \infrule{E \vdash chain:T}{E \vdash getLenght(chain):int}\\
+%\tag{isValid}& \infrule{E \vdash chain:T}{E \vdash isValid(chain):bool}
+%\end{align*}
 
 \begin{align*}
 \tag{Action} & \infrule{E \vdash P \quad P\ra P'}{E\vdash P'}\\
