@@ -60,18 +60,18 @@ The reduction rule of a given conditional process is decided by its boolean expr
 \end{align*}
 
 \begin{align*}
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 = M_2 \ra \top}& \text{if }v_1=v_2 \tag{Equal True}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 = M_2 \ra \bot}& \text{if }v_1\neq v_2 \tag{Equal False}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 \neq M_2 \ra \top}& \text{if }v_1=v_2 \tag{NotEqual True}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 \neq M_2 \ra \bot}& \text{if }v_1\neq v_2 \tag{NotEqual False}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 < M_2 \ra \top}& \text{if }v_1<v_2 \tag{Less True}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 < M_2 \ra \bot}& \text{if }v_1\nless v_2 \tag{Less False}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 > M_2 \ra \top}& \text{if }v_1>v_2 \tag{Greater True}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 > M_2 \ra \bot}& \text{if }v_1\ngtr v_2 \tag{Greater False}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 \leq M_2 \ra \top}& \text{if }v_1\leq v_2 \tag{Less Equal True}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 \leq M_2 \ra \bot}& \text{if }v_1\nleq v_2 \tag{Less Equal False}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 \geq M_2 \ra \top}& \text{if }v_1\geq v_2 \tag{Greater Equal True}\\
-\infrule{M_1 \ra v_1 \quad M_2 \ra v_2}{M_1 \geq M_2 \ra \bot}& \text{if }v_1\ngeq v_2 \tag{Greater Equal False}
+\infrule{}{M_1 = M_2 \ra \top}& \text{if }M_1=M_2 \tag{Equal True}\\
+\infrule{}{M_1 = M_2 \ra \bot}& \text{if }M_1\neq M_2 \tag{Equal False}\\
+\infrule{}{M_1 \neq M_2 \ra \top}& \text{if }M_1=M_2 \tag{NotEqual True}\\
+\infrule{}{M_1 \neq M_2 \ra \bot}& \text{if }M_1\neq M_2 \tag{NotEqual False}\\
+\infrule{}{M_1 < M_2 \ra \top}& \text{if }M_1<M_2 \tag{Less True}\\
+\infrule{}{M_1 < M_2 \ra \bot}& \text{if }M_1\nless M_2 \tag{Less False}\\
+\infrule{}{M_1 > M_2 \ra \top}& \text{if }M_1>m_2 \tag{Greater True}\\
+\infrule{}{M_1 > M_2 \ra \bot}& \text{if }M_1\ngtr M_2 \tag{Greater False}\\
+\infrule{}{M_1 \leq M_2 \ra \top}& \text{if }M_1\leq M_2 \tag{Less Equal True}\\
+\infrule{}{M_1 \leq M_2 \ra \bot}& \text{if }M_1\nleq M_2 \tag{Less Equal False}\\
+\infrule{}{M_1 \geq M_2 \ra \top}& \text{if }M_1\geq M_2 \tag{Greater Equal True}\\
+\infrule{}{M_1 \geq M_2 \ra \bot}& \text{if }M_1\ngeq M_2 \tag{Greater Equal False}
 \end{align*}
 	
 
