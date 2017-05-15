@@ -74,7 +74,7 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 \tag{Nil} &E \vdash \nil\\
 \tag{Input} &\infrule{E\vdash x:ch[S]^\rho\quad E,y:S^\top\vdash P}{E \vdash \inp{x}{y}P}\\
 \tag{Lift} &\infrule{E\vdash x:ch[S]^\bot\quad E \vdash M:S^\rho}{E\vdash \lift{x}{M}}\\
-\tag{Ref-Lift} &\infrule{E\vdash x:ch[S]^\top\quad E \vdash M:0^\rho}{E\vdash \lift{x}{M}}\\
+\tag{LiftRef} &\infrule{E\vdash x:ch[S]^\top\quad E \vdash M:0^\rho}{E\vdash \lift{x}{M}}\\
 \tag{Drop} &\infrule{E \vdash P}{E\vdash \drop{x}}& where \drop{x} \equiv P\\
 \tag{Parallel} &\infrule{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}\\
 \tag{Quote} &\infrule{E \vdash x:T}{E\vdash \quot{P}:T}& where\ \quot{P} \equiv_N x
@@ -86,10 +86,11 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 \tag{And} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \land \phi _2:bool}\\
 \tag{Or} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \lor \phi _2:bool}\\
 \tag{Negation} &\infrule{E\vdash \phi :bool }{E\vdash \neg \phi :bool}\\
-\tag{Operation} &\infrule{E(f)=S\ra S'\quad E(M)=S^\rho}{E(fM)=S'^\rho}\\
-\tag{Tuple} &\infrule{\forall i\ E(M_i) = T_i}{E(M_1,...,M_k)={T_1\times...\times T_k}^\bot}& where\ 1\leq i\leq k\\
-\tag{Int} &E(n)={int^0}^\bot\\
-\tag{String} &E(s)={string^0}^\bot\\
+\tag{Operation} &\infrule{E(f)=U\ra U'\quad E\vdash M:U}{E(fM)=U'}\\
+\tag{Tuple} &\infrule{E(M_j)=S^\bot\quad\forall i\ E(M_i) = U_i}{E(M_1,...,M_j,...,M_k)={U_1\times...\times U_k}^\bot}& where\ 1\leq i\leq k\\
+\tag{TupleRef} &\infrule{\forall i\ E(M_i) = S_i^\top}{E(M_1,...,M_k)={S_1^\top\times...\times S_k^\top}^\top}& where\ 1\leq i\leq k\\
+\tag{Int} &E(n)={int^0}^\top\\
+\tag{String} &E(s)={string^0}^\top\\
 \end{align*}
 
 %\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
