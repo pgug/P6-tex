@@ -51,10 +51,10 @@ The reduction rule of a given conditional process is decided by its boolean expr
 \end{align}
 
 \begin{align*}
-\infrule{\phi_1 \ra \top \quad \phi_2 \ra \top}{\phi_1 \wedge \phi2 \ra \top}\tag{And True}\\
+\infrule{\phi_1 \ra \top \quad \phi_2 \ra \top}{\phi_1 \wedge \phi_2 \ra \top}\tag{And True}\\
 \infrule{\phi_i \ra \top}{\phi_1 \wedge \phi_2 \ra \bot} &i\in \{1,2\}\tag{And False}\\
-\infrule{\phi_i \ra \top}{\phi_1 \vee \phi2 \ra \top} &i\in \{1,2\} \tag{Or True}\\
-\infrule{\phi_1 \ra \bot \quad \phi_2 \ra \bot}{\phi_1 \vee \phi2 \ra \bot} \tag{Or False}\\
+\infrule{\phi_i \ra \top}{\phi_1 \vee \phi_2 \ra \top} &i\in \{1,2\} \tag{Or True}\\
+\infrule{\phi_1 \ra \bot \quad \phi_2 \ra \bot}{\phi_1 \vee \phi_2 \ra \bot} \tag{Or False}\\
 \infrule{\phi \ra \bot}{\neg\phi \ra \top} \tag{Negate True}\\
 \infrule{\phi \ra \top}{\neg\phi \ra \bot} \tag{Negate False}\\
 \end{align*}
@@ -66,7 +66,7 @@ The reduction rule of a given conditional process is decided by its boolean expr
 \infrule{}{M_1 \neq M_2 \ra \bot}& \text{if }M_1\neq M_2 \tag{NotEqual False}\\
 \infrule{}{M_1 < M_2 \ra \top}& \text{if }M_1<M_2 \tag{Less True}\\
 \infrule{}{M_1 < M_2 \ra \bot}& \text{if }M_1\nless M_2 \tag{Less False}\\
-\infrule{}{M_1 > M_2 \ra \top}& \text{if }M_1>m_2 \tag{Greater True}\\
+\infrule{}{M_1 > M_2 \ra \top}& \text{if }M_1>M_2 \tag{Greater True}\\
 \infrule{}{M_1 > M_2 \ra \bot}& \text{if }M_1\ngtr M_2 \tag{Greater False}\\
 \infrule{}{M_1 \leq M_2 \ra \top}& \text{if }M_1\leq M_2 \tag{Less Equal True}\\
 \infrule{}{M_1 \leq M_2 \ra \bot}& \text{if }M_1\nleq M_2 \tag{Less Equal False}\\
