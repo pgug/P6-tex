@@ -5,7 +5,7 @@ We will use rho-calculus to model a system, and later a security type rule will 
 Because rho-calculus is a small calculus, there will not be many reduction rules to look through, and the type rules for the reduction rules will then be few compared a bigger calculus.
 The rho-calculus has a syntax for parallelism which will be useful for modelling client/server systems, where security can be an issue, and security can be a major part of the specification. 
 %Our syntax is similar to the one described in \citep{Meredith2005}, however our lift includes a term $M$ that will be explained in section \ref{sec:addsyntax}.
-The syntax here is as the syntax described in \citep{Meredith2005}, we would like to add some syntax rules on top on this, to make it easier to modelling systems in the calculus.
+The syntax here is as the syntax described in \citep{Meredith2005}, we would like to add some syntax rules on top on this, to make it easier to implement systems in the calculus.
 \begin{align*}
     P  ::= \; &  \nil & \text{nil} \\
       & \mid \inp{x}{y}P & \text{input} \\
@@ -19,7 +19,8 @@ The syntax here is as the syntax described in \citep{Meredith2005}, we would lik
 
 \subsection{Additional Syntax} \label{sec:addsyntax}
 Although it is possible to implement a blockchain protocol in the rho-calculus, it would require convoluted structures to express even simple concepts.
-We choose to extend the rho-calculus to allow easier modeling of those concepts.\\
+We choose to extend the rho-calculus to allow easier modeling of those concepts.
+We can do this with out making the rho-calculus stronger, because rho-calculus is derived from pi-calculus, where such structure already exist. \citep{Meredith2005}\\
 \\
 We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations. We have also added a possibility of lifting a term, instead of a process.
 \begin{align*}
