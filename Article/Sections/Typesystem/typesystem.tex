@@ -3,39 +3,59 @@ In order to determine whether a protocol is secure or not, we need a model that 
 We will construct a type system on top of our existing calculus, that will include security levels.
 That way we can define integrity as a behaviour of our types.
 \begin{align*}
-	S::=&\;T\mid T\ra T\mid bool\\
+	S::=&\;T \tag{Term}\\
+	&\mid T\ra T \tag{Operation}\\
+	&\mid bool \tag{Boolean}\\
 	T::=&\;U^l\\
-	U::=&\;B \tag{Basic}\\
+	U::=&\;B \tag{Basic Term}\\
 	&\mid ch[T] \tag{Channel}\\
 	&\mid T_1 \times...\times T_k \tag{Tuple}\\
-	B::=&\;int 
+	B::=&\;number 
 	\mid string\\
 \end{align*}
 
 \noindent The syntax of our type system is shown above. It is described as follows:
 
 \begin{description}
-\item[Security levels] range over the natural numbers $\mathbb{N}_0$. This ensures an ordering between different security levels, where $0$ is considered the lowest level of security.
+\item[Terms] have a specialization type $U$ and a security level $l$. $l$ ranges over the natural numbers $\mathbb{N}_0$. This ensures an ordering between different security levels, where $0$ is considered the lowest level of security.
+\item[Operations] have an argument type and a resulting type.
+\item[Booleans] are used for the boolean expressions of conditional processes. These are not included as basic terms since they are not terms.
 \item[Channels] allow terms of type $T$ to be sent and received.
 \item[Tuples] have types composed of all the types of the contained terms.
-\item[Basic Types] have a given security level $l$.
+\item[Basic Terms] are terms that do not require specialized type rules.
 \end{description}
 
-\noindent A type judgment $x:T$ denotes that $x$ is well-typed at type $T$.
-These judgments can be collected to form a type environment, denoted $E$, that partially maps terms to types.
+In the rest of this section, we denote the security level of term $T$ as $\level{T}$. This is defined by the following:
+\begin{align*}
+\tag{Level}\level{U^l}\eqdef l
+\end{align*}
+
+\subsection{Type Verification}
+
+\begin{align*}
+\tag{ValidOperation} &\infrule{\valid{T'}}{\valid{T\ra T'}}\\
+\tag{ValidBoolean} &\valid{bool}\\
+\tag{ValidBasicTerm} &\valid{B^l}\\
+\tag{ValidChannel} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{ch[U^l]^{l'}}}\\
+\tag{ValidTuple} &\infrule{\forall i\ \valid{T_i}\quad \forall i\ \level{T_i}\leq l}{\valid{{T_1 \times...\times T_k}^l}}& where\ 1\leq i\leq k
+\end{align*}
+
+\subsection{Well-typing}
+A type judgment $x:T$ denotes that $x$ is well-typed at type $T$.
+These judgments can be collected to form a type environment, denoted $E$, that partially maps names to types.
 \begin{align*}
 E: \mathbf{Names} \rightharpoonup \mathbf{Types}
 \end{align*}
 
 \noindent $E\vdash x:T$ denotes that $x$ is well-typed at type $T$ in context $E$.
-If $x$ is not given a type, then it is simply well-typed. $E(x)$ denotes the actual type of $x$, while $E\vdash x:T$ 
+$E\vdash x$, where no type is provided, denotes that $x$ is simply well-typed. $E(x)$ denotes the actual type of $x$.
 
 \begin{align*}
 \tag{Lookup}\label{rule:lookup} &\infrule{E(M)=S\quad\valid{S}}{E\vdash M:S}
 \end{align*}
 
-The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $T$, then $x$ is also well-typed at type $T$. 
-In order to rule if $x$ is well-typed at other types, we need to introduce subtyping, denoted by the relation $\leq$. The ordering of the security levels apply to the subtype relation, so that $l$ is a subtype of $l'$ if $l\leq l'$
+The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $S$ and $S$ is a valid type, then $x$ is well-typed at type $S$. The validation of $S$ ensures that well-typed expressions can not have invalid types introduced from the type environment.
+In order to rule if $x$ is well-typed at other types, we need to introduce subtyping. The subtyping $S\leq S'$ denotes that $S$ is a subtype of $S'$. 
 
 %\begin{align*}
 %\tag{LessOrEqual}\label{rule:lessorequal} &\infrule{S=S'}{S\leq S'}
@@ -50,18 +70,14 @@ In order to rule if $x$ is well-typed at other types, we need to introduce subty
 %The \ref{rule:transitive} rule gives subtyping a transitive property.
 
 \begin{align*}
-\tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash M:T\quad T\leq T'}{E\vdash M:T'}
-\end{align*}
-
-The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-typed at $T$ and $T$ is a subtype of $T'$, then $x$ is also well-typed at type $T'$. This is what allows a subtyping to maintain well-typing.
-
-\begin{align*}
 \tag{Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
 \end{align*}
 
 \begin{align*}
-\tag{Level} &\level{U^l}=l
+\tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash M:T\quad T\leq T'}{E\vdash M:T'}
 \end{align*}
+
+The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-typed at $T$ and $T$ is a subtype of $T'$, then $x$ is also well-typed at type $T'$. This is what allows a subtyping to maintain well-typing.
 
 %\begin{align*}
 %\tag{BasicSubBasic} &\infrule{l\leq l'}{B^l\leq B^{l'}}\\
@@ -89,18 +105,12 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 \tag{And} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \land \phi _2:bool}\\
 \tag{Or} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \lor \phi _2:bool}\\
 \tag{Negation} &\infrule{E\vdash \phi :bool }{E\vdash \neg \phi :bool}\\
+\tag{True} &E\vdash\top:bool\\
+\tag{False} &E\vdash\bot:bool\\
 \tag{Operation} &\infrule{E\vdash f:T\ra T'\quad E\vdash M:T}{E\vdash fM:T'}\\
 \tag{Tuple} &\infrule{\level{T_i}=l\quad\forall i\ \level{T_i}\leq l\quad\forall i\ E\vdash M_i:T_i}{E\vdash (M_1,...,M_k):{T_1\times...\times T_k}^l}& where\ 1\leq i\leq k\\
-\tag{Int} &E\vdash n:{int^0}\\
+\tag{Int} &E\vdash n:{number^0}\\
 \tag{String} &E\vdash s:{string^0}\\
-\end{align*}
-
-\begin{align*}
-\tag{Valid Operation} &\infrule{\valid{T'}}{\valid{T\ra T'}}\\
-\tag{Valid Boolean} &\valid{bool}\\
-\tag{Valid Basic} &\valid{B^l}\\
-\tag{Valid Channel} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{ch[U^l]^{l'}}}\\
-\tag{Valid Tuple} &\infrule{\forall i\ \valid{T_i}\quad \forall i\ \level{T_i}\leq l}{\valid{{T_1 \times...\times T_k}^l}}& where\ 1\leq i\leq k
 \end{align*}
 
 %\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
