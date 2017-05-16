@@ -3,17 +3,12 @@ In order to determine whether a protocol is secure or not, we need a model that 
 We will construct a type system on top of our existing calculus, that will include security levels.
 That way we can define integrity as a behaviour of our types.
 \begin{align*}
-	T::=&\;U \tag{Term}\\
-	&\mid S\ra S \tag{Operation}\\
-	&\mid bool \tag{Boolean Expression}\\
-	U::=&\;S^\rho\\
-	S::=&\;l \tag{Security Level}\\
-	&\mid ch[S] \tag{Channel}\\
-	&\mid U_1 \times...\times U_n \tag{Tuple}\\
-	&\mid B^l \tag{Basic}\\
+	T::=&\;U^l\\
+	U::=&\;B \tag{Basic}\\
+	&\mid ch[T] \tag{Channel}\\
+	&\mid T_1 \times...\times T_n \tag{Tuple}\\
 	B::=&\;int 
 	\mid string\\
-	\rho::=&\;\top\mid\bot\\
 \end{align*}
 
 \noindent The syntax of our type system is shown above. It is described as follows:
@@ -28,7 +23,7 @@ That way we can define integrity as a behaviour of our types.
 \noindent A type judgment $x:T$ denotes that $x$ is well-typed at type $T$.
 These judgments can be collected to form a type environment, denoted $E$, that partially maps terms to types.
 \begin{align*}
-E: \mathbf{Terms} \rightharpoonup \mathbf{Types}
+E: \mathbf{Names} \rightharpoonup \mathbf{Types}
 \end{align*}
 
 \noindent $E\vdash x:T$ denotes that $x$ is well-typed at type $T$ in context $E$.
