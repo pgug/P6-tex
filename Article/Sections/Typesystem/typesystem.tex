@@ -131,6 +131,8 @@ If \ensuremath{E \vdash P} and \ensuremath{P \ra P'} then \ensuremath{E \vdash P
 \infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}}
 \end{align*}
 
+Lemma Substitution
+If \ensuremath{E,x:T \vdash P} and \ensuremath{E_2 \vdash M:T} then \ensuremath{E, E_2 \vdash P\{M/x \}}
 
 \textbf{Structural Congruent}
 \begin{align*}
@@ -139,12 +141,20 @@ If \ensuremath{E \vdash P} and \ensuremath{P \ra P'} then \ensuremath{E \vdash P
 
 If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
 
-Lemma 1
+Lemma Equivalent
 If \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q}
 
-By applying lemma 1 to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
+By applying lemma equivalent to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
+
+\subsection{Well typed}
+If \ensuremath{E\vdash P} then \ensuremath{P\nrightarrow wrong}
+
+If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong} and if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q \nrightarrow wrong}. This makes it so that that \ensuremath{E \vdash P \para Q \nrightarrow wrong}
 
 
+
+
+%\ensuremath{\frac{P \ra wrong}{P \para Q \ra wrong}}
 
 \begin{align*}
 \tag{Action} & \infrule{E \vdash P \quad P\ra P'}{E\vdash P'}\\
