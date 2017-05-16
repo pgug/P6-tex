@@ -56,7 +56,11 @@ In order to rule if $x$ is well-typed at other types, we need to introduce subty
 The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-typed at $T$ and $T$ is a subtype of $T'$, then $x$ is also well-typed at type $T'$. This is what allows a subtyping to maintain well-typing.
 
 \begin{align*}
-\tag{Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}\\
+\tag{Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
+\end{align*}
+
+\begin{align*}
+\tag{Level} &\level{U^l}=l
 \end{align*}
 
 %\begin{align*}
@@ -86,17 +90,17 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 \tag{Or} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \lor \phi _2:bool}\\
 \tag{Negation} &\infrule{E\vdash \phi :bool }{E\vdash \neg \phi :bool}\\
 \tag{Operation} &\infrule{E\vdash f:T\ra T'\quad E\vdash M:T}{E\vdash fM:T'}\\
-\tag{Tuple} &\infrule{\forall i\ E\vdash M_i:T_i}{E\vdash (M_1,...,M_k):{T_1\times...\times T_k}}& where\ 1\leq i\leq k\\
+\tag{Tuple} &\infrule{\level{T_i}=l\quad\forall i\ \level{T_i}\leq l\quad\forall i\ E\vdash M_i:T_i}{E\vdash (M_1,...,M_k):{T_1\times...\times T_k}^l}& where\ 1\leq i\leq k\\
 \tag{Int} &E\vdash n:{int^0}\\
 \tag{String} &E\vdash s:{string^0}\\
 \end{align*}
 
 \begin{align*}
-\tag{Valid Operation} &\infrule{\valid{T}\quad\valid{T'}}{\valid{T\ra T'}}\\
+\tag{Valid Operation} &\infrule{\valid{T'}}{\valid{T\ra T'}}\\
 \tag{Valid Boolean} &\valid{bool}\\
 \tag{Valid Basic} &\valid{B^l}\\
 \tag{Valid Channel} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{ch[U^l]^{l'}}}\\
-\tag{Valid Tuple} &\infrule{\forall i\ \valid{T_i}}{\valid{T_1 \times...\times T_k}}& where\ 1\leq i\leq k\\\\
+\tag{Valid Tuple} &\infrule{\forall i\ \valid{T_i}\quad \forall i\ \level{T_i}\leq l}{\valid{{T_1 \times...\times T_k}^l}}& where\ 1\leq i\leq k
 \end{align*}
 
 %\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
