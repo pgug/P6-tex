@@ -3,6 +3,7 @@ In order to determine whether a protocol is secure or not, we need a model that 
 We will construct a type system on top of our existing calculus, that will include security levels.
 That way we can define integrity as a behaviour of our types.
 \begin{align*}
+	S::=&\;T\mid T\ra T\mid bool\\
 	T::=&\;U^l\\
 	U::=&\;B \tag{Basic}\\
 	&\mid ch[T] \tag{Channel}\\
@@ -15,7 +16,7 @@ That way we can define integrity as a behaviour of our types.
 
 \begin{description}
 \item[Security levels] range over the natural numbers $\mathbb{N}_0$. This ensures an ordering between different security levels, where $0$ is considered the lowest level of security.
-\item[Channels] allow terms of type $S$ to be sent and received.
+\item[Channels] allow terms of type $T$ to be sent and received.
 \item[Tuples] have types composed of all the types of the contained terms.
 \item[Basic Types] have a given security level $l$.
 \end{description}
@@ -36,40 +37,43 @@ If $x$ is not given a type, then it is simply well-typed. $E(x)$ denotes the act
 The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $T$, then $x$ is also well-typed at type $T$. 
 In order to rule if $x$ is well-typed at other types, we need to introduce subtyping, denoted by the relation $\leq$. The ordering of the security levels apply to the subtype relation, so that $l$ is a subtype of $l'$ if $l\leq l'$
 
+%\begin{align*}
+%\tag{LessOrEqual}\label{rule:lessorequal} &\infrule{S=S'}{S\leq S'}
+%\end{align*}
+
+%The \ref{rule:lessorequal} rule states that equal types are also subtypes of each other.
+
+%\begin{align*}
+%\tag{Transitive}\label{rule:transitive} &\infrule{S\leq S''\quad S''\leq S'}{S\leq S'}
+%\end{align*}
+
+%The \ref{rule:transitive} rule gives subtyping a transitive property.
+
 \begin{align*}
-\tag{LessOrEqual}\label{rule:lessorequal} &\infrule{S=S'}{S\leq S'}
-\end{align*}
-
-The \ref{rule:lessorequal} rule states that equal types are also subtypes of each other.
-
-\begin{align*}
-\tag{Transitive}\label{rule:transitive} &\infrule{S\leq S''\quad S''\leq S'}{S\leq S'}
-\end{align*}
-
-The \ref{rule:transitive} rule gives subtyping a transitive property.
-
-\begin{align*}
-\tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash M:S^\rho\quad S\leq S'}{E\vdash M:S'^\rho}
+\tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash M:T\quad T\leq T'}{E\vdash M:T'}
 \end{align*}
 
 The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-typed at $T$ and $T$ is a subtype of $T'$, then $x$ is also well-typed at type $T'$. This is what allows a subtyping to maintain well-typing.
 
 \begin{align*}
-\tag{BasicSubBasic} &\infrule{l\leq l'}{B^l\leq B^{l'}}\\
-\tag{TupleSubTuple} &\infrule{S_i\leq S'\quad U_i=S_i^\rho}{U_1\times...\times U_i\times...\times U_n\leq U_1\times...\times S'^\rho\times...\times U_n}\\
-\tag{Level-level} &\level{l}=l\\
-\tag{Channel-level} &\level{ch[S]} = \level{S}\\
-\tag{Tuple-level} &\level{U_1\times...\times U_n}=\max_{i=1}^{n}{\level{S_i}}& where\ S_i^\rho=U_i\\
-\tag{Basic-level} &\level{B^l}=l\\
-\tag{TypeSubLevel} &S\leq \level{S}\\
-\tag{TermAsChannel} &\infrule{E(M)=S^\rho\quad \level{S}=l}{E\vdash M:ch[l]^\rho}
+\tag{Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}\\
 \end{align*}
+
+%\begin{align*}
+%\tag{BasicSubBasic} &\infrule{l\leq l'}{B^l\leq B^{l'}}\\
+%\tag{TupleSubTuple} &\infrule{S_i\leq S'\quad %U_i=S_i^\rho}{U_1\times...\times U_i\times...\times U_n\leq %U_1\times...\times S'^\rho\times...\times U_n}\\
+%\tag{Level-level} &\level{l}=l\\
+%\tag{Channel-level} &\level{ch[S]} = \level{S}\\
+%\tag{Tuple-level} &\level{U_1\times...\times %U_n}=\max_{i=1}^{n}{\level{S_i}}& where\ S_i^\rho=U_i\\
+%\tag{Basic-level} &\level{B^l}=l\\
+%\tag{TypeSubLevel} &S\leq \level{S}\\
+%\tag{TermAsChannel} &\infrule{E(M)=S^\rho\quad \level{S}=l}{E\vdash %M:ch[l]^\rho}
+%\end{align*}
 
 \begin{align*}
 \tag{Nil} &E \vdash \nil\\
-\tag{Input} &\infrule{E\vdash x:ch[S]^\rho\quad E,y:S^\top\vdash P}{E \vdash \inp{x}{y}P}\\
-\tag{Lift} &\infrule{E\vdash x:ch[S]^\bot\quad E \vdash M:S^\rho}{E\vdash \lift{x}{M}}\\
-\tag{LiftRef} &\infrule{E\vdash x:ch[S]^\top\quad E \vdash M:0^\rho}{E\vdash \lift{x}{M}}\\
+\tag{Input} &\infrule{E\vdash x:ch[T]^l\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}\\
+\tag{Lift} &\infrule{E\vdash x:ch[T]^l\quad E \vdash M:T}{E\vdash \lift{x}{M}}\\
 \tag{Drop} &\infrule{E \vdash P}{E\vdash \drop{x}}& where \drop{x} \equiv P\\
 \tag{Parallel} &\infrule{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}\\
 \tag{Quote} &\infrule{E \vdash x:T}{E\vdash \quot{P}:T}& where\ \quot{P} \equiv_N x
@@ -77,15 +81,14 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 
 \begin{align*}
 \tag{Condition} &\infrule{E\vdash \phi:bool\quad E\vdash P}{E \vdash [\phi] P}\\
-\tag{Relation} &\infrule{E\vdash M_1:S^\rho \quad E\vdash M_2:S^{\rho'}}{E\vdash M_1 \gamma\ M_2:bool}\\
+\tag{Relation} &\infrule{E\vdash M_1:U^l\quad E\vdash M_2:U^{l'}}{E\vdash M_1 \gamma\ M_2:bool}\\
 \tag{And} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \land \phi _2:bool}\\
 \tag{Or} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \lor \phi _2:bool}\\
 \tag{Negation} &\infrule{E\vdash \phi :bool }{E\vdash \neg \phi :bool}\\
-\tag{Operation} &\infrule{E(f)=U\ra U'\quad E\vdash M:U}{E(fM)=U'}\\
-\tag{Tuple} &\infrule{E(M_j)=S^\bot\quad\forall i\ E(M_i) = U_i}{E(M_1,...,M_j,...,M_k)={U_1\times...\times U_k}^\bot}& where\ 1\leq i\leq k\\
-\tag{TupleRef} &\infrule{\forall i\ E(M_i) = S_i^\top}{E(M_1,...,M_k)={S_1^\top\times...\times S_k^\top}^\top}& where\ 1\leq i\leq k\\
-\tag{Int} &E(n)={int^0}^\top\\
-\tag{String} &E(s)={string^0}^\top\\
+\tag{Operation} &\infrule{E\vdash f:T\ra T'\quad E\vdash M:T}{E\vdash fM:T'}\\
+\tag{Tuple} &\infrule{\forall i\ E\vdash M_i:T_i}{E\vdash (M_1,...,M_k):{T_1\times...\times T_k}}& where\ 1\leq i\leq k\\
+\tag{Int} &E\vdash n:{int^0}\\
+\tag{String} &E\vdash s:{string^0}\\
 \end{align*}
 
 %\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
