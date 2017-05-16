@@ -7,7 +7,7 @@ That way we can define integrity as a behaviour of our types.
 	T::=&\;U^l\\
 	U::=&\;B \tag{Basic}\\
 	&\mid ch[T] \tag{Channel}\\
-	&\mid T_1 \times...\times T_n \tag{Tuple}\\
+	&\mid T_1 \times...\times T_k \tag{Tuple}\\
 	B::=&\;int 
 	\mid string\\
 \end{align*}
@@ -31,7 +31,7 @@ E: \mathbf{Names} \rightharpoonup \mathbf{Types}
 If $x$ is not given a type, then it is simply well-typed. $E(x)$ denotes the actual type of $x$, while $E\vdash x:T$ 
 
 \begin{align*}
-\tag{Lookup}\label{rule:lookup} &\infrule{E(M)=T}{E\vdash M:T}
+\tag{Lookup}\label{rule:lookup} &\infrule{E(M)=S\quad\valid{S}}{E\vdash M:S}
 \end{align*}
 
 The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $T$, then $x$ is also well-typed at type $T$. 
@@ -89,6 +89,14 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 \tag{Tuple} &\infrule{\forall i\ E\vdash M_i:T_i}{E\vdash (M_1,...,M_k):{T_1\times...\times T_k}}& where\ 1\leq i\leq k\\
 \tag{Int} &E\vdash n:{int^0}\\
 \tag{String} &E\vdash s:{string^0}\\
+\end{align*}
+
+\begin{align*}
+\tag{Valid Operation} &\infrule{\valid{T}\quad\valid{T'}}{\valid{T\ra T'}}\\
+\tag{Valid Boolean} &\valid{bool}\\
+\tag{Valid Basic} &\valid{B^l}\\
+\tag{Valid Channel} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{ch[U^l]^{l'}}}\\
+\tag{Valid Tuple} &\infrule{\forall i\ \valid{T_i}}{\valid{T_1 \times...\times T_k}}& where\ 1\leq i\leq k\\\\
 \end{align*}
 
 %\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
