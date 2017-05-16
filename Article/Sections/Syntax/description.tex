@@ -1,19 +1,31 @@
-The syntax of the rho-calculus is described as follows.
+The syntax of the rho-calculus is described as follows.\\
 
-\subsubsection{Processes}
-\begin{description}
-\item[Nil] Does nothing.
-\item[Input] Receives a term lifted on channel \textit{x} and proceeds as process \textit{P} with the term replacing \textit{y}.
-\item[Lift] Lifts a term \textit{M} on channel \textit{x}.
-\item[Drop] Drops a name \textit{x}, so it becomes a process, and proceeds as the resulting process.
-\item[Parallel] Proceeds as both process \textit{P} and process \textit{Q} in parallel.
-\end{description}
+%\subsubsection{Processes}
+%\begin{description}
+%\item[Nil] Does nothing.
+%\item[Input] Receives a term lifted on channel \textit{x} and proceeds as process \textit{P} with the term replacing \textit{y}.
+%\item[Lift] Lifts a term \textit{M} on channel \textit{x}.
+%\item[Drop] Drops a name \textit{x}, so it becomes a process, and proceeds as the resulting process.
+%\item[Parallel] Proceeds as both process \textit{P} and process \textit{Q} in parallel.
+%\end{description}
 
-
-\subsubsection{Names}
-\begin{description}
-\item[Quote] Quotes a process \textit{P}, so it becomes a name.
-\end{description}
+%\subsubsection{Names}
+%\begin{description}
+%\item[Quote] Quotes a process \textit{P}, so it becomes a name.
+%\end{description}
 
 %\subsubsection{Boolean Arithmetic}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HERE IT IS WHIT A NEW IMPROVED TASTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\textbf{Processes}\\ % Yep I know it was a subsubsection, but LaTeX doesn't understand the hint that I want a linebreak.
+The \textbf{Nil} process provides the solo atom every other process arise from. It relates to how 0 is the number from which all natural numbers are constructed from. The \textbf{Nil} process is a process that does nothing.\\
+The \textbf{Input} operator is an operator that blocks the process until it receives an input.\\
+\textbf{Lift} the lift operator allows a process to become a name. Since the language have a clear distension between names and processes therefor we need operations to convert between the two.\\
+\textbf{Drop}, since you lift a process to make it a name, it is also necessarily to be able to convert the name to a process again. The \textbf{Drop} operator provides that functionality. \\
+\textbf{Parallel} is a usual parallel composition, it executes two processes concurrently.\\
+
+\textbf{Names}\\ % This shit is invisible until something is under it???
+\textbf{Quote} Quotes a process \textit{P}, so it becomes a name. %% NOT READ AT ALL
