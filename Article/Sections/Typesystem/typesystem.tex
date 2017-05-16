@@ -104,6 +104,36 @@ The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-t
 %\tag{isValid}& \infrule{E \vdash chain:T}{E \vdash isValid(chain):bool}
 %\end{align*}
 
+\subsection{Subject Reduction}
+If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
+We have to show that \ensuremath{\frac{}{P \ra P'}} holds for the rules, parallel, communication and structural congruent, for it to hold.
+
+\textbf{Parallel}
+\begin{align*}
+\infrule{P \ra P'}{P \para Q \ra P' \para Q}
+\end{align*}
+If \ensuremath{E \vdash P} and \ensuremath{P \ra P'} then \ensuremath{E \vdash P'} We want to show that if \ensuremath{E \vdash P \para Q} then \ensuremath{E \vdash P' \para Q}. The type rule for parallel say \ensuremath{\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}} so if \ensuremath{E \vdash P'} then \ensuremath{\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}}
+
+\textbf{Communication}
+\begin{align*}
+\infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}}
+\end{align*}
+
+
+\textbf{Structural Congruent}
+\begin{align*}
+\infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}
+\end{align*}
+
+If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
+
+Lemma 1
+If \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q}
+
+By applying lemma 1 to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
+
+
+
 \begin{align*}
 \tag{Action} & \infrule{E \vdash P \quad P\ra P'}{E\vdash P'}\\
 \tag{Not Wrong}& \infrule{E \vdash P}{P \nrightarrow wrong}\\
