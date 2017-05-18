@@ -1,30 +1,30 @@
 \subsection{Equivalence Relations}
-The structural congruence of processes is denoted by the relation $\equiv$.
+The structural congruence of processes, denoted by the relation $\equiv$, allows us to express if two processes behave the same. It is defined by the following rules.
 
 \begin{align*}
-	P\para 0 \equiv\ &P \equiv 0\para P\\
-    P\para Q &\equiv Q\para P\\
-    P\para (Q\para R)&\equiv (P\para Q)\para R
+	\tag{ParaIdentity}P&\equiv P\para 0\\
+    \tag{ParaCommutative}P\para Q &\equiv Q\para P\\
+    \tag{ParaAssociative}P\para (Q\para R)&\equiv (P\para Q)\para R
 \end{align*}
 
 
 \FloatBarrier
 
-The equivalence of names is denoted by the relation $\equiv _N$
+The equivalence of names, denoted by the relation $\equiv _N$, allows us to express if two names are the same. It is defined by the following rules. 
 
 \begin{align}
-	& \infrule{}{\quot{\drop{x}}\equiv _N x} \tag{Drop and Quote}
+	\tag{DropAndQuote}\label{rule:DropAndQuote}\infrule{}{\quot{\drop{x}}\equiv _N x}
 \end{align}
 
 \noindent
-The rule states that if $x$ is dropped, and then quoted, then it should stay name equivalent with $x$.
+The \ref{rule:DropAndQuote} rule states, that if $x$ is dropped, and then quoted, then it should stay name equivalent with $x$.
 
 \begin{align}
-	& \infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}} \tag{Structural equivalence}
+	\tag{StructuralEquivalence}\label{rule:StructuralEquivalence}\infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
 \end{align}
 
 \noindent
-The rule states, that if $P$ and $Q$ are structural congruent with each other, then the quoted $P$ and $Q$ are name equivalent with each other.
+The \ref{rule:StructuralEquivalence} rule states, that if $P$ and $Q$ are structural congruent with each other, then the quoted $P$ and $Q$ are name equivalent with each other.
 
 \FloatBarrier
 
