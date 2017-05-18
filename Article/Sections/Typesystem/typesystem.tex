@@ -235,7 +235,7 @@ Lemma Substitution
 If \ensuremath{E,x:T \vdash P} and \ensuremath{E_2 \vdash M:T} then \ensuremath{E, E_2 \vdash P\{M/x \}}
 
 \begin{align*}
-    \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q} \tab{Structural Congruent}
+    \infrule{P \equiv P' \quad P' \ra Q' \quad Q' \equiv Q}{P \ra Q} \tag{Structural Congruent}
 \end{align*}
 
 If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
