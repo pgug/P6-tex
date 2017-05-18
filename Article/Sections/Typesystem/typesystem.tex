@@ -1,4 +1,4 @@
-\section{Type Security}\label{ch:type-security}
+\section{Type System}\label{ch:type-security}
 In order to determine whether a protocol is secure or not, we need a model that can express security.
 We will construct a type system on top of our existing calculus, that will include security levels.
 These levels allow us to isolate the client, by giving it higher security levels than the environment surrounding it.
@@ -213,6 +213,7 @@ This ensures that any argument used with an operation follows the type definitio
 %\tag{getLenght}& \infrule{E \vdash chain:T}{E \vdash getLenght(chain):int}\\
 %\tag{isValid}& \infrule{E \vdash chain:T}{E \vdash isValid(chain):bool}
 %\end{align*}
+\section{Type Security}
 
 \subsection{Subject Reduction}
 If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
