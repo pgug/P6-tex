@@ -80,7 +80,7 @@ Else if the previous hash of the last received block matches the hash of the las
 Else if the length of the received blockchain is one, a QueryAll message is sent.
 
 \begin{align*}
-	P_2 &=\If{\mop{isValid}(c) \land \mop{getLength}(c) > \mop{getLength}(lc)}{\\
+	P_2 &=\If{\mop{isValid}(c) > 0 \land \mop{getLength}(c) > \mop{getLength}(lc)}{\\
 	&\quad(b\lift{}{c} \para \lift{bu}{\mop{getLatest}(c)})}{\lift{b}{lc}}
 \end{align*}
 
