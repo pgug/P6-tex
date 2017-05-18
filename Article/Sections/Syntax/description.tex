@@ -29,3 +29,6 @@ The \textbf{Input} operator is an operator that blocks the process until it rece
 
 \textbf{Names}\\ % This shit is invisible until something is under it???
 \textbf{Quote} Quotes a process \textit{P}, so it becomes a name. %% NOT READ AT ALL
+\\\\
+\textbf{Names and Process}\\
+The relationship between names and process is a little tricky, because a name can be a dropped process and a process can be a quoted name. In \citep{Meredith2005} it is described how we build names out of the process $\nil$ by quoting it,$\quot{\nil}$ and to make more they send the quoted $\nil$ on its own channel and that can be dropped$\drop{\lift{\quot{\nil}}{\quot{\nil}}}$, because it is now a process. The new process can then be used as an channel and its message, and then again be dropped to make a new name. Even so they also describe in \citep{Meredith2005} how a $\nil$ parallel with $\nil$ can be dropped and that is becoming a name $\drop{\nil \para \nil}$
