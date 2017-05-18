@@ -23,20 +23,25 @@ We choose to extend the rho-calculus to allow easier modelling of those concepts
 We can do this with out making the rho-calculus stronger, because in the simple pi-calculus you can code a calculus with terms\citep{Baldamus2005}, and the simple pi-calculus can be coded in the rho-calculus\citep{Meredith2005}.\\
 \\
 We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations. We have also added a possibility of lifting a term, instead of a process.
-\begin{align*}
-M::=\; & n &\text{number}\\
- &\mid s &\text{string}\\
- &\mid (M_1,...,M_k)\quad\quad\quad \text{for all k $\geq$ 2} &\text{tuple}\\
- &\mid fM &\text{operation}\\
- &\mid x &\text{name}\\ 
-P::=\;& \lift{x}{M}&\text{lift}
- \end{align*}
+
 In addition to terms and processes we need to use conditional processes. This requires boolean expressions, denoted by \ensuremath{\phi}.
 \begin{align*}
-P::=& \ [\phi] P\\
-\phi ::=& \ M_1\gamma M_2 \mid \phi\land\phi \mid \phi\lor\phi \mid \neg\phi \mid \top \mid \bot\\
-\gamma ::=& \ = \mid \neq \mid < \mid > \mid \leq \mid \geq
+P  ::= \; &  \nil & \text{nil} \\
+      & \mid \inp{x}{y}P & \text{input} \\
+	  & \mid \lift{x}{M}&\text{lift}\\
+      & \mid \drop{x} & \text{drop} \\
+      & \mid P \para Q & \text{parallel} \\
+      & \mid [\phi] P\\[3mm]
+    x,y ::= \; & \quot{P} & \text{quote}\\[3mm]
+M::=\; & n &\text{number}\\
+ 	  &\mid s &\text{string}\\
+ 	  &\mid (M_1,...,M_k)\quad\quad\quad \text{for all k $\geq$ 2} &\text{tuple}\\
+ 	  &\mid fM &\text{operation}\\
+ 	  &\mid x &\text{name}\\[3mm]
+\phi ::=& \mid M_1\gamma M_2 \mid \phi\land\phi \mid \phi\lor\phi \mid \neg\phi \mid \top \mid \bot\\[3mm]
+\gamma ::=& \mid = \mid \neq \mid < \mid > \mid \leq \mid \geq
 \end{align*}
+
 To ease the writing of conditional branching, we allow an if-then-else syntax.
 \begin{align*}
 	\If{\phi}{P}{Q} \eqdef [\phi].P \mid [\neg \phi].Q
