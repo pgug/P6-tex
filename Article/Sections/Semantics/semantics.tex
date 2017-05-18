@@ -40,6 +40,7 @@ These are similar to the reduction rules of the rho-calculus as described in \ci
 	\tag{Equivalence} \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}&
 \end{align}
 
+\textbf{Name substitution} \ensuremath{P\{M/y\}} means that in the process \ensuremath{P} every place where \ensuremath{y} occur it is substituted with \ensuremath{M}. This is used for the Comm rule when \ensuremath{M} is send over a channel, and the receiver must have a name for what it is going to receive.
 \FloatBarrier
 
 \subsubsection{Rules for conditional processes}
