@@ -170,7 +170,9 @@ The \ref{rule:Condition} rule states that, given context $E$, if $\phi$ is well-
 \begin{align*}
 \tag{And}\label{rule:And} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \land \phi _2:bool}\\
 \tag{Or}\label{rule:Or} &\infrule{E\vdash \phi _1:bool \quad E\vdash \phi _2:bool}{E\vdash \phi _1 \lor \phi _2:bool}\\
-\tag{Negation}\label{rule:Negation} &\infrule{E\vdash \phi :bool }{E\vdash \neg \phi :bool}\\
+\tag{Negation}\label{rule:Negation} &\infrule{E\vdash \phi :bool }{E\vdash \neg \phi :bool}
+\end{align*}
+\begin{align*}
 \tag{True}\label{rule:True} &E\vdash\top:bool\\
 \tag{False}\label{rule:False} &E\vdash\bot:bool
 \end{align*}
