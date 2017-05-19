@@ -2,7 +2,7 @@
 The structural congruence of processes, denoted by the relation $\equiv$, allows us to express if two processes behave the same. It is defined by the following rules.
 
 \begin{align*}
-	\tag{ParaIdentity}P&\equiv P\para 0\\
+    \tag{ParaIdentity}P&\equiv P\para 0\\
     \tag{ParaCommutative}P\para Q &\equiv Q\para P\\
     \tag{ParaAssociative}P\para (Q\para R)&\equiv (P\para Q)\para R
 \end{align*}
@@ -13,14 +13,14 @@ The structural congruence of processes, denoted by the relation $\equiv$, allows
 The equivalence of names, denoted by the relation $\equiv _N$, allows us to express if two names are the same. It is defined by the following rules. 
 
 \begin{align}
-	\tag{DropAndQuote}\label{rule:DropAndQuote}\infrule{}{\quot{\drop{x}}\equiv _N x}
+    \tag{DropAndQuote}\label{rule:DropAndQuote}\infrule{}{\quot{\drop{x}}\equiv _N x}
 \end{align}
 
 \noindent
 The \ref{rule:DropAndQuote} rule states, that if $x$ is dropped, and then quoted, then it should stay name equivalent with $x$.
 
 \begin{align}
-	\tag{StructuralEquivalence}\label{rule:StructuralEquivalence}\infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
+    \tag{StructuralEquivalence}\label{rule:StructuralEquivalence}\infrule{P\equiv Q}{\quot{P} \equiv _N \quot{Q}}
 \end{align}
 
 \noindent
@@ -37,9 +37,9 @@ We make use of the following reduction rules.
 These are similar to the reduction rules of the rho-calculus as described in \citep{Meredith2005}. The only difference is the communication rule reflecting the syntax changes.
 
 \begin{align}
-	\tag{Comm} \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}&\\
-	\tag{Parallel} \infrule{P\ra P'}{P\para Q\ra P'\para Q}&\\
-	\tag{Equivalence} \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}&
+    \tag{Comm} \infrule{x_0 \equiv_N x_1}{\lift{x_0}{M}\para\inp{x_1}{y}P\ra P\{M/y\}}&\\
+        \tag{Parallel} \infrule{P\ra P'}{P\para Q\ra P'\para Q}&\\
+        \tag{Equivalence} \infrule{P\equiv P'\quad P'\ra Q'\quad Q'\equiv Q}{P\ra Q}&
 \end{align}
 
 \FloatBarrier
@@ -48,36 +48,36 @@ These are similar to the reduction rules of the rho-calculus as described in \ci
 The reduction rule of a given conditional process is decided by its boolean expression. These are evaluated using common boolean arithmetics.
 
 \begin{align}
-	& \infrule{\phi \ra \top}{[\phi]P\ra P} \tag{True}\\
-	& \infrule{\phi \ra \bot}{[\phi]P\ra \nil} \tag{False}
+    & \infrule{\phi \ra \top}{[\phi]P\ra P} \tag{True}\\
+        & \infrule{\phi \ra \bot}{[\phi]P\ra \nil} \tag{False}
 \end{align}
 
 The rules for boolean logic, and, or and negation, is shown here, under what condition it is evaluated to true (\ensuremath{\top}) and false (\ensuremath{\bot}).
 \begin{align*}
-\infrule{\phi_1 \ra \top \quad \phi_2 \ra \top}{\phi_1 \wedge \phi_2 \ra \top}\tag{And True}\\
-\infrule{\phi_i \ra \top}{\phi_1 \wedge \phi_2 \ra \bot} &i\in \{1,2\}\tag{And False}\\
-\infrule{\phi_i \ra \top}{\phi_1 \vee \phi_2 \ra \top} &i\in \{1,2\} \tag{Or True}\\
-\infrule{\phi_1 \ra \bot \quad \phi_2 \ra \bot}{\phi_1 \vee \phi_2 \ra \bot} \tag{Or False}\\
-\infrule{\phi \ra \bot}{\neg\phi \ra \top} \tag{Negate True}\\
-\infrule{\phi \ra \top}{\neg\phi \ra \bot} \tag{Negate False}\\
+    \infrule{\phi_1 \ra \top \quad \phi_2 \ra \top}{\phi_1 \wedge \phi_2 \ra \top}\tag{And True}\\
+    \infrule{\phi_i \ra \top}{\phi_1 \wedge \phi_2 \ra \bot} &i\in \{1,2\}\tag{And False}\\
+    \infrule{\phi_i \ra \top}{\phi_1 \vee \phi_2 \ra \top} &i\in \{1,2\} \tag{Or True}\\
+    \infrule{\phi_1 \ra \bot \quad \phi_2 \ra \bot}{\phi_1 \vee \phi_2 \ra \bot} \tag{Or False}\\
+    \infrule{\phi \ra \bot}{\neg\phi \ra \top} \tag{Negate True}\\
+    \infrule{\phi \ra \top}{\neg\phi \ra \bot} \tag{Negate False}\\
 \end{align*}
 
 The rules for arithmetic logic, equal, greater than, etc. It do not determined if the to terms are comparable, like numbers and strings, if it happens it is incomparable.
 \begin{align*}
-\infrule{}{M_1 = M_2 \ra \top}& \text{if }M_1=M_2 \tag{Equal True}\\
-\infrule{}{M_1 = M_2 \ra \bot}& \text{if }M_1\neq M_2 \tag{Equal False}\\
-\infrule{}{M_1 \neq M_2 \ra \top}& \text{if }M_1=M_2 \tag{NotEqual True}\\
-\infrule{}{M_1 \neq M_2 \ra \bot}& \text{if }M_1\neq M_2 \tag{NotEqual False}\\
-\infrule{}{M_1 < M_2 \ra \top}& \text{if }M_1<M_2 \tag{Less True}\\
-\infrule{}{M_1 < M_2 \ra \bot}& \text{if }M_1\nless M_2 \tag{Less False}\\
-\infrule{}{M_1 > M_2 \ra \top}& \text{if }M_1>M_2 \tag{Greater True}\\
-\infrule{}{M_1 > M_2 \ra \bot}& \text{if }M_1\ngtr M_2 \tag{Greater False}\\
-\infrule{}{M_1 \leq M_2 \ra \top}& \text{if }M_1\leq M_2 \tag{Less Equal True}\\
-\infrule{}{M_1 \leq M_2 \ra \bot}& \text{if }M_1\nleq M_2 \tag{Less Equal False}\\
-\infrule{}{M_1 \geq M_2 \ra \top}& \text{if }M_1\geq M_2 \tag{Greater Equal True}\\
-\infrule{}{M_1 \geq M_2 \ra \bot}& \text{if }M_1\ngeq M_2 \tag{Greater Equal False}
+    \infrule{}{M_1 = M_2 \ra \top}& \text{if }M_1=M_2 \tag{Equal True}\\
+    \infrule{}{M_1 = M_2 \ra \bot}& \text{if }M_1\neq M_2 \tag{Equal False}\\
+    \infrule{}{M_1 \neq M_2 \ra \top}& \text{if }M_1=M_2 \tag{NotEqual True}\\
+    \infrule{}{M_1 \neq M_2 \ra \bot}& \text{if }M_1\neq M_2 \tag{NotEqual False}\\
+    \infrule{}{M_1 < M_2 \ra \top}& \text{if }M_1<M_2 \tag{Less True}\\
+    \infrule{}{M_1 < M_2 \ra \bot}& \text{if }M_1\nless M_2 \tag{Less False}\\
+    \infrule{}{M_1 > M_2 \ra \top}& \text{if }M_1>M_2 \tag{Greater True}\\
+    \infrule{}{M_1 > M_2 \ra \bot}& \text{if }M_1\ngtr M_2 \tag{Greater False}\\
+    \infrule{}{M_1 \leq M_2 \ra \top}& \text{if }M_1\leq M_2 \tag{Less Equal True}\\
+    \infrule{}{M_1 \leq M_2 \ra \bot}& \text{if }M_1\nleq M_2 \tag{Less Equal False}\\
+    \infrule{}{M_1 \geq M_2 \ra \top}& \text{if }M_1\geq M_2 \tag{Greater Equal True}\\
+    \infrule{}{M_1 \geq M_2 \ra \bot}& \text{if }M_1\ngeq M_2 \tag{Greater Equal False}
 \end{align*}
-	
+
 
 \FloatBarrier
 \input{Sections/Syntax/replication.tex}

@@ -1,36 +1,11 @@
 The syntax of the rho-calculus is described as follows.\\
 
-%\subsubsection{Processes}
-%\begin{description}
-%\item[Nil] Does nothing.
-%\item[Input] Receives a term lifted on channel \textit{x} and proceeds as process \textit{P} with the term replacing \textit{y}.
-%\item[Lift] Lifts a term \textit{M} on channel \textit{x}.
-%\item[Drop] Drops a name \textit{x}, so it becomes a process, and proceeds as the resulting process.
-%\item[Parallel] Proceeds as both process \textit{P} and process \textit{Q} in parallel.
-%\end{description}
-
-%\subsubsection{Names}
-%\begin{description}
-%\item[Quote] Quotes a process \textit{P}, so it becomes a name.
-%\end{description}
-
-%\subsubsection{Boolean Arithmetic}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% HERE IT IS WITH A NEW IMPROVED TASTE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\textbf{Processes}\\ % Yep I know it was a subsubsection, but LaTeX doesn't understand the hint that I want a linebreak.
-The \textbf{Nil} process provides the solo atom every other process arise from. The \textbf{Nil} process is a process that does nothing.\\
-The \textbf{Input} operator is an operator that blocks the process until it receives an input $y$ on the channel $x$.\\
-\textbf{Lift} is the operator that that send the message $P$ on the channel $x$ where $x$ is a name and $P$ is a process.
-%\textbf{Lift} the lift operator allows a process to become a name. Since the language have a clear distension between names and processes therefor we need operations to convert between the two.\\
-\textbf{Drop} drops a name so it becomes a process. This will be useful later on when we want to make more process.
-%\textbf{Drop}, since you lift a process to make it a name, it is also necessarily to be able to convert the name to a process again. The \textbf{Drop} operator provides that functionality. \\
-\textbf{Parallel} is a usual parallel composition, it executes two processes concurrently.\\
-
-\textbf{Names}\\ % This shit is invisible until something is under it???
-\textbf{Quote} Quotes a process \textit{P}, so it becomes a name. This is useful later on when we want to make more names. %% NOT READ AT ALL
-\\\\
-\textbf{Names and Process}\\
-The relationship between names and process is a little tricky, because a name can be a dropped process and a process can be a quoted name. In \citep{Meredith2005} it is described how we build names out of the process $\nil$ by quoting it,$\quot{\nil}$ and to make more they send the quoted $\nil$ on its own channel and that can be dropped$\drop{\lift{\quot{\nil}}{\quot{\nil}}}$, because it is now a process. The new process can then be used as an channel and its message, and then again be dropped to make a new name. Even so they also describe in \citep{Meredith2005} how a $\nil$ parallel with $\nil$ can be dropped and that is becoming a name $\drop{\nil \para \nil}$
+\begin{description}
+    \item[Nil] The Nil process provides the solo atom every other process arise from. The Nil process is a process that does nothing.
+    \item[Input] The Input operator is an operator that blocks the process until it receives an input $y$ on the channel $x$.
+    \item[Lift] Lift is the operator that sends the message $P$ on the channel $x$ where $x$ is a name and $P$ is a process.
+    \item[Drop] The drop operation drops a name so it becomes a process. This will be useful later on when we want to make more process.
+    \item[Parallel] Parallel is a usual parallel composition, it executes two processes concurrently.
+    \item[Quote] Quotes a process \textit{P}, so it becomes a name. This is useful later on when we want to make more names.
+    \item[Names and Process] The relationship between names and process is a little tricky, because a name can be a dropped process and a process can be a quoted name. In \citep{Meredith2005} it is described how we build names out of the process $\nil$ by quoting it,$\quot{\nil}$ and to make more they send the quoted $\nil$ on its own channel and that can be dropped$\drop{\lift{\quot{\nil}}{\quot{\nil}}}$, because it is now a process. The new process can then be used as an channel and its message, and then again be dropped to make a new name. Even so they also describe in \citep{Meredith2005} how a $\nil$ parallel with $\nil$ can be dropped and that is becoming a name $\drop{\nil \para \nil}$
+\end{description}

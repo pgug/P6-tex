@@ -1,8 +1,8 @@
 \subsection{Evaluating Terms}
 In order to make use of our terms we need to define how to evaluate them.
 The operation terms are intended to operate on terms, so it is sufficient to define how to evaluate these operations.
-Operations can also define abstract datatypes which we will make use of.
-The operations defined in this section are chosen specifically for modelling a blockchain protocol and could be different given another goal.
+Operations can also define abstract data types which we will make use of.
+The operations defined in this section are chosen specifically for modeling a blockchain protocol and could be different given another goal.
 
 \input{Sections/Semantics/tupleoperation.tex}
 
@@ -23,16 +23,16 @@ The list operations enables the abstraction of lists.
 They are described as follows:
 
 \begin{description}
-	\item[\op{head}(list)] The first element of the list
-	\item[\op{tail}(list)] The list without its first element
-	\item[\op{append}(x, list)] The list with element $x$ appended to its beginning.
+    \item[\op{head}(list)] The first element of the list
+    \item[\op{tail}(list)] The list without its first element
+    \item[\op{append}(x, list)] The list with element $x$ appended to its beginning.
 \end{description}
 
 These operations are defined by the rules below.
 
 \begin{align*}
-	&\mop{head}(\mop{append}(M_1, M_2)) = M_1 \tag{Head} \\
-	&\mop{tail}(\mop{append}(M_1, M_2)) = M_2 \tag{Tail}
+    &\mop{head}(\mop{append}(M_1, M_2)) = M_1 \tag{Head} \\
+        &\mop{tail}(\mop{append}(M_1, M_2)) = M_2 \tag{Tail}
 \end{align*}
 
 \FloatBarrier
@@ -42,16 +42,16 @@ The blockchain operations enables the abstraction of blockchains. These will lat
 They are described as follows:
 
 \begin{description}
-	\item[\op{newBlock}(data, previous)]
-	A block that succeeds previous and contains data.
-	\item[\op{getLatest}(chain)]
-	The last block of the chain
-	\item[\op{addToChain}(block, chain)]
-	The chain with block added to it.
-	\item[\op{getLength}(chain)]
-	The length of the chain represented as a number.
-	\item[\op{isValid}(chain)]
-	The validity of the chain represented as a number. A positive number indicates a valid chain, while a non-positive number indicates an invalid chain.
+    \item[\op{newBlock}(data, previous)]
+        A block that succeeds previous and contains data.
+    \item[\op{getLatest}(chain)]
+        The last block of the chain
+    \item[\op{addToChain}(block, chain)]
+        The chain with block added to it.
+    \item[\op{getLength}(chain)]
+        The length of the chain represented as a number.
+    \item[\op{isValid}(chain)]
+        The validity of the chain represented as a number. A positive number indicates a valid chain, while a non-positive number indicates an invalid chain.
 \end{description}
 
 The definition of these operations are dependent on the specific blockchain implementation. We have chosen to omit these for generalization purposes.
