@@ -190,7 +190,7 @@ To show that, we have to prove that \ensuremath{P \ra P'} holds for the rules, p
 
 \begin{proof}[Parallel]
 \begin{align*}
-    \frac{P \ra P' \quad n}{P \para Q \ra P' \para Q} n+1 \tag{Parallel}
+    \frac{P \ra P' \quad =n}{P \para Q \ra P' \para Q} =n+1 \tag{Parallel}
 \end{align*}
 If \ensuremath{E \vdash P} and \ensuremath{P \ra P'} then \ensuremath{E \vdash P'} We want to show that if \ensuremath{E \vdash P \para Q} then \ensuremath{E \vdash P' \para Q}. The type rule for parallel say \ensuremath{\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}} so if \ensuremath{E \vdash P'} then \ensuremath{\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}}
 \end{proof}
@@ -244,7 +244,7 @@ Example: \ensuremath{\lift{x}{true}\para \inp{y}{z}\inp{x}{w}\lift{y}{w+5}} \ens
 \end{proof}
 \end{theorem}
 
-\begin{theorem}[Wrong]
+\subsubsection{Definition: Wrong}
 \ensuremath{E \vdash P \ra wrong} 
 \begin{proof}
 To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case where \ensuremath{P} goes \ensuremath{wrong}.\\
@@ -278,51 +278,12 @@ To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case wher
 \end{align*}
 
 \end{proof}
-\end{theorem}
+%\end{theorem}
 
-\begin{description}
-\ensuremath{E \vdash P \ra wrong} 
-\begin{proof}
-To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case where \ensuremath{P} goes \ensuremath{wrong}.\\
-\textbf{Lift} \begin{align*}
-\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}\\
-\frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &where T_1 \neq T_2
-\end{align*}
-
-\textbf{Input} \begin{align*}
-\frac{\exists M,\quad E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]} {E \vdash \inp{x}{y}P \ra wrong}\\
-\end{align*}
-
-\textbf{Parallel} \begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
-\end{align*}
-
-\textbf{Structural Congruens} \begin{align*}
-\frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
-\end{align*}
-
-\textbf{Drop}\begin{align*}
-\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
-
-\textbf{Quot}\begin{align*}
-\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
-
-\textbf{Condition}\begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
-\end{align*}
-\end{description}
 
 %\begin{align*}
 %    \tag{Wrong}& \infrule{E(x) = ch[T_1] \quad E \vdash M:T_2 \quad \level{T_2} > \level{T_1} }{\lift{x}{M} \ra wrong}
 %\end{align*}
 
-
-%\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
-%
-%\fig{\frac{\Gamma \vdash M:Secret \quad \Gamma \vdash c:Secure}{\Gamma \vdash \lift{c}{M}}}{}{secret}
-%
-%\fig{\frac{\Gamma \vdash M:Public \quad \Gamma \vdash c:Insecure}{\Gamma \vdash \lift{c}{M}}}{}{public}
 
 \FloatBarrier
