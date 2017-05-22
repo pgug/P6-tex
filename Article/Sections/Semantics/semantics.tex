@@ -55,8 +55,8 @@ The reduction rule of a given conditional process is decided by its boolean expr
 The rules for boolean logic, and, or and negation, is shown here, under what condition it is evaluated to true (\ensuremath{\top}) and false (\ensuremath{\bot}).
 \begin{align*}
     \infrule{\phi_1 \ra \top \quad \phi_2 \ra \top}{\phi_1 \wedge \phi_2 \ra \top}\tag{And True}\\
-    \infrule{\phi_i \ra \top}{\phi_1 \wedge \phi_2 \ra \bot} &i\in \{1,2\}\tag{And False}\\
-    \infrule{\phi_i \ra \top}{\phi_1 \vee \phi_2 \ra \top} &i\in \{1,2\} \tag{Or True}\\
+    \infrule{\phi_i \ra \top}{\phi_1 \wedge \phi_2 \ra \bot} &where\ i\in \{1,2\}\tag{And False}\\
+    \infrule{\phi_i \ra \top}{\phi_1 \vee \phi_2 \ra \top} &where\ i\in \{1,2\} \tag{Or True}\\
     \infrule{\phi_1 \ra \bot \quad \phi_2 \ra \bot}{\phi_1 \vee \phi_2 \ra \bot} \tag{Or False}\\
     \infrule{\phi \ra \bot}{\neg\phi \ra \top} \tag{Negate True}\\
     \infrule{\phi \ra \top}{\neg\phi \ra \bot} \tag{Negate False}\\
