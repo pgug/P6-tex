@@ -92,18 +92,6 @@ The validation of $S$ ensures that well-typed expressions can not have invalid t
 In order to state that an expression is well-typed at other types, we need to introduce subtyping.
 The subtyping $S\leq S'$ denotes that $S$ is a subtype of $S'$. 
 
-%\begin{align*}
-%\tag{LessOrEqual}\label{rule:lessorequal} &\infrule{S=S'}{S\leq S'}
-%\end{align*}
-
-%The \ref{rule:lessorequal} rule states that equal types are also subtypes of each other.
-
-%\begin{align*}
-%\tag{Transitive}\label{rule:transitive} &\infrule{S\leq S''\quad S''\leq S'}{S\leq S'}
-%\end{align*}
-
-%The \ref{rule:transitive} rule gives subtyping a transitive property.
-
 \begin{align*}
     \tag{Subtype}\label{rule:subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
 \end{align*}
@@ -117,17 +105,6 @@ For example, $string^2$ is a subtype of $string^4$, since $2\leq4$ and the speci
 
 The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-typed at $T$ and $T$ is a subtype of $T'$, then $x$ is also well-typed at type $T'$.
 Together with the \ref{rule:subtype} rule this states that, if $T$ is a term, then $x$ remains well-typed at higher security levels of $T$.
-
-%\begin{align*}
-%\tag{BasicSubBasic} &\infrule{l\leq l'}{B^l\leq B^{l'}}\\
-%\tag{TupleSubTuple} &\infrule{S_i\leq S'\quad %U_i=S_i^\rho}{U_1\times...\times U_i\times...\times U_n\leq %U_1\times...\times S'^\rho\times...\times U_n}\\
-%\tag{Level-level} &\level{l}=l\\
-%\tag{Channel-level} &\level{ch[S]} = \level{S}\\
-%\tag{Tuple-level} &\level{U_1\times...\times %U_n}=\max_{i=1}^{n}{\level{S_i}}& where\ S_i^\rho=U_i\\
-%\tag{Basic-level} &\level{B^l}=l\\
-%\tag{TypeSubLevel} &S\leq \level{S}\\
-%\tag{TermAsChannel} &\infrule{E(M)=S^\rho\quad \level{S}=l}{E\vdash %M:ch[l]^\rho}
-%\end{align*}
 
 \subsection{Well-typing of expressions}
 In order to use the type system with expressions in our extended rho-calculus, we need to define the well-typing of all expressions.
@@ -205,18 +182,6 @@ This ensures that the tuple type can not be composed of types with higher securi
 The \ref{rule:Operation} rule states that, given context $E$, if $f$ is well-typed at a operation type and $M$ is well-typed at the argument type of that operation type, then $fM$ is well-typed at the resulting type of that operation type.
 This ensures that any argument used with an operation follows the type definition of the operation.
 
-%\textit{max(T)} is a operation which returns the maximum value off its input \textit{T}, according to the input \textit{T}s order.
-
-%\begin{align*}
-%\tag{Append} &\infrule{E \vdash x:T^l \quad E \vdash y:list^l}{E \vdash append(x,y):list^l}\\
-%\tag{Head} &\infrule{E \vdash x:list^l}{E \vdash head(x):l}\\
-%\tag{Tail} &\infrule{E \vdash x:list^l}{E \vdash tail(x):list^l}\\
-%\tag{newBlock}& \infrule{E \vdash data:T \quad E \vdash previus : T}{E \vdash newBlock(data, previus) :T}\\
-%\tag{getLatest}& \infrule{E \vdash chain :T}{E \vdash getLatest(chain):T}\\
-%\tag{addToChain}& \infrule{E \vdash block:T \quad E \vdash chain:T}{E \vdash addToChain(block, chain):T}\\
-%\tag{getLenght}& \infrule{E \vdash chain:T}{E \vdash getLenght(chain):int}\\
-%\tag{isValid}& \infrule{E \vdash chain:T}{E \vdash isValid(chain):bool}
-%\end{align*}
 \section{Type Security}
 
 \begin{theorem}[Subject Reduction]
