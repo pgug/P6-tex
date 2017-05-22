@@ -38,7 +38,7 @@ This is defined by the following:
 \subsection{Type Validation}
 With the syntax of our type system, it is possible to make types with some security level that consist of types with lower security level.
 This could allow anything with some security level to disguise itself as a lower security level, allowing it to be accessed by environments of lower security level.
-To avoid this we introduce type validation, where $\valid{S}$ denotes that the type $S$ is valid.
+To avoid this we introduce type validation, where $\valid{T}$ denotes that the type $T$ is valid.
 
 \begin{align*}
 \tag{ValidSubsumption}\label{rule:ValidSublevel} &\infrule{\valid{T}\quad T\leq T'}{\valid{T'}}
@@ -70,7 +70,7 @@ The \ref{rule:ValidTuple} rule states that a tuple type is valid if all its comp
 This ensures that a tuple with some security level does not contain terms with a higher security level than what should be accessible to an environment with that security level.
 
 \subsection{Well-typing}
-In order to give types to expressions in our extended rho-calculus, we need to introduce well-typing.
+In order to give types to process' in our extended rho-calculus, we need to introduce well-typing.
 A type judgment $x:T$ denotes that $x$ is well-typed at type $T$.
 These judgments can be collected to form a type environment, denoted $E$, that partially maps $\mathbf{Names}$ to $\mathbf{Types}$.
 \begin{align*}
@@ -86,10 +86,10 @@ $E(x)$ denotes the actual type of $x$.
 \end{align*}
 
 The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $S$ and $S$ is a valid type, then $x$ is well-typed at type $S$.
-The validation of $S$ ensures that well-typed expressions can not have invalid types originating from the type environment.
+The validation of $S$ ensures that well-typed process' can not have invalid types originating from the type environment.
 
 \subsection{Subtyping}
-In order to state that an expression is well-typed at other types, we need to introduce subtyping.
+In order to state that an process is well-typed at other types, we need to introduce subtyping.
 The subtyping $S\leq S'$ denotes that $S$ is a subtype of $S'$. 
 
 \begin{align*}
@@ -106,9 +106,9 @@ For example, $string^2$ is a subtype of $string^4$, since $2\leq4$ and the speci
 The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-typed at $T$ and $T$ is a subtype of $T'$, then $x$ is also well-typed at type $T'$.
 Together with the \ref{rule:subtype} rule this states that, if $T$ is a term, then $x$ remains well-typed at higher security levels of $T$.
 
-\subsection{Well-typing of expressions}
-In order to use the type system with expressions in our extended rho-calculus, we need to define the well-typing of all expressions.
-This is done by providing type rules that cover our syntax and consequently any expressions in our syntax.
+\subsection{Well-typing of process'}
+In order to use the type system with process' in our extended rho-calculus, we need to define the well-typing of all process'.
+This is done by providing type rules that cover our syntax and consequently any process' in our syntax.
 \begin{align*}
     \tag{Nil}\label{rule:Nil} &E \vdash \nil
 \end{align*}
@@ -186,9 +186,7 @@ This ensures that any argument used with an operation follows the type definitio
 
 \begin{theorem}[Subject Reduction]
 If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
-We have to show that \ensuremath{\frac{}{P \ra P'}} holds for the rules, parallel, communication and structural congruent
-
-\end{theorem}
+To show that, we have to prove that \ensuremath{P \ra P'} holds for the rules, parallel, communication and structural congruent. We can do that by prove it by induction for the cases \ensuremath{n} and \ensuremath{n+1}.
 
 \begin{proof}[Parallel]
 \begin{align*}
@@ -219,6 +217,11 @@ If \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash
 
 By applying lemma equivalent to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
 \end{proof}
+
+\end{theorem}
+
+
+
 
 \begin{theorem}[Well typed]
 If \ensuremath{E\vdash P} then \ensuremath{P\nrightarrow wrong}
