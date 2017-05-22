@@ -6,7 +6,7 @@ If the type system prevents anything with some security level from being accessi
 Because these levels are part of our type system, we can define integrity as a behaviour of our types.
 \begin{align*}
     T::=&\;U^l\\    	
-    U::=&\;B \tag{Basic Term}\\
+    U::=&\;B \tag{Basic Type}\\
         &\mid ch[T] \tag{Channel}\\
         &\mid T_1 \times...\times T_k \tag{Tuple}\\
         &\mid T\ra T \tag{Operation}\\
@@ -26,7 +26,7 @@ Because these levels are part of our type system, we can define integrity as a b
         These are not included as basic terms since they are not terms.
     \item[Channels] allow terms of type $T$ to be sent and received.
     \item[Tuples] have types composed of all the types of the contained terms.
-    \item[Basic Terms] are terms that do not require specialized type rules.
+    \item[Basic Type] are types that do not require specialized type rules.
 \end{description}
 
 In the rest of this section, we denote the security level of term $T$ as $\level{T}$.
@@ -267,12 +267,9 @@ If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong} and i
 If \ensuremath{P \ra wrong} then must \ensuremath{P \para Q \ra wrong} true.\\
 If \ensuremath{P \ra wrong} and \ensuremath{P \equiv Q} then must \ensuremath{Q \ra wrong} be true.
 
-\begin{align*}
-    \tag{Action} & \infrule{E \vdash P \quad P\ra P'}{E\vdash P'}\\
-    \tag{Not Wrong}& \infrule{E \vdash P}{P \nrightarrow wrong}\\
-    \tag{Para Wrong}& \infrule{P \ra wrong}{P\para Q \ra wrong}\\
-    \tag{Wrong}& \infrule{E(x) = ch[T_1] \quad E \vdash M:T_2 \quad \level{T_2} > \level{T_1} }{\lift{x}{M} \ra wrong}
-\end{align*}
+%\begin{align*}
+%    \tag{Wrong}& \infrule{E(x) = ch[T_1] \quad E \vdash M:T_2 \quad \level{T_2} > \level{T_1} }{\lift{x}{M} \ra wrong}
+%\end{align*}
 
 
 %\fig{M: secret,c:secure\vdash \lift{c}{M}}{If \textit{M} is of type \textit{secret}, then \textit{c} should be of type \textit{secure}}{fig:sec}
