@@ -3,17 +3,16 @@ In order to determine whether a protocol is secure or not, we need a model that 
 We will construct a type system on top of our existing calculus, that will include security levels.
 These levels allow us to isolate the client, by giving it higher security levels than the environment surrounding it.
 If the type system prevents anything with some security level from being accessible to an environment with a lower security level, then the client gains integrity even in a malicious environment.
-Because these levels are part of our type system, we can define integrity as a behavior of our types.
+Because these levels are part of our type system, we can define integrity as a behaviour of our types.
 \begin{align*}
-    S::=&\;T \tag{Term}\\
-        &\mid T\ra T \tag{Operation}\\
-        &\mid bool \tag{Boolean}\\
-    T::=&\;U^l\\
+    T::=&\;U^l\\    	
     U::=&\;B \tag{Basic Term}\\
         &\mid ch[T] \tag{Channel}\\
         &\mid T_1 \times...\times T_k \tag{Tuple}\\
+        &\mid T\ra T \tag{Operation}\\
     B::=&\;number 
-        \mid string\\
+        \mid string
+        \mid bool\\
 \end{align*}
 
 \noindent The syntax of our type system is shown above. It is described as follows:
