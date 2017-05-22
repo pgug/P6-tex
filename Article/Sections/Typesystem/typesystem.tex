@@ -200,8 +200,9 @@ If \ensuremath{E \vdash P} and \ensuremath{P \ra P'} then \ensuremath{E \vdash P
     \infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}} \tag{Communication}
 \end{align*}
 
-Lemma Substitution
+\begin{lemma}[Substitution]
 If \ensuremath{E,x:T \vdash P} and \ensuremath{E_2 \vdash M:T} then \ensuremath{E, E_2 \vdash P\{M/x \}}
+\end{lemma}
 
 \end{proof}
 
@@ -212,8 +213,9 @@ If \ensuremath{E,x:T \vdash P} and \ensuremath{E_2 \vdash M:T} then \ensuremath{
 
 If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
 
-Lemma Equivalent
+\begin{lemma}[Equivalent]
 If \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q}
+\end{lemma}
 
 By applying lemma equivalent to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
 \end{proof}
@@ -277,6 +279,40 @@ To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case wher
 
 \end{proof}
 \end{theorem}
+
+\begin{description}
+\ensuremath{E \vdash P \ra wrong} 
+\begin{proof}
+To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case where \ensuremath{P} goes \ensuremath{wrong}.\\
+\textbf{Lift} \begin{align*}
+\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}\\
+\frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &where T_1 \neq T_2
+\end{align*}
+
+\textbf{Input} \begin{align*}
+\frac{\exists M,\quad E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]} {E \vdash \inp{x}{y}P \ra wrong}\\
+\end{align*}
+
+\textbf{Parallel} \begin{align*}
+\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
+\end{align*}
+
+\textbf{Structural Congruens} \begin{align*}
+\frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
+\end{align*}
+
+\textbf{Drop}\begin{align*}
+\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+\end{align*}
+
+\textbf{Quot}\begin{align*}
+\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+\end{align*}
+
+\textbf{Condition}\begin{align*}
+\frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
+\end{align*}
+\end{description}
 
 %\begin{align*}
 %    \tag{Wrong}& \infrule{E(x) = ch[T_1] \quad E \vdash M:T_2 \quad \level{T_2} > \level{T_1} }{\lift{x}{M} \ra wrong}
