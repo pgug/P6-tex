@@ -1,11 +1,16 @@
 \section{Rho-Calculus}\label{ch:rho-calculus}
-We are using rho-calculus because it is a small and simple calculus which should be fast to learn.
-It is developed and described by L. G. Meredith and M. Radestock in \citep{Meredith2005}.
-We will use rho-calculus to model a system, and later a security type rule will be applied. We could maybe make the calculus even smaller but that would make it more difficult to express and model a system in it, we would actually want to expand it a little to make it easier to model a system in it.
-Because rho-calculus is a small calculus, there will not be many reduction rules to look through, and the type rules for the reduction rules will then be few compared a bigger calculus.
-The rho-calculus has a syntax for parallelism which will be useful for modeling client/server systems, where security can be an issue, and security can be a major part of the specification. 
+%We are using rho-calculus because it is a small and simple calculus which should be fast to learn.
+%It is developed and described by L. G. Meredith and M. Radestock in \citep{Meredith2005}.
+%We will use rho-calculus to model a system, and later a security type rule will be applied. We could maybe make the calculus even smaller but that would make it more difficult to express and model a system in it, we would actually want to expand it a little to make it easier to model a system in it.
+%Because rho-calculus is a small calculus, there will not be many reduction rules to look through, and the type rules for the reduction rules will then be few compared a bigger calculus.
+%The rho-calculus has a syntax for parallelism which will be useful for modeling client/server systems, where security can be an issue, and security can be a major part of the specification.
+
 %Our syntax is similar to the one described in \citep{Meredith2005}, however our lift includes a term $M$ that will be explained in section \ref{sec:addsyntax}.
+
+
+The rho-calculus was developed by L. G. Meredith and M. Radestock in \citep{Meredith2005}. We will use the rho-calculus to model a system, and later a security typesystem will be added to the implementation. One of the reasons for choosing the rho-calculus, is that it is a very expressive calculus and very small. We could make the calculus smaller but that take away some of the expressive power from the calculus. Instead we chose to extend the calculus. That is done to make it easier to implement our blockchain protocol. This is not necessary to do, since it is already possible to implement our blockchain protocol without adding to the rho-calculus.\\
 The syntax here is as the syntax described in \citep{Meredith2005}, we would like to add some syntax rules on top on this, to make it easier to implement systems in the calculus.
+
 \begin{align*}
     P  ::= \; &  \nil & \text{nil} \\
       & \mid \inp{x}{y}P & \text{input} \\
@@ -20,7 +25,7 @@ The syntax here is as the syntax described in \citep{Meredith2005}, we would lik
 \subsection{Additional Syntax} \label{sec:addsyntax}
 Although it is possible to implement a blockchain protocol in the rho-calculus, it would require convoluted structures to express even simple concepts.
 We choose to extend the rho-calculus to allow easier modeling of those concepts.
-We can do this with out making the rho-calculus stronger, because in the simple pi-calculus you can code a calculus with terms\citep{Baldamus2005}, and the simple pi-calculus can be coded in the rho-calculus\citep{Meredith2005}.\\
+We can do this without making the rho-calculus stronger, because in the simple pi-calculus you can code a calculus with terms\citep{Baldamus2005}, and the simple pi-calculus can be coded in the rho-calculus\citep{Meredith2005}.\\
 \\
 We add an additional syntax rule for terms, where $M$ ranges over terms, $n$ ranges over numbers, $s$ ranges over strings and $f$ ranges over operations. We have also added a possibility of lifting a term, instead of a process.
 
