@@ -92,19 +92,19 @@ $E(x)$ denotes the actual type of $x$.
     \tag{Lookup}\label{rule:lookup} &\infrule{E(x)=T\quad\valid{T}}{E\vdash x:T}
 \end{align*}
 
-The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $S$ and $S$ is a valid type, then $x$ is well-typed at type $S$.
+The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $T$ and $T$ is a valid type, then $x$ is well-typed at type $T$.
 The validation of $S$ ensures that well-typed processes can not have invalid types originating from the type environment.
 
 \subsection{Subtyping}
 In order to state that an process is well-typed at other types, we need to introduce subtyping.
-The subtyping $S\leq S'$ denotes that $S$ is a subtype of $S'$. 
+The subtyping $T\leq T'$ denotes that $T$ is a subtype of $T'$. 
 
 \begin{align*}
     \tag{Subtype}\label{rule:subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
 \end{align*}
 
-The \ref{rule:subtype} rule states that if $l$ is at most $l'$, then a term with security level $l$ is a subtype of a term with security level $l'$ that shares the same specialization type.
-For example, $string^2$ is a subtype of $string^4$, since $2\leq4$ and the specialization types of both terms is $string$.
+The \ref{rule:subtype} rule states that if $l$ is at most $l'$, then a type with security level $l$ is a subtype of a type with security level $l'$ that shares the same specialization type.
+For example, $string^2$ is a subtype of $string^4$, since $2\leq4$ and the specialization types of both types is $string$.
 
 \begin{align*}
     \tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash x:T\quad T\leq T'}{E\vdash x:T'}
@@ -233,11 +233,11 @@ To prove when \ensuremath{P} goes \ensuremath{wrong}, every \ensuremath{wrong} c
 
 \begin{theorem}[Subject Reduction]
 If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
-To show that, we have to prove that \ensuremath{P \ra P'} holds for the rules, parallel, communication and structural congruent. We can do that by prove it by induction for the cases \ensuremath{n} and \ensuremath{n+1}.
+To show that, we have to prove that \ensuremath{P \ra P'} holds for the rules, parallel, communication and structural congruent.
 
 \begin{proof}[Parallel]
 \begin{align*}
-    \frac{P \ra P' \quad =n}{P \para Q \ra P' \para Q} =n+1 \tag{Parallel}
+    \frac{P \ra P' \quad}{P \para Q \ra P' \para Q} \tag{Parallel}
 \end{align*}
 If \ensuremath{E \vdash P} and \ensuremath{P \ra P'} then \ensuremath{E \vdash P'} We want to show that if \ensuremath{E \vdash P \para Q} then \ensuremath{E \vdash P' \para Q}. The type rule for parallel say \ensuremath{\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}} so if \ensuremath{E \vdash P'} then \ensuremath{\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}}
 \end{proof}
@@ -292,7 +292,7 @@ Because the wrong predicate for parallel says:
 \begin{align*}
 \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
 \end{align*}
-And we can prove by structural equivalences that the same holds for \ensuremath{Q}
+And we can prove by the rule ParaCommutative that the same holds for \ensuremath{Q}
 \end{proof}
 
 \begin{proof}[Nil]
