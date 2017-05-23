@@ -263,9 +263,140 @@ By applying lemma equivalent to the structural congruent, we see that because \e
 
 
 \begin{theorem}
-If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong}
+If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong}\\
+We need to show by induction that every reduction holds by their assumption and do not goes to \ensuremath{wrong}.
 \begin{proof}[Parallel]
-We need to show by induction that every reduction in parallel
+\begin{align*}
+\frac{E \vdash P \quad E \vdash Q }{E \vdash P \para Q}
+\end{align*}
+
+By induction hypothesis we have that: 
+\begin{align*}
+E \vdash P \nrightarrow wrong\\
+E \vdash Q \nrightarrow wrong
+\end{align*}
+That is way we can say that:
+\begin{align*}
+\frac{}{E \vdash P \para Q \nrightarrow wrong}
+\end{align*}
+
+Because the wrong predicate for parallel says:
+\begin{align*}
+\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
+\end{align*}
+And we can prove by structural equivalences that the same holds for \ensuremath{Q}
+\end{proof}
+
+\begin{proof}[Nil]
+Because there is not a wrong predicate for nil, nil can not go wrong, and we do not have to show that nil will not go wrong.
+\end{proof}
+
+\begin{proof}[Lift]
+\begin{align*}
+\frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2] \quad T_1 = T_2}{E \vdash \lift{x}{M}}
+\end{align*}
+By induction hypothesis we have that:
+\begin{align*}
+E \vdash M:T_1\\
+E \vdash x:ch[T_2]\\
+T_1 = T_2
+\end{align*}
+That is why we can say that:
+\begin{align*}
+\frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
+\end{align*}
+
+Because the wrong predicate for Lift says:
+\begin{align*}
+\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}\\
+\frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2] \quad T_1 \neq T_2}{E \vdash \lift{x}{M} \ra wrong}
+\end{align*}
+
+\end{proof}
+
+\begin{proof}[Input]
+\begin{align*}
+\frac{E \vdash x:ch[T] \quad E,y:t \vdash P}{E \vdash \inp{x}{y}P}
+\end{align*}
+By induction hypothesis we have that:
+\begin{align*}
+E \vdash x:ch[T]\\
+E \vdash y:T \vdash P \nrightarrow wrong
+\end{align*}
+
+That is way we can say that:
+\begin{align*}
+\frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
+\end{align*}
+
+Because the wrong predicate for input says:
+\begin{align*}
+\frac{\exists M, \quad E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]}{E \vdash \inp{x}{y}P \ra wrong}
+\end{align*}
+\end{proof}
+
+\begin{proof}[Drop]
+\begin{align*}
+\frac{E \vdash P}{E \vdash \drop{x}}
+\end{align*}
+
+By induction hypothesis we have that:
+\begin{align*}
+E \vdash P \nrightarrow wrong
+\end{align*}
+
+That is way we can say that:
+\begin{align*}
+\frac{}{E \vdash \drop{x} \nrightarrow wrong}
+\end{align*}
+
+Because the wrong predicate for drop says:
+\begin{align*}
+\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+\end{align*}
+\end{proof}
+
+\begin{proof}[Quote]
+\begin{align*}
+\frac{E \vdash x:T \quad \quot{P} \equiv _N x}{E \vdash \quot{P}:T}
+\end{align*}
+
+By induction hypothesis we have that:
+\begin{align*}
+E \vdash \drop{x} \nrightarrow wrong
+\end{align*}
+
+That is way we can say that:
+\begin{align*}
+\frac{}{E \vdash \drop{x} \nrightarrow wrong}
+\end{align*}
+
+Because the wrong predicate for quote is:
+\begin{align*}
+\frac{\quot{P} \equiv _N x \quad E \vdash P ra wrong}{E \vdash \drop{x} \ra wrong}
+\end{align*}
+
+\end{proof}
+
+\begin{proof}[Condition]
+\begin{align*}
+\frac{E \vdash \phi : bool \quad E \vdash P}{E \vdash [\phi]P}
+\end{align*}
+
+By induction hypothesis we have that:
+\begin{align*}
+E \vdash P \nrightarrow wrong
+\end{align*}
+
+That is way we can say that:
+\begin{align*}
+\frac{}{E \vdash [\phi ]P \nrightarrow wrong}
+\end{align*}
+
+Because the wrong predicate for condition is:
+\begin{align*}
+\frac{E \vdash P \ra wrong}{E \vdash [\phi ]P \ra wrong}
+\end{align*}
 \end{proof}
 \end{theorem}
 
