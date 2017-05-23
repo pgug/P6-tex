@@ -1,11 +1,11 @@
 The syntax of the rho-calculus is described as follows.\\
 
 \begin{description}
-    \item[Nil] The Nil process provides the solo atom every other process arise from. The Nil process is a process that does nothing.
+    \item[Nil] The Nil process provides the solo atom every other process arises from. The Nil process is a process that does nothing.
     \item[Input] The Input operator is an operator that blocks the process until it receives an input $y$ on the channel $x$.
     \item[Lift] Lift is the operator that sends the message $P$ on the channel $x$ where $x$ is a name and $P$ is a process.
     \item[Drop] The drop operation drops a name so it becomes a process. This will be useful later on when we want to make more process.
     \item[Parallel] Parallel is a usual parallel composition, it executes two processes concurrently.
     \item[Quote] Quotes a process \textit{P}, so it becomes a name. This is useful later on when we want to make more names.
-    \item[Names and Process] The relationship between names and process is a little tricky, because a name can be a dropped process and a process can be a quoted name. In \citep{Meredith2005} it is described how we build names out of the process $\nil$ by quoting it,$\quot{\nil}$ and to make more they send the quoted $\nil$ on its own channel and that can be dropped$\drop{\lift{\quot{\nil}}{\quot{\nil}}}$, because it is now a process. The new process can then be used as an channel and its message, and then again be dropped to make a new name. Even so they also describe in \citep{Meredith2005} how a $\nil$ parallel with $\nil$ can be dropped and that is becoming a name $\drop{\nil \para \nil}$
+    \item[Names and Process] The relationship between names and processes is a little tricky, because a name can be a dropped process and a process can be a quoted name. In Meredith and Radestocs paper\citep{Meredith2005} it is described how we build names out of the process $\nil$ by quoting it,$\quot{\nil}$ and to make more they send the quoted $\nil$ on its own channel and that can be dropped$\drop{\lift{\quot{\nil}}{\quot{\nil}}}$, because it is now a process. The new process can then be used as an channel and its message, and then again be dropped to make a new name. Even so Meredith and Radestock\citep{Meredith2005} described how a $\nil$ parallel with $\nil$ can be dropped and that is becoming a name $\drop{\nil \para \nil}$
 \end{description}
