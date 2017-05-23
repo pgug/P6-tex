@@ -184,6 +184,45 @@ This ensures that any argument used with an operation follows the type definitio
 
 \section{Type Security}
 
+\begin{theorem}[Wrong]
+\ensuremath{E \vdash P \ra wrong} \\
+\textbf{Definition: Wrong}
+To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case where \ensuremath{P} goes \ensuremath{wrong}.\\
+\textbf{Lift 1} \begin{align*}
+\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
+\end{align*}
+
+\textbf{Lift 2} \begin{align*}
+\frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &\quad where T_1 \neq T_2
+\end{align*}
+
+\textbf{Input} \begin{align*}
+\frac{\exists M,\quad E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]} {E \vdash \inp{x}{y}P \ra wrong}\\
+\end{align*}
+
+\textbf{Parallel} \begin{align*}
+\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
+\end{align*}
+
+\textbf{Structural Congruens} \begin{align*}
+\frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
+\end{align*}
+
+\textbf{Drop}\begin{align*}
+\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+\end{align*}
+
+\textbf{Quot}\begin{align*}
+\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+\end{align*}
+
+\textbf{Condition}\begin{align*}
+\frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
+\end{align*}
+
+
+\end{theorem}
+
 \begin{theorem}[Subject Reduction]
 If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
 To show that, we have to prove that \ensuremath{P \ra P'} holds for the rules, parallel, communication and structural congruent. We can do that by prove it by induction for the cases \ensuremath{n} and \ensuremath{n+1}.
@@ -223,62 +262,14 @@ By applying lemma equivalent to the structural congruent, we see that because \e
 \end{theorem}
 
 
-
-
-\begin{theorem}[Well typed]
-If \ensuremath{E\vdash P} then \ensuremath{P\nrightarrow wrong}
-
-\begin{proof}
-If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong} and if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q \nrightarrow wrong}. This makes it so that that \ensuremath{E \vdash P \para Q \nrightarrow wrong}
-\end{proof}
-
-\end{theorem}
-
-
-
 \begin{theorem}
-If \ensuremath{E \vdash P} then \ensuremath{P \nrightarrow wrong}
-\begin{proof}
-We can have a \ensuremath{P} where \ensuremath{P \nrightarrow wrong} and where \ensuremath{E \nvdash P}
-Example: \ensuremath{\lift{x}{true}\para \inp{y}{z}\inp{x}{w}\lift{y}{w+5}} \ensuremath{E=x:ch[bool], y:ch[int]} Because \ensuremath{y} never receive its messages we never get to receive on x where the error will occur where \ensuremath{w} should of type \ensuremath{int} because of \ensuremath{y} but actually is a \ensuremath{bool}.
+If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong}
+\begin{proof}[Parallel]
+We need to show by induction that every reduction in parallel
 \end{proof}
 \end{theorem}
 
-\subsubsection{Definition: Wrong}
-\ensuremath{E \vdash P \ra wrong} 
-\begin{proof}
-To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case where \ensuremath{P} goes \ensuremath{wrong}.\\
-\textbf{Lift} \begin{align*}
-\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}\\
-\frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &where T_1 \neq T_2
-\end{align*}
 
-\textbf{Input} \begin{align*}
-\frac{\exists M,\quad E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]} {E \vdash \inp{x}{y}P \ra wrong}\\
-\end{align*}
-
-\textbf{Parallel} \begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
-\end{align*}
-
-\textbf{Structural Congruens} \begin{align*}
-\frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
-\end{align*}
-
-\textbf{Drop}\begin{align*}
-\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
-
-\textbf{Quot}\begin{align*}
-\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
-
-\textbf{Condition}\begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
-\end{align*}
-
-\end{proof}
-%\end{theorem}
 
 
 %\begin{align*}
