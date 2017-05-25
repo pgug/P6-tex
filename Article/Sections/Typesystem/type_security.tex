@@ -84,11 +84,12 @@ We need to show when a process first is well typed, it stays well typed even if 
 \end{theorem}
 \newpage
 
-\begin{theorem}
+\begin{theorem}[Not Wrong]
+We need to show that if a process is well typed it will never could go \ensuremath{wrong}. That ensures the integrity of the process and the well typed process can break the type system.
     If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong}.\\
     %We need to show by induction that every reduction holds by their assumption and do not goes to \ensuremath{wrong}.
     %Proofs by induction will be shown, proving that every reduction holds and therefor can not go \ensuremath{wrong}\\
-    Using proof by induction, proofs for every reduction rule proving that they hold and therefor can not go \ensuremath{wrong} will be presented.
+    Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go \ensuremath{wrong} will be presented.
 
     \begin{proof}[Nil]
         Since there is not a wrong predicate for nil, nil can not go wrong therefor \ensuremath{E \vdash 0 \nrightarrow 0}.
