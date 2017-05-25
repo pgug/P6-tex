@@ -1,220 +1,227 @@
 \section{Type Security}
-
 \begin{theorem}[Wrong]
-\ensuremath{E \vdash P \ra wrong} \\
-\textbf{Definition: Wrong}
-%To show when \ensuremath{P} goes \ensuremath{wrong} we need show every case where \ensuremath{P} goes \ensuremath{wrong}.\\
-To prove when \ensuremath{P} goes \ensuremath{wrong}, every \ensuremath{wrong} case will be presented.\\\\
-\textbf{Lift 1} \begin{align*}
-\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
-\end{align*}
+    \ensuremath{E \vdash P \ra wrong} \\
+    \textbf{Definition: Wrong}
+    To prove when \ensuremath{P} goes \ensuremath{wrong}, every \ensuremath{wrong} case will be presented.\\\\
+    \textbf{Lift 1} \begin{align*}
+        \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
+    \end{align*}
 
-\textbf{Lift 2} \begin{align*}
-\frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &\quad where T_1 \neq T_2
-\end{align*}
+    \textbf{Lift 2} \begin{align*}
+        \frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &\quad where T_1 \neq T_2
+    \end{align*}
 
-\textbf{Input} \begin{align*}
-\frac{\exists M,\quad E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]} {E \vdash \inp{x}{y}P \ra wrong}\\
-\end{align*}
+    \textbf{Input} \begin{align*}
+        \frac{\exists M,\quad E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]} {E \vdash \inp{x}{y}P \ra wrong}\\
+    \end{align*}
 
-\textbf{Parallel} \begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
-\end{align*}
+    \textbf{Parallel} \begin{align*}
+        \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
+    \end{align*}
 
-\textbf{Structural Congruens} \begin{align*}
-\frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
-\end{align*}
+    \textbf{Structural Congruens} \begin{align*}
+        \frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
+    \end{align*}
 
-\textbf{Drop}\begin{align*}
-\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
+    \textbf{Drop}\begin{align*}
+        \frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+    \end{align*}
 
-\textbf{Quote}\begin{align*}
-\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
+    \textbf{Quote}\begin{align*}
+        \frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+    \end{align*}
 
-\textbf{Condition}\begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
-\end{align*}
-
-
+    \textbf{Condition}\begin{align*}
+        \frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
+    \end{align*}
 \end{theorem}
 
 \begin{theorem}[Subject Reduction]
-If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
-To show that, we have to prove that \ensuremath{P \ra P'} holds for the rules, parallel, communication and structural congruent.
+    If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
+    Proofs for parallel, communication and structural congruent proving that \ensuremath{P \ra P'} holds will be presented.\\
 
-\begin{proof}[Parallel]
-\begin{align*}
-    \frac{P \ra P' \quad}{P \para Q \ra P' \para Q} \tag{Parallel}
-\end{align*}
-If \ensuremath{E \vdash P} and \ensuremath{P \ra P'} then \ensuremath{E \vdash P'} We want to show that if \ensuremath{E \vdash P \para Q} then \ensuremath{E \vdash P' \para Q}. The type rule for parallel say \ensuremath{\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}} so if \ensuremath{E \vdash P'} then \ensuremath{\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}}
-\end{proof}
+    \begin{proof}[Parallel]
+        \begin{align*}
+            \frac{P \ra P' \quad}{P \para Q \ra P' \para Q} \tag{Parallel}
+        \end{align*}\\
 
-\begin{proof}[Communication]
-\begin{align*}
-    \infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}} \tag{Communication}
-\end{align*}
+    Therefor if \ensuremath{E \vdash P \para Q} then \ensuremath{E \vdash P' \para Q}. The type rule for parallel says \ensuremath{\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}} so if \ensuremath{E \vdash P'} then \ensuremath{\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}}\\
+        \qed
+    \end{proof}
 
-\begin{lemma}[Substitution]
-If \ensuremath{E,x:T \vdash P} and \ensuremath{E_2 \vdash M:T} then \ensuremath{E, E_2 \vdash P\{M/x \}}
-\end{lemma}
+    \begin{proof}[Communication]
+        \begin{align*}
+            \infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}} \tag{Communication}
+        \end{align*}
 
-\end{proof}
+        \begin{lemma}[Substitution]
+            If \ensuremath{E,x:T \vdash P} and \ensuremath{E_2 \vdash M:T} then \ensuremath{E, E_2 \vdash P\{M/x \}}
+        \end{lemma}
+        \qed
+    \end{proof}
 
-\begin{proof}[Structural Congruent]
-\begin{align*}
-    \infrule{P \equiv P' \quad P' \ra Q' \quad Q' \equiv Q}{P \ra Q} \tag{Structural Congruent}
-\end{align*}
+    \begin{proof}[Structural Congruent]
+        \begin{align*}
+            \infrule{P \equiv P' \quad P' \ra Q' \quad Q' \equiv Q}{P \ra Q} \tag{Structural Congruent}
+        \end{align*}
 
-If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
+        If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
 
-\begin{lemma}[Equivalent]
-If \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q}
-\end{lemma}
+        \begin{lemma}[Equivalent]
+            If \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q}
+        \end{lemma}
 
-By applying lemma equivalent to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
-\end{proof}
-
+        By applying lemma equivalent to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
+        \qed
+    \end{proof}
 \end{theorem}
-
+\newpage
 
 \begin{theorem}
-If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong}\\
-We need to show by induction that every reduction holds by their assumption and do not goes to \ensuremath{wrong}.
-\begin{proof}[Parallel]
-\begin{align*}
-\frac{E \vdash P \quad E \vdash Q }{E \vdash P \para Q}
-\end{align*}
+    If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong}.\\
+    %We need to show by induction that every reduction holds by their assumption and do not goes to \ensuremath{wrong}.
+    %Proofs by induction will be shown, proving that every reduction holds and therefor can not go \ensuremath{wrong}\\
+    Using proof by induction, proofs for every reduction rule proving that they hold and therefor can not go \ensuremath{wrong} will be presented.
 
-By induction hypothesis we have that: 
-\begin{align*}
-E \vdash P \nrightarrow wrong\\
-E \vdash Q \nrightarrow wrong
-\end{align*}
-That is way we can say that:
-\begin{align*}
-\frac{}{E \vdash P \para Q \nrightarrow wrong}
-\end{align*}
+    \begin{proof}[Nil]
+        Since there is not a wrong predicate for nil, nil can not go wrong therefor \ensuremath{E \vdash 0 \nrightarrow 0}.
+        \qed
+    \end{proof}
 
-Because the wrong predicate for parallel says:
-\begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
-\end{align*}
-And we can prove by the rule ParaCommutative that the same holds for \ensuremath{Q}
-\end{proof}
+    \begin{proof}[Parallel]
+        \begin{align*}
+            \frac{E \vdash P \quad E \vdash Q }{E \vdash P \para Q}
+        \end{align*}
 
-\begin{proof}[Nil]
-Because there is not a wrong predicate for nil, nil can not go wrong, and we do not have to show that nil will not go wrong.
-\end{proof}
+        By induction hypothesis we have that: 
+        \begin{align*}
+            E \vdash P \nrightarrow wrong\\
+            E \vdash Q \nrightarrow wrong
+        \end{align*}
+        Therefor:
+        \begin{align*}
+            \frac{}{E \vdash P \para Q \nrightarrow wrong}
+        \end{align*}
 
-\begin{proof}[Lift]
-\begin{align*}
-\frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2] \quad T_1 = T_2}{E \vdash \lift{x}{M}}
-\end{align*}
-By induction hypothesis we have that:
-\begin{align*}
-E \vdash M:T_1\\
-E \vdash x:ch[T_2]\\
-T_1 = T_2
-\end{align*}
-That is why we can say that:
-\begin{align*}
-\frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
-\end{align*}
+        Since the wrong predicate for parallel says:
+        \begin{align*}
+            \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
+        \end{align*}
+        And we can prove by the rule ParaCommutative that the same holds for \ensuremath{Q}.\\
+        \qed
+    \end{proof}
 
-Because the wrong predicate for Lift says:
-\begin{align*}
-\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}\\
-\frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2] \quad T_1 \neq T_2}{E \vdash \lift{x}{M} \ra wrong}
-\end{align*}
+    \begin{proof}[Lift]
+        \begin{align*}
+            \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2] \quad T_1 = T_2}{E \vdash \lift{x}{M}}
+        \end{align*}
+        By induction hypothesis we have that:
+        \begin{align*}
+            &E \vdash M:T_1\\
+            &E \vdash x:ch[T_2]\\
+            &T_1 = T_2
+        \end{align*}
+        Therefor:
+        \begin{align*}
+            \frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
+        \end{align*}
 
-\end{proof}
+        Since the wrong predicate for Lift says:
+        \begin{align*}
+            \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
+        \end{align*}
+        \begin{align*}
+            \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2] \quad T_1 \neq T_2}{E \vdash \lift{x}{M} \ra wrong}
+        \end{align*}
+        \qed
+    \end{proof}
 
-\begin{proof}[Input]
-\begin{align*}
-\frac{E \vdash x:ch[T] \quad E,y:t \vdash P}{E \vdash \inp{x}{y}P}
-\end{align*}
-By induction hypothesis we have that:
-\begin{align*}
-E \vdash x:ch[T]\\
-E \vdash y:T \vdash P \nrightarrow wrong
-\end{align*}
+    \begin{proof}[Input]
+        \begin{align*}
+            \frac{E \vdash x:ch[T] \quad E,y:T \vdash P}{E \vdash \inp{x}{y}P}
+        \end{align*}
+        By induction hypothesis we have that:
+        \begin{align*}
+            &E \vdash x:ch[T]\\
+            &E \vdash y:T \vdash P \nrightarrow wrong
+        \end{align*}
 
-That is way we can say that:
-\begin{align*}
-\frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
-\end{align*}
+        Therefor:
+        \begin{align*}
+            \frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
+        \end{align*}
 
-Because the wrong predicate for input says:
-\begin{align*}
-\frac{\exists M, \quad E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]}{E \vdash \inp{x}{y}P \ra wrong}
-\end{align*}
-\end{proof}
+        Since the wrong predicate for input says:
+        \begin{align*}
+            \frac{\exists M, \quad E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]}{E \vdash \inp{x}{y}P \ra wrong}
+        \end{align*}
+        \qed
+    \end{proof}
 
-\begin{proof}[Drop]
-\begin{align*}
-\frac{E \vdash P}{E \vdash \drop{x}}
-\end{align*}
+    \begin{proof}[Drop]
+        \begin{align*}
+            \frac{E \vdash P}{E \vdash \drop{x}}
+        \end{align*}
 
-By induction hypothesis we have that:
-\begin{align*}
-E \vdash P \nrightarrow wrong
-\end{align*}
+        By induction hypothesis we have that:
+        \begin{align*}
+            E \vdash P \nrightarrow wrong
+        \end{align*}
 
-That is way we can say that:
-\begin{align*}
-\frac{}{E \vdash \drop{x} \nrightarrow wrong}
-\end{align*}
+        Therefor:
+        \begin{align*}
+            \frac{}{E \vdash \drop{x} \nrightarrow wrong}
+        \end{align*}
 
-Because the wrong predicate for drop says:
-\begin{align*}
-\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
-\end{proof}
+        Since the wrong predicate for drop says:
+        \begin{align*}
+            \frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+        \end{align*}
+        \qed\\
+    \end{proof}
 
-\begin{proof}[Quote]
-\begin{align*}
-\frac{E \vdash x:T \quad \quot{P} \equiv _N x}{E \vdash \quot{P}:T}
-\end{align*}
+    \begin{proof}[Quote]
+        \begin{align*}
+            \frac{E \vdash x:T \quad \quot{P} \equiv _N x}{E \vdash \quot{P}:T}
+        \end{align*}
 
-By induction hypothesis we have that:
-\begin{align*}
-E \vdash \drop{x} \nrightarrow wrong
-\end{align*}
+        By induction hypothesis we have that:
+        \begin{align*}
+            E \vdash \drop{x} \nrightarrow wrong
+        \end{align*}
 
-That is way we can say that:
-\begin{align*}
-\frac{}{E \vdash \drop{x} \nrightarrow wrong}
-\end{align*}
+        Therefor:
+        \begin{align*}
+            \frac{}{E \vdash \drop{x} \nrightarrow wrong}
+        \end{align*}
 
-Because the wrong predicate for quote is:
-\begin{align*}
-\frac{\quot{P} \equiv _N x \quad E \vdash P ra wrong}{E \vdash \drop{x} \ra wrong}
-\end{align*}
+        Since the wrong predicate for quote says:
+        \begin{align*}
+            \frac{\quot{P} \equiv _N x \quad E \vdash P ra wrong}{E \vdash \drop{x} \ra wrong}
+        \end{align*}
+        \qed
+    \end{proof}
 
-\end{proof}
+    \begin{proof}[Condition]
+        \begin{align*}
+            \frac{E \vdash \phi : bool \quad E \vdash P}{E \vdash [\phi]P}
+        \end{align*}
+        By induction hypothesis we have that:
+        \begin{align*}
+            E \vdash P \nrightarrow wrong
+        \end{align*}
 
-\begin{proof}[Condition]
-\begin{align*}
-\frac{E \vdash \phi : bool \quad E \vdash P}{E \vdash [\phi]P}
-\end{align*}
+        Therefor:
+        \begin{align*}
+            \frac{}{E \vdash [\phi ]P \nrightarrow wrong}
+        \end{align*}
 
-By induction hypothesis we have that:
-\begin{align*}
-E \vdash P \nrightarrow wrong
-\end{align*}
-
-That is way we can say that:
-\begin{align*}
-\frac{}{E \vdash [\phi ]P \nrightarrow wrong}
-\end{align*}
-
-Because the wrong predicate for condition is:
-\begin{align*}
-\frac{E \vdash P \ra wrong}{E \vdash [\phi ]P \ra wrong}
-\end{align*}
-\end{proof}
+        Since the wrong predicate for condition is:
+        \begin{align*}
+            \frac{E \vdash P \ra wrong}{E \vdash [\phi ]P \ra wrong}
+        \end{align*}
+        \qed
+    \end{proof}
 \end{theorem}
 
 
