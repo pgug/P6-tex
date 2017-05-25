@@ -39,7 +39,11 @@ We need to define the wrong predicate, to know when a process can go \ensuremath
     \end{align*}
 \end{description}
 
+
+
 \begin{theorem}[Subject Reduction]
+We need to show when a process first is well typed, it stays well typed even if it is reduced. That way we can be sure when a process is well typed it stays well typed. We can show that by showing that every reduction a process can take will not make the process go \ensuremath{wrong}.
+
     If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
     Proofs for parallel, communication and structural congruent proving that \ensuremath{P \ra P'} holds will be presented.\\
 
