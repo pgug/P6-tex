@@ -11,8 +11,8 @@ U::=&\;B \tag{Basic Type}\\
 &\mid ch[T] \tag{Channel}\\
 &\mid T_1 \times...\times T_k \tag{Tuple}\\
 &\mid T\ra T \tag{Operation}\\
-B::=&\;number 
-\mid string
+B::=&\;num 
+\mid str
 \mid bool\\
 \end{align*}
 The syntax of our type system is shown above. It is described as follows:
@@ -41,7 +41,7 @@ This is called subtyping, where $T\leq T'$ denotes that $T$ is a subtype of $T'$
 \tag{Subtype}\label{rule:Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
 \end{align*}
 The \ref{rule:Subtype} rule states that if $l$ is at most $l'$, then a type with security level $l$ is a subtype of a type with security level $l'$ that shares the same specialization type.
-For example, $string^2$ is a subtype of $string^4$, since $2\leq4$ and the specialization types of both types is $string$.
+For example, $str^2$ is a subtype of $str^4$, since $2\leq4$ and the specialization types of both types is $str$.
 
 \subsection{Type Validation}
 With the syntax of our type system, it is possible to make types with some security level that allow access to something with a higher security level.
@@ -169,12 +169,12 @@ The \ref{rule:And}, \ref{rule:Or} and \ref{rule:Negation} rules states that, giv
 \begin{align*}
 \tag{True}\label{rule:True} &E\vdash\top:bool^0\\
 \tag{False}\label{rule:False} &E\vdash\bot:bool^0\\
-\tag{Number}\label{rule:Number} &E\vdash n:{number^0}\\
-\tag{String}\label{rule:String} &E\vdash s:{string^0}
+\tag{Number}\label{rule:Number} &E\vdash n:{num^0}\\
+\tag{String}\label{rule:String} &E\vdash s:{str^0}
 \end{align*}
 The \ref{rule:True} and \ref{rule:False} rules state that $\top$ and $\bot$ are trivially well-typed at $bool^0$.
-The \ref{rule:Number} rule states that $n$ is trivially well-typed at $number^0$.
-The \ref{rule:String} rule states that $s$ is trivially well-typed at $string^0$.
+The \ref{rule:Number} rule states that $n$ is trivially well-typed at $num^0$.
+The \ref{rule:String} rule states that $s$ is trivially well-typed at $str^0$.
 These rules ensure that any values used statically in the protocol have the lowest level of security possible, since the protocol is considered accessible to all environments.
 
 \FloatBarrier
