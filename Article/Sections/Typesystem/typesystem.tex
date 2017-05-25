@@ -148,7 +148,7 @@ The \ref{rule:Tuple} rule states that, given context $E$, if some terms are well
 This ensures that the tuple type can not be composed of types with higher security level than itself.
 
 \begin{align*}
-\tag{Operation}\label{rule:Operation} &\infrule{E\vdash f:T\ra T'\quad E\vdash M:T}{E\vdash fM:T'}
+\tag{Operation}\label{rule:Operation} &\infrule{E\vdash f:(T\ra T')^l\quad E\vdash M:T}{E\vdash fM:T'}
 \end{align*}
 The \ref{rule:Operation} rule states that, given context $E$, if $f$ is well-typed at a operation type and $M$ is well-typed at the argument type of that operation type, then $fM$ is well-typed at the resulting type of that operation type.
 This ensures that the argument type and the resulting type are coherent with the types defined by the operation type.
