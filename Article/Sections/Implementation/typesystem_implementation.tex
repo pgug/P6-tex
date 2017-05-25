@@ -1,0 +1,60 @@
+\section{Typesystem derivation with Blockchain}
+The following is the derivation tree obtained by applying our typesystem to a part of our blockchain implementation.
+This serves as a practical example of our typesystem.\\\\
+
+For this example we use the process $P_1$ from section \ref{subsec:blockchain}.
+We also make use of an additional basic type $bc^l$ that represents a blockchain.
+We define the type environment $E$ as the following.
+\begin{align*}
+	E=\mop{getLength}:(bc^0\ra num^0)^0,\ c:bc^0,\ b:ch[bc^1]^1,\ lc:bc^1,\  ba:ch[num^0]^1
+\end{align*}
+
+This results in the following derivation tree, written as 4 subtrees.
+\begin{prooftree}
+		\AxiomC{$E(\mop{getLength})=(bc^0\ra num^0)^0$}
+		\AxiomC{$\valid{num^0}$}
+		\AxiomC{$0\leq0$}
+		\BinaryInfC{$\valid{(bc^0\ra num^0)^0}$}
+		\BinaryInfC{$E\vdash \mop{getLength}:(bc^0\ra num^0)^0$}
+	\AxiomC{$E(c)=bc^0$}
+	\AxiomC{$\valid{bc^0}$}
+	\BinaryInfC{$E\vdash c:bc^0$}
+	\BinaryInfC{$E\vdash\mop{getLength}(c):num^0$}
+	\AxiomC{$E\vdash1:num^0$}
+	\BinaryInfC{$E\vdash\mop{getLength}(c)=1:bool^0$}
+\end{prooftree}
+\vspace{10pt}
+\begin{prooftree}
+	\AxiomC{$E(b)=ch[bc^1]^1$}
+	\AxiomC{$\valid{bc^1}$}
+	\AxiomC{$1\leq1$}
+	\BinaryInfC{$\valid{ch[bc^1]^1}$}
+	\BinaryInfC{$E\vdash b:ch[bc^1]^1$}
+	\AxiomC{$E(lc)=bc^1$}
+	\AxiomC{$\valid{bc^1}$}
+	\BinaryInfC{$E\vdash lc:bc^1$}
+	\BinaryInfC{$E\vdash\lift{b}{lc}$}
+\end{prooftree}
+\vspace{10pt}
+\begin{prooftree}
+	\AxiomC{$E(ba)=ch[num^0]^1$}
+	\AxiomC{$\valid{num^0}$}
+	\AxiomC{$0\leq1$}
+	\BinaryInfC{$\valid{ch[num^0]^1}$}
+	\BinaryInfC{$E\vdash ba:ch[num^0]^1$}
+	\AxiomC{$E\vdash 0:num^0$}
+	\BinaryInfC{$E\vdash\lift{ba}{0}$}
+\end{prooftree}
+\vspace{10pt}
+\begin{prooftree}
+	\AxiomC{$E\vdash\mop{getLength}(c)=1:bool^0$}
+	\AxiomC{$E\vdash\lift{b}{lc}$}
+	\AxiomC{$E\vdash\lift{ba}{0}$}
+	\BinaryInfC{$E\vdash\lift{b}{lc} \para \lift{ba}{0}$}
+	\BinaryInfC{$E\vdash[{\mop{getLength}(c)=1}]{(\lift{b}{lc} \para \lift{ba}{0})}$}
+	\AxiomC{$E\vdash\mop{getLength}(c)=1:bool^0$}
+	\UnaryInfC{$E\vdash\lnot\mop{getLength}(c)=1:bool^0$}
+	\AxiomC{$E\vdash P_2$}
+	\BinaryInfC{$E\vdash[\lnot{\mop{getLength}(c)=1}]{P_2}$}
+	\BinaryInfC{$E\vdash[{\mop{getLength}(c)=1}]{(\lift{b}{lc} \para \lift{ba}{0})}\para[\lnot{\mop{getLength}(c)=1}]{P_2}$}
+\end{prooftree}
