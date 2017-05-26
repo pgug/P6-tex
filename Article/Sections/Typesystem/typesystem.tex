@@ -6,22 +6,22 @@ If the type system prevents anything with some security level from being accessi
 Because these levels are part of our type system, we can define integrity as a behaviour of our types.
 
 \begin{align*}
-T::=&\;U^l\\    	
-U::=&\;B \tag{Basic Type}\\
-&\mid ch[T] \tag{Channel}\\
-&\mid T_1 \times...\times T_k \tag{Tuple}\\
-&\mid T\ra T \tag{Operation}\\
-B::=&\;num 
-\mid str
-\mid bool\\
+    T::=&\;U^l\\    	
+    U::=&\;B \tag{Basic Type}\\
+    &\mid ch[T] \tag{Channel}\\
+    &\mid T_1 \times...\times T_k \tag{Tuple}\\
+    &\mid T\ra T \tag{Operation}\\
+    B::=&\;num 
+    \mid str
+    \mid bool\\
 \end{align*}
 The syntax of our type system is shown above. It is described as follows:
 
 \begin{description}
-	\item[Channels] allow terms of type $T$ to be sent and received.
-	\item[Tuples] have types composed of all the types of the contained terms.
-	\item[Operations] have an argument type and a resulting type.
-	\item[Basic Type] are types that do not consist of other types.
+    \item[Channels] allow terms of type $T$ to be sent and received.
+    \item[Tuples] have types composed of all the types of the contained terms.
+    \item[Operations] have an argument type and a resulting type.
+    \item[Basic Type] are types that do not consist of other types.
 \end{description}
 
 The security level $l$ ranges over the natural numbers $\mathbb{N}_0$.
@@ -30,7 +30,7 @@ In the rest of this section, we denote the security level of type $T$ as $\level
 This is defined by the following:
 
 \begin{align*}
-\tag{Level}\level{U^l}\eqdef l
+    \tag{Level}\level{U^l}\eqdef l
 \end{align*}
 
 \subsection{Subtyping}
@@ -38,7 +38,7 @@ When modeling types with varying security levels, it is useful to allow some typ
 This is called subtyping, where $T\leq T'$ denotes that $T$ is a subtype of $T'$. 
 
 \begin{align*}
-\tag{Subtype}\label{rule:Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
+   \tag{Subtype}\label{rule:Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
 \end{align*}
 The \ref{rule:Subtype} rule states that if $l$ is at most $l'$, then a type with security level $l$ is a subtype of a type with security level $l'$ that shares the same specialization type.
 For example, $str^2$ is a subtype of $str^4$, since $2\leq4$ and the specialization types of both types is $str$.
@@ -49,25 +49,25 @@ This allows environments of lower security level to access something with a high
 To avoid this we introduce type validation, where $\valid{T}$ denotes that the type $T$ is valid, meaning that $T$ does not give access to types with a higher security level than the security level of $T$.
 
 \begin{align*}
-\tag{ValidBasicTerm}\label{rule:ValidBasicTerm} &\valid{B^l}
+    \tag{ValidBasicTerm}\label{rule:ValidBasicTerm} &\valid{B^l}
 \end{align*}
 The \ref{rule:ValidBasicTerm} rule state that the basic term types are trivially valid.
 This is true since they do not consist of any other types and therefore can not give access to higher security levels.
 
 \begin{align*}
-\tag{ValidChannel}\label{rule:ValidChannel} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{ch[U^l]^{l'}}}
+    \tag{ValidChannel}\label{rule:ValidChannel} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{ch[U^l]^{l'}}}
 \end{align*}
 The \ref{rule:ValidChannel} rule states that a channel type is valid if the type communicated by the channel type is valid and has at most the security level of the channel type.
 This ensures that anything of some security level can not be communicated on a channel of lower security and possibly making it accessible to an environment of lower security level.
 
 \begin{align*}
-\tag{ValidTuple}\label{rule:ValidTuple} &\infrule{\forall i\ \valid{T_i}\quad \forall i\ \level{T_i}\leq l}{\valid{(T_1 \times...\times T_k)^l}}& where\ 1\leq i\leq k
+    \tag{ValidTuple}\label{rule:ValidTuple} &\infrule{\forall i\ \valid{T_i}\quad \forall i\ \level{T_i}\leq l}{\valid{(T_1 \times...\times T_k)^l}}& \text{where}\ 1\leq i\leq k
 \end{align*}
 The \ref{rule:ValidTuple} rule states that a tuple type is valid if all its composite types are valid and all their security levels are at most the security level of the tuple type.
 This ensures that a tuple with some security level does not contain terms with a higher security level, since that could allow environments with some security level to access something of a higher security level.
 
 \begin{align*}
-\tag{ValidOperation}\label{rule:ValidOperation} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{(T\ra U^l)^{l'}}}
+    \tag{ValidOperation}\label{rule:ValidOperation} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{(T\ra U^l)^{l'}}}
 \end{align*}
 The \ref{rule:ValidOperation} rule states that an operation type is valid if its resulting type is valid and the operation type has at least the security level of its resulting type.
 This is because the security level of the resulting type determines what security level the operation allows access to.
@@ -81,20 +81,20 @@ A type judgment $x:T$ denotes that $x$ is well-typed at type $T$.
 These judgments can be collected to form a type environment, denoted $E$, that partially maps $\mathbf{Names}$ to $\mathbf{Types}$.
 
 \begin{align*}
-E: \mathbf{Names} \rightharpoonup \mathbf{Types}
+    E: \mathbf{Names} \rightharpoonup \mathbf{Types}
 \end{align*}
 $E\vdash x:T$ denotes that $x$ is well-typed at type $T$ in context $E$.
 $E\vdash x$, where no type is provided, denotes that $x$ is simply well-typed.
 $E(x)$ denotes the actual type of $x$.
 
 \begin{align*}
-\tag{Lookup}\label{rule:lookup} &\infrule{E(x)=T\quad\valid{T}}{E\vdash x:T}
+    \tag{Lookup}\label{rule:lookup} &\infrule{E(x)=T\quad\valid{T}}{E\vdash x:T}
 \end{align*}
 The \ref{rule:lookup} rule states that, given context $E$, if the actual type of $x$ is $T$ and $T$ is a valid type, then $x$ is well-typed at type $T$.
 The validation of $T$ ensures that well-typed names can not have invalid types originating from the type environment.
 
 \begin{align*}
-\tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash x:T\quad T\leq T'}{E\vdash x:T'}
+    \tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash x:T\quad T\leq T'}{E\vdash x:T'}
 \end{align*}
 The \ref{rule:subsumption} rule states that, given context $E$, if $x$ is well-typed at $T$ and $T$ is a subtype of $T'$, then $x$ is also well-typed at type $T'$.
 Together with the \ref{rule:Subtype} rule this states that $x$ remains well-typed at a type that has a higher security level.
@@ -104,73 +104,73 @@ In order to use the type system with processes in our extended rho-calculus, we 
 This is done by providing type rules that cover our syntax and consequently any process that can be expressed in our syntax.
 
 \begin{align*}
-\tag{Nil}\label{rule:Nil} &E \vdash \nil
+    \tag{Nil}\label{rule:Nil} &E \vdash \nil
 \end{align*}
 The \ref{rule:Nil} rule states that any nil process is trivially well-typed.
 This is true since the process contains no types.
 
 \begin{align*}
-\tag{Input}\label{rule:Input} &\infrule{E\vdash x:ch[T]^l\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}
+    \tag{Input}\label{rule:Input} &\infrule{E\vdash x:ch[T]^l\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}
 \end{align*}
 The \ref{rule:Input} rule states that, given context $E$, if $x$ is well-typed at a channel type, that communicates type $T$, and $P$ is well-typed in a context where $y$ is well-typed at $T$, then $x(y).P$ is well-typed.
 This ensures that communication is done on a channel and that $y$ is well-typed at the type communicated by the channel when proceeding with $P$.
 
 \begin{align*}
-\tag{Lift}\label{rule:Lift} &\infrule{E\vdash x:ch[T]^l\quad E \vdash M:T}{E\vdash \lift{x}{M}}
+    \tag{Lift}\label{rule:Lift} &\infrule{E\vdash x:ch[T]^l\quad E \vdash M:T}{E\vdash \lift{x}{M}}
 \end{align*}
 The \ref{rule:Lift} rule states that, given context $E$, if $x$ is well-typed at a channel type, that communicates type $T$ and $M$ is well-typed at $T$, then $\lift{x}{M}$ is well-typed.
 This ensures that communication is done on a channel and that $M$ is well-typed at the type communicated by the channel.
 
 \begin{align*}
-\tag{Drop}\label{rule:Drop} &\infrule{E \vdash P}{E\vdash \drop{x}}& where \drop{x} \equiv P
+    \tag{Drop}\label{rule:Drop} &\infrule{E \vdash P}{E\vdash \drop{x}}& \text{where} \drop{x} \equiv P
 \end{align*}
 The \ref{rule:Drop} rule states that, given context $E$, if the resulting process of dropping $x$ is well-typed, then dropping $x$ is well-typed.
 
 \begin{align*}
-\tag{Parallel}\label{rule:Parallel} &\infrule{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}
+    \tag{Parallel}\label{rule:Parallel} &\infrule{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}
 \end{align*}
 The \ref{rule:Parallel} rule states that, given context $E$, two well-typed processes in parallel form a well-typed process.
 
 \begin{align*}
-\tag{Condition}\label{rule:Condition} &\infrule{E\vdash \phi:bool^l\quad E\vdash P}{E \vdash [\phi] P}
+    \tag{Condition}\label{rule:Condition} &\infrule{E\vdash \phi:bool^l\quad E\vdash P}{E \vdash [\phi] P}
 \end{align*}
 The \ref{rule:Condition} rule states that, given context $E$, if $\phi$ is well-typed at $bool$ and $P$ is well-typed, then the conditional process $[\phi]P$ is also well-typed. This ensures that the condition always evaluates to a boolean value.
 
 \begin{align*}
-\tag{Quote}\label{rule:Quote} &\infrule{E \vdash x:T}{E\vdash \quot{P}:T}& where\ \quot{P} \equiv_N x
+    \tag{Quote}\label{rule:Quote} &\infrule{E \vdash x:T}{E\vdash \quot{P}:T}& \text{where}\ \quot{P} \equiv_N x
 \end{align*}
 The \ref{rule:Quote} rule states that, given context $E$, if the resulting name of quoting $P$ is well-typed at type $T$, then quoting $P$ is also well-typed at $T$.
 
 \begin{align*}
-\tag{Tuple}\label{rule:Tuple} &\infrule{\forall i\ E\vdash M_i:T_i\quad \forall i\ \level{T_i}\leq l}{E\vdash (M_1,...,M_k):(T_1\times...\times T_k)^l}& where\ 1\leq i\leq k
+    \tag{Tuple}\label{rule:Tuple} &\infrule{\forall i\ E\vdash M_i:T_i\quad \forall i\ \level{T_i}\leq l}{E\vdash (M_1,...,M_k):(T_1\times...\times T_k)^l}& \text{where}\ 1\leq i\leq k
 \end{align*}
 The \ref{rule:Tuple} rule states that, given context $E$, if some terms are well-typed at some types, and the highest security level of those types is $l$, then a tuple containing those terms are well-typed at the composition of the types the terms are well-typed at where the composition has a security level of $l$.
 This ensures that the tuple type can not be composed of types with higher security level than itself.
 
 \begin{align*}
-\tag{Operation}\label{rule:Operation} &\infrule{E\vdash f:(T\ra T')^l\quad E\vdash M:T}{E\vdash fM:T'}
+    \tag{Operation}\label{rule:Operation} &\infrule{E\vdash f:(T\ra T')^l\quad E\vdash M:T}{E\vdash fM:T'}
 \end{align*}
 The \ref{rule:Operation} rule states that, given context $E$, if $f$ is well-typed at a operation type and $M$ is well-typed at the argument type of that operation type, then $fM$ is well-typed at the resulting type of that operation type.
 This ensures that the argument type and the resulting type are coherent with the types defined by the operation type.
 
 \begin{align*}
-\tag{Relation}\label{rule:Relation} &\infrule{E\vdash M_1:T\quad E\vdash M_2:T\quad\level{T}=l}{E\vdash M_1 \gamma\ M_2:bool^{l}}
+    \tag{Relation}\label{rule:Relation} &\infrule{E\vdash M_1:T\quad E\vdash M_2:T\quad\level{T}=l}{E\vdash M_1 \gamma\ M_2:bool^{l}}
 \end{align*}
 The \ref{rule:Relation} rule states that, given context $E$, if the terms $M_1$ and $M_2$ are well-type at type $T$ with security level $l$, then $M_1\gamma M_2$ is well-typed at $bool^l$. This ensures that the two terms are comparable with each other and that the security level of the resulting type is at least the security level of the argument types.
 
 \begin{align*}
-\tag{And}\label{rule:And} &\infrule{E\vdash \phi_1:bool^l\quad E\vdash \phi_2:bool^l}{E\vdash \phi _1 \land \phi _2:bool^{l}}\\
-\tag{Or}\label{rule:Or} &\infrule{E\vdash \phi_1:bool^l\quad E\vdash \phi_2:bool^l}{E\vdash \phi _1 \lor \phi _2:bool^{l}}\\
-\tag{Negation}\label{rule:Negation} &\infrule{E\vdash \phi :bool^l }{E\vdash \neg \phi :bool^l}
+    \tag{And}\label{rule:And} &\infrule{E\vdash \phi_1:bool^l\quad E\vdash \phi_2:bool^l}{E\vdash \phi _1 \land \phi _2:bool^{l}}\\
+    \tag{Or}\label{rule:Or} &\infrule{E\vdash \phi_1:bool^l\quad E\vdash \phi_2:bool^l}{E\vdash \phi _1 \lor \phi _2:bool^{l}}\\
+    \tag{Negation}\label{rule:Negation} &\infrule{E\vdash \phi :bool^l }{E\vdash \neg \phi :bool^l}
 \end{align*}
 
 The \ref{rule:And}, \ref{rule:Or} and \ref{rule:Negation} rules states that, given context $E$, boolean operators are well-typed if both the arguments and the result are well-typed at $bool^l$. This ensures that the security level of the resulting type is at least the security level of the argument types.
 
 \begin{align*}
-\tag{True}\label{rule:True} &E\vdash\top:bool^0\\
-\tag{False}\label{rule:False} &E\vdash\bot:bool^0\\
-\tag{Number}\label{rule:Number} &E\vdash n:{num^0}\\
-\tag{String}\label{rule:String} &E\vdash s:{str^0}
+    \tag{True}\label{rule:True} &E\vdash\top:bool^0\\
+    \tag{False}\label{rule:False} &E\vdash\bot:bool^0\\
+    \tag{Number}\label{rule:Number} &E\vdash n:{num^0}\\
+    \tag{String}\label{rule:String} &E\vdash s:{str^0}
 \end{align*}
 The \ref{rule:True} and \ref{rule:False} rules state that $\top$ and $\bot$ are trivially well-typed at $bool^0$.
 The \ref{rule:Number} rule states that $n$ is trivially well-typed at $num^0$.

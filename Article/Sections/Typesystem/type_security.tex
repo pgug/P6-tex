@@ -2,7 +2,7 @@
 
 We need to define the wrong predicate, to know when a process can go \ensuremath{wrong}. If a process goes \ensuremath{wrong}, it have consequences for it integrity. When a process goes \ensuremath{wrong} it can also be determined that the process have a runtime error.
 \begin{description}
-\item[\textbf{Definition: Wrong}]
+    \item[\textbf{Definition: Wrong}]
     \ensuremath{E \vdash P \ra wrong} \\
     
     To prove when \ensuremath{P} goes \ensuremath{wrong}, every \ensuremath{wrong} case will be presented.\\\\
@@ -11,7 +11,7 @@ We need to define the wrong predicate, to know when a process can go \ensuremath
     \end{align*}\\
         
     \item[\textbf{Lift 2}] \begin{align*}
-        \frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &\quad where T_1 \neq T_2
+            \frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &\quad \text{where}\ T_1 \neq T_2
     \end{align*}
 
     \item[\textbf{Input}] \begin{align*}
@@ -42,7 +42,7 @@ We need to define the wrong predicate, to know when a process can go \ensuremath
 
 
 \begin{theorem}[Subject Reduction]
-We need to show when a process first is well typed, it stays well typed even if it is reduced. That way we can be sure when a process is well typed it stays well typed. We can show that by showing that every reduction a process can take will not make the process go \ensuremath{wrong}.
+    To ensure that a process that is well typed continues to be well typed after reduction, it is necessary to proof every reduction a process can take and verify that it wont go \ensuremath{wrong}.
 
     If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
     Proofs for parallel, communication and structural congruent proving that \ensuremath{P \ra P'} holds will be presented.\\
@@ -71,6 +71,7 @@ We need to show when a process first is well typed, it stays well typed even if 
         \begin{align*}
             \infrule{P \equiv P' \quad P' \ra Q' \quad Q' \equiv Q}{P \ra Q} \tag{Structural Congruent}
         \end{align*}
+
 
         If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
 
