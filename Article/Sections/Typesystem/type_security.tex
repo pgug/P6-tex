@@ -182,17 +182,17 @@ Using proof by induction, proofs for every reduction rule proving that they hold
 		
 		By induction hypothesis we have that:
 		\begin{align*}
-		E \vdash \drop{x} \nrightarrow wrong
+		E \vdash P \nrightarrow wrong
 		\end{align*}
 		
 		Therefore:
 		\begin{align*}
-		\frac{}{E \vdash \drop{x} \nrightarrow wrong}
+		\frac{}{E \vdash \quot{P} \nrightarrow wrong}
 		\end{align*}
 		
 		Since the wrong predicate for quote says:
 		\begin{align*}
-		\frac{\quot{P} \equiv _N x \quad E \vdash P ra wrong}{E \vdash \drop{x} \ra wrong}
+		\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
 		\end{align*}
 	\item[Condition]
 		\begin{align*}
