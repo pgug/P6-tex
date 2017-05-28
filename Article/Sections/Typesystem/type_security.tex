@@ -43,18 +43,27 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
     To ensure that a process that is well typed continues to be well typed after reduction, it is necessary to proof every reduction a process can take and verify that it wont go $wrong$.
 
     Proofs for parallel, communication and structural congruent proving that $P \ra P'$ holds will be presented.\\
+\newpage
+
+We need to show that if a process is well typed it will never could go $wrong$. That ensures the integrity of the process and the well typed process can break the type system.
+
+Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go $wrong$ will be presented.
 \begin{theorem}[Subject Reduction]
-    If $E \vdash P$ and $P\ra P'$ then $E \vdash P'$.
+	If $E \vdash P$ and $P\ra P'$ then $E \vdash P'$.
 \end{theorem}
+\begin{theorem}[Not Wrong]
+	If $E \vdash P$ then $E \vdash P \nrightarrow wrong$
+\end{theorem}
+\subsection{Theorem Proofs}
 \begin{proof}[Subject Reduction]
 	\begin{description}
-		\item[Parallel]
+	\item[Parallel]
 		\begin{align*}
 		\frac{P \ra P' \quad}{P \para Q \ra P' \para Q} \tag{Parallel}
 		\end{align*}\\
 		
 		Therefore if $E \vdash P \para Q$ then $E \vdash P' \para Q$. The type rule for parallel says $\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}$ so if $E \vdash P'$ then $\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}$\\
-		\item[Communication]
+	\item[Communication]
 		\begin{align*}
 		\infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}} \tag{Communication}
 		\end{align*}
@@ -62,7 +71,7 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
 		\begin{lemma}[Substitution]
 			If $E,x:T \vdash P$ and $E_2 \vdash M:T$ then $E, E_2 \vdash P\{M/x \}$
 		\end{lemma}
-		\item[Structural Congruent]
+	\item[Structural Congruent]
 		\begin{align*}
 		\infrule{P \equiv P' \quad P' \ra Q' \quad Q' \equiv Q}{P \ra Q} \tag{Structural Congruent}
 		\end{align*}
@@ -78,83 +87,75 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
 	\end{description}
 	\qed
 \end{proof}
-\newpage
-
-We need to show that if a process is well typed it will never could go $wrong$. That ensures the integrity of the process and the well typed process can break the type system.
-
-Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go $wrong$ will be presented.
-\begin{theorem}[Not Wrong]
-	If $E \vdash P$ then $E \vdash P \nrightarrow wrong$
-\end{theorem}
 
 \begin{proof}[Not Wrong]
 	\begin{description}
-		\item[Nil]
-			Since there is not a wrong predicate for nil, nil can not go wrong therefore:
-			\begin{align*}
-			E \vdash 0 \nrightarrow 0
-			\end{align*}
-		\item[Parallel]
-			\begin{align*}
-			\frac{E \vdash P \quad E \vdash Q }{E \vdash P \para Q}
-			\end{align*}
-		 
-			By induction hypothesis we have that: 
-			\begin{align*}
-			E \vdash P \nrightarrow wrong\\
-			E \vdash Q \nrightarrow wrong
-			\end{align*}
-			Therefore:
-			\begin{align*}
-			\frac{}{E \vdash P \para Q \nrightarrow wrong}
-			\end{align*}
-		 
+	\item[Nil]
+		Since there is not a wrong predicate for nil, nil can not go wrong therefore:
+		\begin{align*}
+		E \vdash 0 \nrightarrow 0
+		\end{align*}
+	\item[Parallel]
+		\begin{align*}
+		\frac{E \vdash P \quad E \vdash Q }{E \vdash P \para Q}
+		\end{align*}
+		
+		By induction hypothesis we have that: 
+		\begin{align*}
+		E \vdash P \nrightarrow wrong\\
+		E \vdash Q \nrightarrow wrong
+		\end{align*}
+		Therefore:
+		\begin{align*}
+		\frac{}{E \vdash P \para Q \nrightarrow wrong}
+		\end{align*}
+		
 		Since the wrong predicate for parallel says:
 		\begin{align*}
 		\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
 		\end{align*}
 		And we can prove by the \ref{rule:ParaCommutative} rule that the same holds for $Q$.
 	\item[Lift]
-	    \begin{align*}
-	    \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 = T_2}{E \vdash \lift{x}{M}}
-	    \end{align*}
-	    By induction hypothesis we have that:
-	    \begin{align*}
-	    &E \vdash M:T_1\\
-	    &E \vdash x:ch[T_2]^l\\
-	    &T_1 = T_2
-	    \end{align*}
-	    Therefore:
-	    \begin{align*}
-	    \frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
-	    \end{align*}
-	    
-	    Since the wrong predicate for Lift says:
-	    \begin{align*}
-	    \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
-	    \end{align*}
-	    \begin{align*}
-	    \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 \neq T_2}{E \vdash \lift{x}{M} \ra wrong}
-	    \end{align*}
+		\begin{align*}
+		\frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 = T_2}{E \vdash \lift{x}{M}}
+		\end{align*}
+		By induction hypothesis we have that:
+		\begin{align*}
+		&E \vdash M:T_1\\
+		&E \vdash x:ch[T_2]^l\\
+		&T_1 = T_2
+		\end{align*}
+		Therefore:
+		\begin{align*}
+		\frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
+		\end{align*}
+		
+		Since the wrong predicate for Lift says:
+		\begin{align*}
+		\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
+		\end{align*}
+		\begin{align*}
+		\frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 \neq T_2}{E \vdash \lift{x}{M} \ra wrong}
+		\end{align*}
 	\item[Input]
-	    \begin{align*}
-	    \frac{E \vdash x:ch[T]^l \quad E,y:T \vdash P}{E \vdash \inp{x}{y}P}
-	    \end{align*}
-	    By induction hypothesis we have that:
-	    \begin{align*}
-	    &E \vdash x:ch[T]^l\\
-	    &E \vdash y:T \vdash P \nrightarrow wrong
-	    \end{align*}
-	    
-	    Therefore:
-	    \begin{align*}
-	    \frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
-	    \end{align*}
-	    
-	    Since the wrong predicate for input says:
-	    \begin{align*}
-	    \frac{E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]^l}{E \vdash \inp{x}{y}P \ra wrong}
-	    \end{align*}
+		\begin{align*}
+		\frac{E \vdash x:ch[T]^l \quad E,y:T \vdash P}{E \vdash \inp{x}{y}P}
+		\end{align*}
+		By induction hypothesis we have that:
+		\begin{align*}
+		&E \vdash x:ch[T]^l\\
+		&E \vdash y:T \vdash P \nrightarrow wrong
+		\end{align*}
+		
+		Therefore:
+		\begin{align*}
+		\frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
+		\end{align*}
+		
+		Since the wrong predicate for input says:
+		\begin{align*}
+		\frac{E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]^l}{E \vdash \inp{x}{y}P \ra wrong}
+		\end{align*}
 	\item[Drop]
 		\begin{align*}
 		\frac{E \vdash P}{E \vdash \drop{x}}
