@@ -97,7 +97,7 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 \begin{proof}[Not Wrong]
 	\begin{description}
 	\item[Nil]
-		Since there is not a wrong predicate for nil, nil can not go wrong therefore:
+		Since there is not a wrong-predicate for nil, nil can not go wrong therefore:
 		\begin{align*}
 		E \vdash 0 \nrightarrow 0
 		\end{align*}
@@ -116,7 +116,7 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\frac{}{E \vdash P \para Q \nrightarrow wrong}
 		\end{align*}
 		
-		Since the wrong predicate for parallel says:
+		Since the wrong-predicate for parallel says:
 		\begin{align*}
 		\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
 		\end{align*}
@@ -136,7 +136,7 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
 		\end{align*}
 		
-		Since the wrong predicate for Lift says:
+		Since the wrong-predicate for Lift says:
 		\begin{align*}
 		\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
 		\end{align*}
@@ -158,7 +158,7 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
 		\end{align*}
 		
-		Since the wrong predicate for input says:
+		Since the wrong-predicate for input says:
 		\begin{align*}
 		\frac{E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]^l}{E \vdash \inp{x}{y}P \ra wrong}
 		\end{align*}
@@ -177,7 +177,7 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\frac{}{E \vdash \drop{x} \nrightarrow wrong}
 		\end{align*}
 		
-		Since the wrong predicate for drop says:
+		Since the wrong-predicate for drop says:
 		\begin{align*}
 		\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
 		\end{align*}
@@ -196,7 +196,7 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\frac{}{E \vdash \quot{P} \nrightarrow wrong}
 		\end{align*}
 		
-		Since the wrong predicate for quote says:
+		Since the wrong-predicate for quote says:
 		\begin{align*}
 		\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
 		\end{align*}
@@ -214,7 +214,7 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\frac{}{E \vdash [\phi ]P \nrightarrow wrong}
 		\end{align*}
 		
-		Since the wrong predicate for condition is:
+		Since the wrong-predicate for condition is:
 		\begin{align*}
 		\frac{E \vdash P \ra wrong}{E \vdash [\phi ]P \ra wrong}
 		\end{align*}
