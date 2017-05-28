@@ -1,10 +1,11 @@
 \section{Type Security}
 We need to define the wrong predicate, to know when a process can go $wrong$. If a process goes $wrong$, it have consequences for it integrity. When a process goes $wrong$ it can also be determined that the process have a runtime error.
 \begin{description}
-    \item[Definition: Wrong]
-    $E \vdash P \ra wrong$ \\
+    \item[Definition: Wrong] $E \vdash P \ra wrong$
+\end{description}
     
-    In order to prove when $P$ goes $wrong$, every $wrong$ case will be presented.\\\\
+    In order to prove when $P$ goes $wrong$, every $wrong$ case will be presented.
+\begin{description}
     \item[Lift 1] \begin{align*}
         \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
     \end{align*}\\
@@ -39,194 +40,177 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
 \end{description}
 
 
-
-\begin{theorem}[Subject Reduction]
     To ensure that a process that is well typed continues to be well typed after reduction, it is necessary to proof every reduction a process can take and verify that it wont go $wrong$.
 
-    If $E \vdash P$ and $P\ra P'$ then $E \vdash P'$.
     Proofs for parallel, communication and structural congruent proving that $P \ra P'$ holds will be presented.\\
-
-    \begin{proof}[Parallel]
-        \begin{align*}
-            \frac{P \ra P' \quad}{P \para Q \ra P' \para Q} \tag{Parallel}
-        \end{align*}\\
-
-    Therefore if $E \vdash P \para Q$ then $E \vdash P' \para Q$. The type rule for parallel says $\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}$ so if $E \vdash P'$ then $\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}$\\
-        \qed
-    \end{proof}
-
-    \begin{proof}[Communication]
-        \begin{align*}
-            \infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}} \tag{Communication}
-        \end{align*}
-
-        \begin{lemma}[Substitution]
-            If $E,x:T \vdash P$ and $E_2 \vdash M:T$ then $E, E_2 \vdash P\{M/x \}$
-        \end{lemma}
-        \qed
-    \end{proof}
-
-    \begin{proof}[Structural Congruent]
-        \begin{align*}
-            \infrule{P \equiv P' \quad P' \ra Q' \quad Q' \equiv Q}{P \ra Q} \tag{Structural Congruent}
-        \end{align*}
-
-
-        If $E \vdash P$ then $E \vdash P'$ We will want to show that if $E \vdash Q$ then $E \vdash Q'$
-
-        \begin{lemma}[Equivalent]
-            If $P \equiv Q$ and $E \vdash P$ then $E \vdash Q$
-        \end{lemma}
-
-        By applying lemma equivalent to the structural congruent, we see that because $P \equiv Q$ and $E \vdash P$ then $E \vdash Q$ and because $P \ra P'$ and $E \vdash P'$ then $E \vdash Q'$.
-        \qed
-    \end{proof}
+\begin{theorem}[Subject Reduction]
+    If $E \vdash P$ and $P\ra P'$ then $E \vdash P'$.
 \end{theorem}
+\begin{proof}[Subject Reduction]
+	\begin{description}
+		\item[Parallel]
+		\begin{align*}
+		\frac{P \ra P' \quad}{P \para Q \ra P' \para Q} \tag{Parallel}
+		\end{align*}\\
+		
+		Therefore if $E \vdash P \para Q$ then $E \vdash P' \para Q$. The type rule for parallel says $\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}$ so if $E \vdash P'$ then $\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}$\\
+		\item[Communication]
+		\begin{align*}
+		\infrule{}{\lift{x}{M}\para\inp{x}{y}P\ra P\{M/y\}} \tag{Communication}
+		\end{align*}
+		
+		\begin{lemma}[Substitution]
+			If $E,x:T \vdash P$ and $E_2 \vdash M:T$ then $E, E_2 \vdash P\{M/x \}$
+		\end{lemma}
+		\item[Structural Congruent]
+		\begin{align*}
+		\infrule{P \equiv P' \quad P' \ra Q' \quad Q' \equiv Q}{P \ra Q} \tag{Structural Congruent}
+		\end{align*}
+		
+		
+		If $E \vdash P$ then $E \vdash P'$ We will want to show that if $E \vdash Q$ then $E \vdash Q'$
+		
+		\begin{lemma}[Equivalent]
+			If $P \equiv Q$ and $E \vdash P$ then $E \vdash Q$
+		\end{lemma}
+		
+		By applying lemma equivalent to the structural congruent, we see that because $P \equiv Q$ and $E \vdash P$ then $E \vdash Q$ and because $P \ra P'$ and $E \vdash P'$ then $E \vdash Q'$.
+	\end{description}
+	\qed
+\end{proof}
 \newpage
 
-\begin{theorem}[Not Wrong]
 We need to show that if a process is well typed it will never could go $wrong$. That ensures the integrity of the process and the well typed process can break the type system.
-    If $E \vdash P$ then $E \vdash P \nrightarrow wrong$.\\
 
-    Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go $wrong$ will be presented.
-
-    \begin{proof}[Nil]
-        Since there is not a wrong predicate for nil, nil can not go wrong therefore $E \vdash 0 \nrightarrow 0$.
-        \qed
-    \end{proof}
-
-    \begin{proof}[Parallel]
-        \begin{align*}
-            \frac{E \vdash P \quad E \vdash Q }{E \vdash P \para Q}
-        \end{align*}
-
-        By induction hypothesis we have that: 
-        \begin{align*}
-            E \vdash P \nrightarrow wrong\\
-            E \vdash Q \nrightarrow wrong
-        \end{align*}
-        Therefore:
-        \begin{align*}
-            \frac{}{E \vdash P \para Q \nrightarrow wrong}
-        \end{align*}
-
-        Since the wrong predicate for parallel says:
-        \begin{align*}
-            \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
-        \end{align*}
-        And we can prove by the \ref{rule:ParaCommutative} rule that the same holds for $Q$.\\
-        \qed
-    \end{proof}
-
-    \begin{proof}[Lift]
-        \begin{align*}
-            \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 = T_2}{E \vdash \lift{x}{M}}
-        \end{align*}
-        By induction hypothesis we have that:
-        \begin{align*}
-            &E \vdash M:T_1\\
-            &E \vdash x:ch[T_2]^l\\
-            &T_1 = T_2
-        \end{align*}
-        Therefore:
-        \begin{align*}
-            \frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
-        \end{align*}
-
-        Since the wrong predicate for Lift says:
-        \begin{align*}
-            \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
-        \end{align*}
-        \begin{align*}
-            \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 \neq T_2}{E \vdash \lift{x}{M} \ra wrong}
-        \end{align*}
-        \qed
-    \end{proof}
-
-    \begin{proof}[Input]
-        \begin{align*}
-            \frac{E \vdash x:ch[T]^l \quad E,y:T \vdash P}{E \vdash \inp{x}{y}P}
-        \end{align*}
-        By induction hypothesis we have that:
-        \begin{align*}
-            &E \vdash x:ch[T]^l\\
-            &E \vdash y:T \vdash P \nrightarrow wrong
-        \end{align*}
-
-        Therefore:
-        \begin{align*}
-            \frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
-        \end{align*}
-
-        Since the wrong predicate for input says:
-        \begin{align*}
-            \frac{E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]^l}{E \vdash \inp{x}{y}P \ra wrong}
-        \end{align*}
-        \qed
-    \end{proof}
-
-    \begin{proof}[Drop]
-        \begin{align*}
-            \frac{E \vdash P}{E \vdash \drop{x}}
-        \end{align*}
-
-        By induction hypothesis we have that:
-        \begin{align*}
-            E \vdash P \nrightarrow wrong
-        \end{align*}
-
-        Therefore:
-        \begin{align*}
-            \frac{}{E \vdash \drop{x} \nrightarrow wrong}
-        \end{align*}
-
-        Since the wrong predicate for drop says:
-        \begin{align*}
-            \frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-        \end{align*}
-        \qed
-    \end{proof}
-
-    \begin{proof}[Quote]
-        \begin{align*}
-            \frac{E \vdash x:T \quad \quot{P} \equiv _N x}{E \vdash \quot{P}:T}
-        \end{align*}
-
-        By induction hypothesis we have that:
-        \begin{align*}
-            E \vdash \drop{x} \nrightarrow wrong
-        \end{align*}
-
-        Therefore:
-        \begin{align*}
-            \frac{}{E \vdash \drop{x} \nrightarrow wrong}
-        \end{align*}
-
-        Since the wrong predicate for quote says:
-        \begin{align*}
-            \frac{\quot{P} \equiv _N x \quad E \vdash P ra wrong}{E \vdash \drop{x} \ra wrong}
-        \end{align*}
-        \qed
-    \end{proof}
-
-    \begin{proof}[Condition]
-        \begin{align*}
-            \frac{E \vdash \phi : bool \quad E \vdash P}{E \vdash [\phi]P}
-        \end{align*}
-        By induction hypothesis we have that:
-        \begin{align*}
-            E \vdash P \nrightarrow wrong
-        \end{align*}
-
-        Therefore:
-        \begin{align*}
-            \frac{}{E \vdash [\phi ]P \nrightarrow wrong}
-        \end{align*}
-
-        Since the wrong predicate for condition is:
-        \begin{align*}
-            \frac{E \vdash P \ra wrong}{E \vdash [\phi ]P \ra wrong}
-        \end{align*}
-        \qed
-    \end{proof}
+Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go $wrong$ will be presented.
+\begin{theorem}[Not Wrong]
+	If $E \vdash P$ then $E \vdash P \nrightarrow wrong$
 \end{theorem}
+
+\begin{proof}[Not Wrong]
+	\begin{description}
+		\item[Nil]
+			Since there is not a wrong predicate for nil, nil can not go wrong therefore:
+			\begin{align*}
+			E \vdash 0 \nrightarrow 0
+			\end{align*}
+		\item[Parallel]
+			\begin{align*}
+			\frac{E \vdash P \quad E \vdash Q }{E \vdash P \para Q}
+			\end{align*}
+		 
+			By induction hypothesis we have that: 
+			\begin{align*}
+			E \vdash P \nrightarrow wrong\\
+			E \vdash Q \nrightarrow wrong
+			\end{align*}
+			Therefore:
+			\begin{align*}
+			\frac{}{E \vdash P \para Q \nrightarrow wrong}
+			\end{align*}
+		 
+		Since the wrong predicate for parallel says:
+		\begin{align*}
+		\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
+		\end{align*}
+		And we can prove by the \ref{rule:ParaCommutative} rule that the same holds for $Q$.
+	\item[Lift]
+	    \begin{align*}
+	    \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 = T_2}{E \vdash \lift{x}{M}}
+	    \end{align*}
+	    By induction hypothesis we have that:
+	    \begin{align*}
+	    &E \vdash M:T_1\\
+	    &E \vdash x:ch[T_2]^l\\
+	    &T_1 = T_2
+	    \end{align*}
+	    Therefore:
+	    \begin{align*}
+	    \frac{}{E \vdash \lift{x}{M} \nrightarrow wrong}
+	    \end{align*}
+	    
+	    Since the wrong predicate for Lift says:
+	    \begin{align*}
+	    \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
+	    \end{align*}
+	    \begin{align*}
+	    \frac{E \vdash M:T_1 \quad E \vdash x:ch[T_2]^l \quad T_1 \neq T_2}{E \vdash \lift{x}{M} \ra wrong}
+	    \end{align*}
+	\item[Input]
+	    \begin{align*}
+	    \frac{E \vdash x:ch[T]^l \quad E,y:T \vdash P}{E \vdash \inp{x}{y}P}
+	    \end{align*}
+	    By induction hypothesis we have that:
+	    \begin{align*}
+	    &E \vdash x:ch[T]^l\\
+	    &E \vdash y:T \vdash P \nrightarrow wrong
+	    \end{align*}
+	    
+	    Therefore:
+	    \begin{align*}
+	    \frac{}{E \vdash \inp{x}{y}P \nrightarrow wrong}
+	    \end{align*}
+	    
+	    Since the wrong predicate for input says:
+	    \begin{align*}
+	    \frac{E \vdash P\{M/y\}\ra wrong \quad E\vdash M\vdash T \quad E(x)=ch[T]^l}{E \vdash \inp{x}{y}P \ra wrong}
+	    \end{align*}
+	\item[Drop]
+		\begin{align*}
+		\frac{E \vdash P}{E \vdash \drop{x}}
+		\end{align*}
+		
+		By induction hypothesis we have that:
+		\begin{align*}
+		E \vdash P \nrightarrow wrong
+		\end{align*}
+		
+		Therefore:
+		\begin{align*}
+		\frac{}{E \vdash \drop{x} \nrightarrow wrong}
+		\end{align*}
+		
+		Since the wrong predicate for drop says:
+		\begin{align*}
+		\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+		\end{align*}
+	\item[Quote]
+		\begin{align*}
+		\frac{E \vdash x:T \quad \quot{P} \equiv _N x}{E \vdash \quot{P}:T}
+		\end{align*}
+		
+		By induction hypothesis we have that:
+		\begin{align*}
+		E \vdash \drop{x} \nrightarrow wrong
+		\end{align*}
+		
+		Therefore:
+		\begin{align*}
+		\frac{}{E \vdash \drop{x} \nrightarrow wrong}
+		\end{align*}
+		
+		Since the wrong predicate for quote says:
+		\begin{align*}
+		\frac{\quot{P} \equiv _N x \quad E \vdash P ra wrong}{E \vdash \drop{x} \ra wrong}
+		\end{align*}
+	\item[Condition]
+		\begin{align*}
+		\frac{E \vdash \phi : bool \quad E \vdash P}{E \vdash [\phi]P}
+		\end{align*}
+		By induction hypothesis we have that:
+		\begin{align*}
+		E \vdash P \nrightarrow wrong
+		\end{align*}
+		
+		Therefore:
+		\begin{align*}
+		\frac{}{E \vdash [\phi ]P \nrightarrow wrong}
+		\end{align*}
+		
+		Since the wrong predicate for condition is:
+		\begin{align*}
+		\frac{E \vdash P \ra wrong}{E \vdash [\phi ]P \ra wrong}
+		\end{align*}
+	\end{description}
+	\qed
+\end{proof}
