@@ -9,34 +9,43 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
     \item[Lift 1] \begin{align*}
         \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
     \end{align*}\\
+    If $M$ is not well typed under $E$ then the lifting will go wrong.\\
         
     \item[Lift 2] \begin{align*}
             \frac{E \vdash M:T_1 \quad E(x)=ch[T_2]^l}{E \vdash \lift{x}{M} \ra wrong} &\quad \text{where}\ T_1 \neq T_2
     \end{align*}
+    If $M$ is of type $T_1$ and $x$ is of type channel with type $T_2$ and $T_1$ and $T_2$ is not equal, then the lifting will go wrong. We may not lift an $M$ on a channel which is not of the same type.\\
 
     \item[Input] \begin{align*}
         \frac{E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]^l} {E \vdash \inp{x}{y}P \ra wrong}\\
     \end{align*}
+    If the process $P$ goes $wrong$ with the input $M$ in exchange for $y$. Then the input will go wrong. It can happen that the process $P$ expected that the $y$ will be of type $num$ but $M$ is instead of type $str$.\\
 
     \item[Parallel] \begin{align*}
         \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
     \end{align*}
+    If one of the process $P$ or $Q$ goes $wrong$, then $P$ and $Q$ in parallel will go $wrong$.\\
 
     \item[Structural Congruens] \begin{align*}
         \frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
     \end{align*}
+    If $P$ and $Q$ are structural congruent and $Q$ goes $wrong$, then $P$ also goes $wrong$.\\
 
     \item[Drop 1]\begin{align*}
         \frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
     \end{align*}
+    
+    If a dropped name $x$ if structural congruent with a process $P$ and $P$ goes $wrong$, then the dropped$x$ will also go $wrong$.\\
 
     \item[Drop 2]\begin{align*}
         \frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
     \end{align*}
+    If a quoted process $P$ is name equivalent with a name $x$ and $P$ goes $wrong$. Then the dropped x will also go $wrong$.\\
 
     \item[Condition]\begin{align*}
         \frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
     \end{align*}
+    If the process $P$ goes $wrong$ then the condition of $P$ will also go $wrong$ even if the condition is false, and never will execute $P$.
 \end{description}
 
 
