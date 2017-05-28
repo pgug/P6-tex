@@ -18,8 +18,9 @@
 \tocauthor{}
 \maketitle
 \begin{abstract}
-In this article we will try to verify the integrity of a blockchain protocol in the rho-calculus. We chose to extend the rho-calculus to make our blockchain implementation easier to design and read, as it is possible to make a implementation without the extensions but that would be far more complex and as the implementation is not the focus of this article, the extensions were added. This articles focuses on checking for the integrity of the blockchain, so to check that we propose a types system. The type system consist of several types we have defined and security levels. The security levels are used to make sure information, that must not be leaked, is only send on a channel if its security level is at least as high.\\
-    The type systems validity is proved in the article with proofs by induction, where all cases that a process can go \ensuremath{wrong}, which means that there will not happen a runtime error, can happen. There after proving that our type system can not go \ensuremath{wrong} we have proved that our type system does verify that the integrity of our blockchain is kept. The type system is not limited for usage on a blockchain implementation, it can be used on any implementation written in the rho-calculus.\\
-We have achieved proving and designing a type system, that tests for integrity problems for an implementation made in the rho-calculus.
+In this article we will try to verify the integrity of a blockchain protocol in the rho-calculus. To do this we chose to implement a blockchain in the rho-calculus. We also chose to extend the rho-calculus to make our blockchain implementation easier to design and read, as it is possible to make an implementation without the extensions but that would be far more complex.\\
+To verify the integrity of our blockchain, we present a type system. The type system consists of several types with security levels. The security levels are added to make sure that secure information is inaccessable to insecure environments.\\
+The type system is proven to prevent the integrity of a protocol from being broken, if the protocol is given a correct typing. The type system is not limited in usage to our blockchain implementation, but can be applied to any other implementation written in the rho-calculus.\\
+We have achieved designing and proving a type system, that can verify the integrity of an implementation written in the rho-calculus.
 \end{abstract}
 \clearpage
