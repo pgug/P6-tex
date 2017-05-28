@@ -26,11 +26,11 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
         \frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
     \end{align*}
 
-    \item[Drop]\begin{align*}
+    \item[Drop 1]\begin{align*}
         \frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
     \end{align*}
 
-    \item[Quote]\begin{align*}
+    \item[Drop 2]\begin{align*}
         \frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
     \end{align*}
 
