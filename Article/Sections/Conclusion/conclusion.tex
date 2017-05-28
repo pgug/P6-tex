@@ -1,8 +1,13 @@
 \section{Conclusion}
-We have shown that the rho-calculus is a usable calculus, we managed to implement a blockchain protocol, and made a type system which ensures the integrity of a system. By showing that the rho-calculus is useful can be more used in the future, rho-calculus have been out since 2005, but have not been seen used in many occasions. The RChain project could very well have some potential, and we have shown that it is possible to implement a blockchain protocol in the rho-calculus, so the RChain should also be possible to make.\\
+%We have shown that the rho-calculus is a usable calculus, we managed to implement a blockchain protocol, and made a type system which ensures the integrity of a system. By showing that the rho-calculus is useful can be more used in the future, rho-calculus have been out since 2005, but have not been seen used in many occasions. The RChain project could very well have some potential, and we have shown that it is possible to implement a blockchain protocol in the rho-calculus, so the RChain should also be possible to make.\\
 
+In this article, we have shown that it is possible to implement a simple blockchain protocol in the rho-calculus. It was done by extending the rho-calculus to make it easier to model the protocol, and also make the model easier to understand. It was not necessary to extend the rho-calculus is it was already possible to model our blockchain protocol without the extensions, but it make it far more complex and as the rho-calculus in it self, is no the main focus of this article, extending the rho-calculus was chosen.\\
+We designed a type system, that can be added on top of a model written in the rho-calculus. The type system adds type rules, to verify that a process is well-typed after a transition. In the article we prove by induction that our type system is valid and therefore also correctly determine if the models integrity is broken on runtime.\\
+
+
+% further work
 For further work we could implement other security feature in the rho-calculus such that instead of only proving the integrity of a system, it could hold its authenticity or its immutability, other security features could also be implemented. The rho-calculus could also be implemented into a type checker or model checker, and in that way check a model for its integrity or for other security features. But with the work we have done on the rho-calculus we have shown that it is useful and can be use in other occasions, because it is as strong and expressive as the pi calculus as shown in \citep{Meredith2005}, but we have shown that we could implement a blockchain protocol in it.
 
 
-\subsection*{Acknowledgements}
+\subsection*{Acknowledgments}
 We would like to thank Hans Hüttel our supervisor for helping us with this project, for our discussion on the calculus and type system and for guiding us in the right direction.
