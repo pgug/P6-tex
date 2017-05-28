@@ -1,40 +1,40 @@
 \section{Type Security}
 
-We need to define the wrong predicate, to know when a process can go \ensuremath{wrong}. If a process goes \ensuremath{wrong}, it have consequences for it integrity. When a process goes \ensuremath{wrong} it can also be determined that the process have a runtime error.
+We need to define the wrong predicate, to know when a process can go $wrong$. If a process goes $wrong$, it have consequences for it integrity. When a process goes $wrong$ it can also be determined that the process have a runtime error.
 \begin{description}
-    \item[\textbf{Definition: Wrong}]
-    \ensuremath{E \vdash P \ra wrong} \\
+    \item[Definition: Wrong]
+    $E \vdash P \ra wrong$ \\
     
-    To prove when \ensuremath{P} goes \ensuremath{wrong}, every \ensuremath{wrong} case will be presented.\\\\
-    \item[\textbf{Lift 1}] \begin{align*}
+    To prove when $P$ goes $wrong$, every $wrong$ case will be presented.\\\\
+    \item[Lift 1] \begin{align*}
         \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
     \end{align*}\\
         
-    \item[\textbf{Lift 2}] \begin{align*}
+    \item[Lift 2] \begin{align*}
             \frac{E \vdash M:T_1 \quad E(x)=ch[T_2]}{E \vdash \lift{x}{M} \ra wrong} &\quad \text{where}\ T_1 \neq T_2
     \end{align*}
 
-    \item[\textbf{Input}] \begin{align*}
+    \item[Input] \begin{align*}
         \frac{\exists M,\quad E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]} {E \vdash \inp{x}{y}P \ra wrong}\\
     \end{align*}
 
-    \item[\textbf{Parallel}] \begin{align*}
+    \item[Parallel] \begin{align*}
         \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
     \end{align*}
 
-    \item[\textbf{Structural Congruens}] \begin{align*}
+    \item[Structural Congruens] \begin{align*}
         \frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
     \end{align*}
 
-    \item[\textbf{Drop}]\begin{align*}
+    \item[Drop]\begin{align*}
         \frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
     \end{align*}
 
-    \item[\textbf{Quote}]\begin{align*}
+    \item[Quote]\begin{align*}
         \frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
     \end{align*}
 
-    \item[\textbf{Condition}]\begin{align*}
+    \item[Condition]\begin{align*}
         \frac{E \vdash P \ra wrong}{E \vdash [\phi]P \ra wrong}
     \end{align*}
 \end{description}
@@ -42,17 +42,17 @@ We need to define the wrong predicate, to know when a process can go \ensuremath
 
 
 \begin{theorem}[Subject Reduction]
-    To ensure that a process that is well typed continues to be well typed after reduction, it is necessary to proof every reduction a process can take and verify that it wont go \ensuremath{wrong}.
+    To ensure that a process that is well typed continues to be well typed after reduction, it is necessary to proof every reduction a process can take and verify that it wont go $wrong$.
 
-    If \ensuremath{E \vdash P} and \ensuremath{P\ra P'} then \ensuremath{E \vdash P'}.
-    Proofs for parallel, communication and structural congruent proving that \ensuremath{P \ra P'} holds will be presented.\\
+    If $E \vdash P$ and $P\ra P'$ then $E \vdash P'$.
+    Proofs for parallel, communication and structural congruent proving that $P \ra P'$ holds will be presented.\\
 
     \begin{proof}[Parallel]
         \begin{align*}
             \frac{P \ra P' \quad}{P \para Q \ra P' \para Q} \tag{Parallel}
         \end{align*}\\
 
-    Therefor if \ensuremath{E \vdash P \para Q} then \ensuremath{E \vdash P' \para Q}. The type rule for parallel says \ensuremath{\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}} so if \ensuremath{E \vdash P'} then \ensuremath{\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}}\\
+    Therefor if $E \vdash P \para Q$ then $E \vdash P' \para Q$. The type rule for parallel says $\frac{E \vdash P\quad E \vdash Q}{E \vdash P \para Q}$ so if $E \vdash P'$ then $\frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}$\\
         \qed
     \end{proof}
 
@@ -62,7 +62,7 @@ We need to define the wrong predicate, to know when a process can go \ensuremath
         \end{align*}
 
         \begin{lemma}[Substitution]
-            If \ensuremath{E,x:T \vdash P} and \ensuremath{E_2 \vdash M:T} then \ensuremath{E, E_2 \vdash P\{M/x \}}
+            If $E,x:T \vdash P$ and $E_2 \vdash M:T$ then $E, E_2 \vdash P\{M/x \}$
         \end{lemma}
         \qed
     \end{proof}
@@ -73,27 +73,27 @@ We need to define the wrong predicate, to know when a process can go \ensuremath
         \end{align*}
 
 
-        If \ensuremath{E \vdash P} then \ensuremath{E \vdash P'} We will want to show that if \ensuremath{E \vdash Q} then \ensuremath{E \vdash Q'}
+        If $E \vdash P$ then $E \vdash P'$ We will want to show that if $E \vdash Q$ then $E \vdash Q'$
 
         \begin{lemma}[Equivalent]
-            If \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q}
+            If $P \equiv Q$ and $E \vdash P$ then $E \vdash Q$
         \end{lemma}
 
-        By applying lemma equivalent to the structural congruent, we see that because \ensuremath{P \equiv Q} and \ensuremath{E \vdash P} then \ensuremath{E \vdash Q} and because \ensuremath{P \ra P'} and \ensuremath{E \vdash P'} then \ensuremath{E \vdash Q'}.
+        By applying lemma equivalent to the structural congruent, we see that because $P \equiv Q$ and $E \vdash P$ then $E \vdash Q$ and because $P \ra P'$ and $E \vdash P'$ then $E \vdash Q'$.
         \qed
     \end{proof}
 \end{theorem}
 \newpage
 
 \begin{theorem}[Not Wrong]
-We need to show that if a process is well typed it will never could go \ensuremath{wrong}. That ensures the integrity of the process and the well typed process can break the type system.
-    If \ensuremath{E \vdash P} then \ensuremath{E \vdash P \nrightarrow wrong}.\\
+We need to show that if a process is well typed it will never could go $wrong$. That ensures the integrity of the process and the well typed process can break the type system.
+    If $E \vdash P$ then $E \vdash P \nrightarrow wrong$.\\
     %We need to show by induction that every reduction holds by their assumption and do not goes to \ensuremath{wrong}.
     %Proofs by induction will be shown, proving that every reduction holds and therefor can not go \ensuremath{wrong}\\
-    Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go \ensuremath{wrong} will be presented.
+    Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go $wrong$ will be presented.
 
     \begin{proof}[Nil]
-        Since there is not a wrong predicate for nil, nil can not go wrong therefor \ensuremath{E \vdash 0 \nrightarrow 0}.
+        Since there is not a wrong predicate for nil, nil can not go wrong therefor $E \vdash 0 \nrightarrow 0$.
         \qed
     \end{proof}
 
@@ -116,7 +116,7 @@ We need to show that if a process is well typed it will never could go \ensurema
         \begin{align*}
             \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
         \end{align*}
-        And we can prove by the rule ParaCommutative that the same holds for \ensuremath{Q}.\\
+        And we can prove by the \ref{rule:ParaCommutative} rule that the same holds for $Q$.\\
         \qed
     \end{proof}
 
