@@ -4,7 +4,7 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
     \item[Definition: Wrong] $E \vdash P \ra wrong$
 \end{description}
     
-    In order to prove when $P$ goes $wrong$, every $wrong$ case will be presented.
+    In order to determine when $P$ goes $wrong$, every $wrong$ case will be presented.
 \begin{description}
     \item[Lift 1] \begin{align*}
         \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
@@ -24,10 +24,10 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
     \item[Parallel] \begin{align*}
         \frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
     \end{align*}
-    If one of the process $P$ or $Q$ goes $wrong$, then $P$ and $Q$ in parallel will go $wrong$.\\
+    If the process $P$ goes $wrong$, then $P$ and $Q$ in parallel will go $wrong$. By applying the rule ParaCommunative we can show that either if $P$ or $Q$ goes $wrong$, $P$ and $Q$ in parallel will go $wrong$.\\
 
     \item[Structural Congruens] \begin{align*}
-        \frac{E \vdash Q \quad P \equiv Q}{E \vdash P \ra wrong}
+        \frac{E \vdash Q \ra wrong \quad P \equiv Q}{E \vdash P \ra wrong}
     \end{align*}
     If $P$ and $Q$ are structural congruent and $Q$ goes $wrong$, then $P$ also goes $wrong$.\\
 
