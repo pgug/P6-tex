@@ -1,10 +1,8 @@
 \section{Type Security}
-We need to define the wrong predicate, to know when a process can go $wrong$. If a process goes $wrong$, it have consequences for it integrity. When a process goes $wrong$ it can also be determined that the process have a runtime error.
-\begin{description}
-    \item[Definition: Wrong] $E \vdash P \ra wrong$
-\end{description}
-    
-    In order to determine when $P$ goes $wrong$, every $wrong$ case will be presented.
+In this section we will show that any process, that is well-typed in our type system, can never break the integrity of a protocol.
+\subsection{Wrong-predicate}
+To ensure that a well-typed process can never break the integrity of a protocol, we first need to define when a process breaks the integrity of a protocol.
+The wrong-predicate, $E \vdash P \ra wrong$, denotes that the well-typed process $P$ can go $wrong$ and break the integrity of a protocol. In order to define when $P$ goes $wrong$, we will present every case of this.
 \begin{description}
     \item[Lift 1] \begin{align*}
         \frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong}
@@ -48,21 +46,20 @@ We need to define the wrong predicate, to know when a process can go $wrong$. If
     If the process $P$ goes $wrong$ then the condition of $P$ will also go $wrong$ even if the condition is false, and thereby never executing $P$.
 \end{description}
 
+\subsection{Theorems}
+A well-typed process can never break the integrity of a protocol if the following two theorems hold.
 
-    To ensure that a process that is well typed and continues to be well typed after reduction, it is necessary to proof every reduction a process can take and verify that it will not go $wrong$.
-
-    Proofs for parallel, communication and structural congruent proving that $P \ra P'$ holds will be presented.\\
-\newpage
-
-We need to show that if a process is well typed it will never could go $wrong$. That ensures the integrity of the process and the well typed process can break the type system.
-
-Using proof by induction, proofs for every reduction rule proving that they hold and therefore can not go $wrong$ will be presented.
 \begin{theorem}[Subject Reduction]
 	If $E \vdash P$ and $P\ra P'$ then $E \vdash P'$.
 \end{theorem}
+
+The first theorem states that if a well-typed process is reduced, the resulting process is well-typed. This ensures that a well-typed process can not reduce to a process that is not well-typed.
+
 \begin{theorem}[Not Wrong]
 	If $E \vdash P$ then $E \vdash P \nrightarrow wrong$
 \end{theorem}
+
+The second theorem states that a well-typed process can not go $wrong$. Together with the first theorem, this ensures that any process that starts out well-typed can never go $wrong$. Therefore if we prove both theorems, then a well-typed process can never break the integrity of a protocol.
 \subsection{Theorem Proofs}
 \begin{proof}[Subject Reduction]
 	\begin{description}
