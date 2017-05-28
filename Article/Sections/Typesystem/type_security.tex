@@ -61,7 +61,8 @@ The first theorem states that if a well-typed process is reduced, the resulting 
 
 The second theorem states that a well-typed process can not go $wrong$. Together with the first theorem, this ensures that any process that starts out well-typed can never go $wrong$. Therefore if we prove both theorems, then a well-typed process can never break the integrity of a protocol.
 \subsection{Theorem Proofs}
-\begin{proof}[Subject Reduction]
+\begin{proof}[Subject Reduction]\\
+	We will prove that if $E \vdash P$ and $P\ra P'$ then $E \vdash P'$. This will be proven by induction in the reduction rules of our extended calculus.
 	\begin{description}
 	\item[Parallel]
 		\begin{align*}
@@ -91,10 +92,11 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		
 		By applying lemma equivalent to the structural congruent, we see that because $P \equiv Q$ and $E \vdash P$ then $E \vdash Q$ and because $P \ra P'$ and $E \vdash P'$ then $E \vdash Q'$.
 	\end{description}
-	\qed
+	Since the statement, if $E \vdash P$ and $P\ra P'$ then $E \vdash P'$, holds true by induction in the reduction rules of our extended calculus, then it must hold true for all possible reductions, therefore proving the theorem.\qed
 \end{proof}
 \vspace{10mm}
-\begin{proof}[Not Wrong]
+\begin{proof}[Not Wrong]\\
+	We will prove that if $E \vdash P$ then $E \vdash P \nrightarrow wrong$. This will be proven by induction in the process rules of our type system.
 	\begin{description}
 	\item[Nil]
 		Since there is not a wrong-predicate for nil, nil can not go wrong therefore:
@@ -181,25 +183,25 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\begin{align*}
 		\frac{\drop{x} \equiv P \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
 		\end{align*}
-	\item[Quote]
-		\begin{align*}
-		\frac{E \vdash x:T \quad \quot{P} \equiv _N x}{E \vdash \quot{P}:T}
-		\end{align*}
+%	\item[Quote]
+%		\begin{align*}
+%		\frac{E \vdash x:T \quad \quot{P} \equiv _N x}{E \vdash \quot{P}:T}
+%		\end{align*}
 		
-		By induction hypothesis we have that:
-		\begin{align*}
-		E \vdash P \nrightarrow wrong
-		\end{align*}
+%		By induction hypothesis we have that:
+%		\begin{align*}
+%		E \vdash P \nrightarrow wrong
+%		\end{align*}
 		
-		Therefore:
-		\begin{align*}
-		\frac{}{E \vdash \quot{P} \nrightarrow wrong}
-		\end{align*}
+%		Therefore:
+%		\begin{align*}
+%		\frac{}{E \vdash \quot{P} \nrightarrow wrong}
+%		\end{align*}
 		
-		Since the wrong-predicate for quote says:
-		\begin{align*}
-		\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
-		\end{align*}
+%		Since the wrong-predicate for quote says:
+%		\begin{align*}
+%		\frac{\quot{P} \equiv _N x \quad E \vdash P \ra wrong}{E \vdash \drop{x} \ra wrong}
+%		\end{align*}
 	\item[Condition]
 		\begin{align*}
 		\frac{E \vdash \phi : bool \quad E \vdash P}{E \vdash [\phi]P}
@@ -219,5 +221,5 @@ The second theorem states that a well-typed process can not go $wrong$. Together
 		\frac{E \vdash P \ra wrong}{E \vdash [\phi ]P \ra wrong}
 		\end{align*}
 	\end{description}
-	\qed
+	Since the statement, if $E \vdash P$ then $E \vdash P \nrightarrow wrong$, holds true by induction in the process rules of our type system, then it must hold true for all possible processes, therefore proving the theorem.\qed
 \end{proof}
