@@ -1,0 +1,31 @@
+\input{preamble}
+\input{../Makroer/rho-makroer.tex}
+
+\begin{document}
+% the titlepage
+{\aauwavesbg%
+\begin{frame}[plain,noframenumbering] % the plain option removes the sidebar and header from the title page
+    \titlepage
+\end{frame}}
+
+\begin{frame}{Contents}
+    \vspace{1mm}
+    \setcounter{tocdepth}{1}
+    \tableofcontents
+\end{frame}
+
+%INPUT HERE 
+\input{sections/intro}
+\input{sections/rho}
+\input{sections/semantic}
+\input{sections/typesystem}
+\input{sections/typesecurity}
+\input{sections/closing}
+
+{\aauwavesbg
+\begin{frame}[plain,noframenumbering]
+    \finalpage{Theme made by: \\Jesper Kjær Nielsen \\jkn@es.aau.dk \\http://kom.aau.dk/\textasciitilde jkn}
+\end{frame}}
+
+% Heloo!
+\end{document}
