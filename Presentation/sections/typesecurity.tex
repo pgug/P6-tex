@@ -2,13 +2,47 @@
 %fejl predicater
 %subject reduktion
 \begin{frame}{Type Sikkerhed}
+\begin{itemize}
+\item Undgå fejl
+\item Defination af fejl
+\item Fejl 	\begin{itemize}
+				\item Type fejl
+				\item Integritets fejl
+			\end{itemize}
 
+\end{itemize}
 \end{frame}
 
 \subsection{Fejl Prædikater}
 \begin{frame}{Fejl Prædikater}
-
+\begin{itemize}
+	\item Type fejl
+	\item Integritets fejl
+\end{itemize}
+\begin{align}
+	E \vdash P \ra wrong \tag{wrong predicate}
+\end{align}
 \end{frame}
+
+\begin{frame}{Fejl Prædikater}{Lift}
+\begin{align}
+	\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong} \tag{Lift 1}
+\end{align}	
+\begin{align}
+	\frac{E \vdash M:T_1 \quad E(x)=ch[T_2]^l}{E \vdash \lift{x}{M} \ra wrong} &\quad \text{where}\ T_1 \neq T_2\tag{Lift 2}
+\end{align}
+\end{frame}
+
+\begin{frame}{Fejl Prædikater}{Input og Parallel}
+\begin{align}
+	\tag{Input}\frac{E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]^l} {E \vdash \inp{x}{y}P \ra wrong}
+\end{align}	
+
+\begin{align}
+	\tag{Parallel}\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
+\end{align}
+\end{frame}
+
 
 \subsection{Subjekt Reduktion}
 \begin{frame}{Subjekt Reduktion}
