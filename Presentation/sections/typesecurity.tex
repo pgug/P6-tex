@@ -27,7 +27,7 @@
 \begin{frame}{Fejl Prædikater}{Lift}
 \begin{align}
 	\frac{E \nvdash M}{E \vdash \lift{x}{M} \ra wrong} \tag{Lift 1}
-\end{align}	
+\end{align}
 \begin{align}
 	\frac{E \vdash M:T_1 \quad E(x)=ch[T_2]^l}{E \vdash \lift{x}{M} \ra wrong} &\quad \text{where}\ T_1 \neq T_2\tag{Lift 2}
 \end{align}
@@ -36,7 +36,7 @@
 \begin{frame}{Fejl Prædikater}{Input og Parallel}
 \begin{align}
 	\tag{Input}\frac{E \vdash P\{ M/ y\} \ra wrong \quad E \vdash M:T \quad E(x)= ch[T]^l} {E \vdash \inp{x}{y}P \ra wrong}
-\end{align}	
+\end{align}
 
 \begin{align}
 	\tag{Parallel}\frac{E \vdash P \ra wrong}{E \vdash P \para Q \ra wrong}
@@ -47,4 +47,65 @@
 \subsection{Subjekt Reduktion}
 \begin{frame}{Subjekt Reduktion}
 
+\end{frame}
+
+\subsection{Not Wrong}
+
+\begin{frame}{Not Wrong}
+
+	\begin{itemize}
+		\item Veltypet kan ikke gå wrong
+	\end{itemize}
+
+	\begin{align}
+		If\ E \vdash P\ then\ E \vdash P \nrightarrow wrong \tag{Not Wrong}
+	\end{align}
+
+\end{frame}
+
+\begin{frame}{Not Wrong - Induktionsbevis}
+
+	\begin{itemize}
+		\item Induktionsbevis
+		\item Opdelt i seks dele
+		\begin{itemize}
+			\item Nil
+			\item Parallel
+			\item Lift
+			\item Input
+			\item Drop
+			\item Condition
+		\end{itemize}
+		\item Operationen parallel gennemgås
+	\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Not Wrong - Parallel}
+	\begin{align*}
+		\frac{E \vdash P\ \ \ E \vdash Q}{E \vdash P\ |\ Q}
+	\end{align*}
+
+	Ved indoktions antagelse har vi at:
+
+	\begin{align*}
+		E \vdash P \nrightarrow wrong \\
+		E \vdash Q \nrightarrow wrong
+	\end{align*}
+\end{frame}
+
+\begin{frame}{Not Wrong - Parallel}
+	Derfor kan vi sige at:
+
+	\begin{align*}
+		\frac{}{E \vdash P\ |\ Q \nrightarrow wrong}
+	\end{align*}
+
+	Siden vores wrong predikat for parralel siger:
+
+	\begin{align*}
+		\frac{E \vdash P \rightarrow wrong}{E \vdash P\ |\ Q \rightarrow wrong}
+	\end{align*}
+
+	Og vi via vores ParaCommutative regl ved at det samme holder for Q kan vi konkluderer at beviset virker for parallel
 \end{frame}
