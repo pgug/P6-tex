@@ -1,6 +1,15 @@
 \section{Type System}
 \begin{frame}{Type System}
-
+    \begin{align*}
+        T::=&\;U^l\\    	
+        U::=&\;B \tag{Basic Type}\\
+        &\mid ch[T] \tag{Channel}\\
+        &\mid T_1 \times...\times T_k \tag{Tuple}\\
+        &\mid T\ra T \tag{Operation}\\
+        B::=&\;num 
+        \mid str
+        \mid bool\\
+    \end{align*}
 \end{frame}
 
 \subsection{Subtyping}
