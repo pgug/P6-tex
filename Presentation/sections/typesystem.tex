@@ -14,17 +14,27 @@
 
 \subsection{Subtyping}
 \begin{frame}{Subtyping}
-
+    \begin{align*}
+       \tag{Subtype}\label{rule:Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
+    \end{align*}
 \end{frame}
 
 \subsection{Type validering}
 \begin{frame}{Type validering}
+    \begin{align*}
+        \tag{ValidBasicTerm}\label{rule:ValidBasicTerm} &\valid{B^l}
+    \end{align*}
 
+    \begin{align*}
+        \tag{ValidChannel}\label{rule:ValidChannel} &\infrule{\valid{U^l}\quad l\leq l'}{\valid{ch[U^l]^{l'}}}
+    \end{align*}
 \end{frame}
 
 \subsection{Well-typing}
 \begin{frame}{Well-typing}
-
+    \begin{align*}
+        \tag{Input}\label{rule:Input} &\infrule{E\vdash x:ch[T]^l\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}
+    \end{align*}
 \end{frame}
 
 
