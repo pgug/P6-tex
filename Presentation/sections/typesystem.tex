@@ -33,8 +33,10 @@
 \subsection{Vel typet}
 \begin{frame}{Vel typet}
     \begin{align*}
+        &E=a:num, b:str, c:ch[a^1]^1\\
         \tag{Nil}\label{rule:Nil} &E \vdash \nil\\
-        \tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash x:T\quad T\leq T'}{E\vdash x:T'}
+        \tag{Parallel}\label{rule:Parallel} &\infrule{E\vdash P \quad E \vdash Q}{E \vdash P \para Q}\\
+        \tag{Condition}\label{rule:Condition} &\infrule{E\vdash \phi:bool^l\quad E\vdash P}{E \vdash [\phi] P}
     \end{align*}
 \end{frame}
 
