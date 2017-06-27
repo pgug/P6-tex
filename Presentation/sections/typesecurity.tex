@@ -137,12 +137,18 @@ E \vdash P \para Q\\
 			\item Drop
 			\item Condition
 		\end{itemize}
+		\item Nil gennemgås
 		\item Operationen parallel gennemgås
 	\end{itemize}
 
 \end{frame}
 
-\begin{frame}{Not Wrong - Parallel}
+\begin{frame}{Not Wrong - Nil \& Parallel}
+
+\begin{itemize}
+	\item \textbf{Nil} Siden der ikke er et wrong predikat for Nil kan Nil ikke gå wrong.
+\end{itemize}
+
 	\begin{align*}
 		\frac{E \vdash P\ \ \ E \vdash Q}{E \vdash P\ |\ Q}
 	\end{align*}
@@ -168,5 +174,4 @@ E \vdash P \para Q\\
 		\frac{E \vdash P \rightarrow wrong}{E \vdash P\ |\ Q \rightarrow wrong}
 	\end{align*}
 
-	Og vi via vores ParaCommutative regel ved at det samme holder for Q kan vi konkludere at beviset virker for parallel
 \end{frame}
