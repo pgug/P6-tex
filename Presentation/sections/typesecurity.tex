@@ -43,11 +43,20 @@
 
 \subsection{Subjekt Reduktion}
 \begin{frame}{Subjekt Reduktion}
+
+\begin{itemize}
+\item En gang veltypet altid veltypet
+\end{itemize}
 \begin{align*}
 \text{Hvis } E \vdash P \text{ og } P \ra P' \text{ så } E \vdash P'
 \end{align*}
+
+
+
 \begin{itemize}
-\item En gang veltypet altid veltypet
+\item Parallel
+\item Communication
+\item Structural congruent
 \end{itemize}
 \end{frame}
 
@@ -63,7 +72,7 @@ E \vdash P \para Q\\
 \end{align*}
 
 \begin{align*}
-E \vdash P'\\
+\tag{Pr. IA} E \vdash P'\\
 \frac{E \vdash P' \quad E \vdash Q}{E \vdash P' \para Q}
 \end{align*}
 
@@ -71,11 +80,11 @@ E \vdash P'\\
 
 \begin{frame}{Subjekt Reduktion}{Communication}
 \begin{align*}
-\frac{}{\lift{x}{M} \para \inp{x}{y}P \ra P\{M/y\}}
+\frac{}{\lift{x}{M} \para \inp{x}{y}P \ra P\{M/y\}} \tag{Communication}
 \end{align*}
 
 \begin{align*}
-\tag{Lemma substitution} \text{Hvis } E,x:T \vdash P \text{ og } E_2 \vdash M:T \text{ så } E,E_2\vdash P\{M/x\}
+\tag{Lemma substitution} \text{Hvis } E,y:T \vdash P \text{ og } E_2 \vdash M:T \text{ så } E,E_2\vdash P\{M/y\}
 \end{align*}
 
 \end{frame}
@@ -97,7 +106,7 @@ E \vdash P'\\
 
 \begin{align*}
 \text{Fordi } P \equiv Q \text{ og } E \vdash P \text{ så } E \vdash Q\\
-\text{Fordi } P \ra P' \text{ og } E \vdash P' \text{ så } E \vdash Q'\\
+\text{Fordi } P' \ra Q' \text{ og } E \vdash P' \text{ så } E \vdash Q'\\
 \end{align*}
 \end{frame}
 
