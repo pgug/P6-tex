@@ -12,8 +12,8 @@
     \end{align*}
 \end{frame}
 
-\subsection{Subtyping}
-\begin{frame}{Subtyping}
+\subsection{Sub typer}
+\begin{frame}{Sub typer}
     \begin{align*}
        \tag{Subtype}\label{rule:Subtype} &\infrule{l\leq l'}{U^l\leq U^{l'}}
     \end{align*}
@@ -30,10 +30,11 @@
     \end{align*}
 \end{frame}
 
-\subsection{Well-typing}
-\begin{frame}{Well-typing}
+\subsection{Vel typet}
+\begin{frame}{Vel typet}
     \begin{align*}
-        \tag{Input}\label{rule:Input} &\infrule{E\vdash x:ch[T]^l\quad E,y:T\vdash P}{E \vdash \inp{x}{y}P}
+        \tag{Nil}\label{rule:Nil} &E \vdash \nil\\
+        \tag{Subsumption}\label{rule:subsumption} &\infrule{E\vdash x:T\quad T\leq T'}{E\vdash x:T'}
     \end{align*}
 \end{frame}
 
